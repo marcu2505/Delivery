@@ -1,0 +1,327 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
+import 'SignUpScreen.dart';
+import 'InitScreen.dart';
+
+class SignInScreen extends StatefulWidget {
+  final PageController controller;
+  SignInScreen(this.controller);
+  @override
+  _SignInScreenState createState() => _SignInScreenState(controller);
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  final myController = TextEditingController();
+
+  final email = TextEditingController();
+  final password = TextEditingController();
+  final loginDate = DateTime.now();
+
+
+  getValues(){
+    print("E-mail: " + email.text);
+    print("Password: " + password.text);
+    print("LoginDate: " + loginDate.toIso8601String());
+  }
+
+  void dispose(){
+    myController.dispose();
+    super.dispose();
+  }
+
+  bool _obscure = true;
+
+  void _togglePassword(){
+    setState(() {
+      _obscure = !_obscure;
+    });
+  }
+
+  final PageController pageController;
+  _SignInScreenState(this.pageController);
+
+  double displayHeight() => MediaQuery.of(context).size.height;
+  double displayWidth() => MediaQuery.of(context).size.width;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.yellow,
+      body: Container(
+         child: SingleChildScrollView( child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            SizedBox(
+              height: displayHeight() / 10,
+            ),
+            Container(
+              height: displayHeight() / 3,
+              child: Image(
+                image: AssetImage('assets/img/deliveryRegional.png'),
+                fit: BoxFit.contain,
+                height: displayHeight() / 6,
+                width: displayWidth() / 2,
+              ),
+            ),
+
+            Container(
+              margin: EdgeInsets.symmetric(
+                  horizontal: displayWidth() / 10
+              ),
+              height: displayHeight() / 13,
+              child: TextFormField(
+                controller: email,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(50.0),
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(50.0),
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(50.0),
+                    ),
+                  ),
+                  filled: true,
+                  prefixIcon: Icon(
+                    Icons.person,
+                    color: Colors.black,
+                  ),
+                  labelText: "E-mail",
+                  labelStyle: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 15,
+                  ),
+                ),
+                style: TextStyle(fontSize: 14, color: Colors.black),
+              ),
+            ),
+
+            SizedBox(
+              height: displayHeight() / 30,
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(
+                  horizontal: displayWidth() / 10
+              ),
+              height: displayHeight() / 13,
+              child: new Column(
+                children: <Widget>[
+                  new TextFormField(
+                    controller: password,
+                    cursorColor: Colors.black,
+                    keyboardType: TextInputType.text,
+                    obscureText: _obscure,
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        borderRadius: const BorderRadius.all(
+                          const Radius.circular(50.0),
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        borderRadius: const BorderRadius.all(
+                          const Radius.circular(50.0),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        borderRadius: const BorderRadius.all(
+                          const Radius.circular(50.0),
+                        ),
+                      ),
+                      filled: true,
+                      prefixIcon: Icon(
+                        Icons.lock,
+                        color: Colors.black,
+                      ),
+                      suffixIcon: GestureDetector(
+                        onTap: _togglePassword,
+                        child: Icon(
+                           _obscure ? Icons.visibility : Icons.visibility_off,
+                          color: Colors.black,
+                        ),
+                      ),
+                      labelText: "Senha",
+                      focusColor: Colors.white,
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                      ),
+                    ),
+                    style: TextStyle(fontSize: 14, color: Colors.black),
+                  ),
+                ],
+              ),
+            ),
+
+            Container(
+              margin: EdgeInsets.only(
+                right: displayWidth() / 20,
+                top: 2,
+              ),
+              height: 40,
+              alignment: Alignment.centerRight,
+              child: FlatButton(
+                child: Text(
+                  "Esqueci minha senha",
+                  textAlign: TextAlign.right,
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+            ),
+
+//            SizedBox(
+//              height: displayHeight() / 30,
+//            ),
+            Container(
+              margin: EdgeInsets.only(
+                left: displayWidth() / 10,
+                right: displayWidth() / 10,
+                bottom: displayWidth() / 12,
+              ),
+              height: displayHeight() / 18,
+              child: RaisedButton(
+                onPressed: (){
+                  getValues();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+
+                        builder: (context) => InitScreen()
+                    ),
+                  );
+                },
+                child: Text('Entrar', style: TextStyle(color: Colors.white, fontSize: 20),),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                color: Colors.red,
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  height: 1,
+                  width: displayWidth() / 3,
+                  color: Colors.white,
+                  margin: EdgeInsets.only(
+                    bottom: displayWidth() / 18,
+                  ),
+                ),
+                Container(
+                  child: Text(
+                    "OU",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                    ),
+                  ),
+                  margin: EdgeInsets.only(
+                    left: 5,
+                    right: 5,
+                    bottom: displayWidth() / 18,
+                  ),
+                ),
+                Container(
+                  height: 1,
+                  width: displayWidth() / 3,
+                  color: Colors.white,
+                  margin: EdgeInsets.only(
+                    bottom: displayWidth() / 18,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.topCenter,
+                  height: displayHeight() / 15,
+                  width: displayWidth() / 7,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: displayWidth() / 35,
+                  ),
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/img/google.png'),
+                        fit: BoxFit.cover,
+                      )
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.topCenter,
+                  height: displayHeight() / 15,
+                  width: displayWidth() / 7,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: displayWidth() / 35,
+                  ),
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/img/Instagram-circle-icon-1.png'),
+                        fit: BoxFit.cover,
+                      )
+                  ),
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+//                  margin: EdgeInsets.only(
+//                    top: displayHeight() / 40,
+//                  ),
+                  alignment: Alignment.topCenter,
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "Ainda não tem conta? ",
+                          style: TextStyle(color: Colors.black, fontSize: 17),
+                        ),
+                        TextSpan(
+                          text: "Cadastre-se",
+                          style: TextStyle(color: Colors.red, fontSize: 17),
+                          recognizer: TapGestureRecognizer()..onTap = () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignUpScreen()
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: displayHeight() / 9//
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    ),
+    );
+  }
+}
+
