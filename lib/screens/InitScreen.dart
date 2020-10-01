@@ -42,7 +42,6 @@ class _InitScreenState extends State<InitScreen> {
         children: <Widget>[
           HomeTopInfo(),
           FoodCategory(),
-          //teste
         ],
       ),
     );
