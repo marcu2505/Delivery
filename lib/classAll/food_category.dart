@@ -10,18 +10,15 @@ class FoodCategory extends StatelessWidget{
 
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      color: Colors.yellow,
       height: 80.0,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: _categories.length,
-
         itemBuilder: (BuildContext context, int index) {
-          return FoodCard();
-
+          return Container(
+            color: Colors.transparent,
+            child: FoodCard(),
+          );
         },
       ),
     );
