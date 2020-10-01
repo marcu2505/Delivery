@@ -6,8 +6,17 @@ class FoodCard extends StatelessWidget{
     return Card(
       child: Row(
         children: <Widget>[
-          Icon(
-            Icons.local_pizza,
+
+          RaisedButton(
+            onPressed: (){},
+            elevation: 2.0,
+            color: Colors.white,
+            child: Icon(
+              Icons.local_pizza,
+              size: 30.0,
+            ),
+            padding: EdgeInsets.all(15.0),
+            shape: CircleBorder(),
           ),
         ],
       ),
