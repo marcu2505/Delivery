@@ -1,0 +1,55 @@
+const FOOD_DATA = [
+  {
+    "name":"Burger",
+    "brand":"Hawkers",
+    "price":2.99,
+    "image":"https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.pngall.com%2Fburger-png&psig=AOvVaw2DzLJq2QCM25griwjfeF0H&ust=1601679514421000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOjPj6i_lOwCFQAAAAAdAAAAABAD"
+  },{
+    "name":"Cheese Dip",
+    "brand":"Hawkers",
+    "price":4.99,
+    "image":"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nicepng.com%2Fmaxp%2Fu2e6a9i1q8q8o0q8%2F&psig=AOvVaw38kSf7U0JSiOBaR7nRF01_&ust=1601679554541000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMC77Lu_lOwCFQAAAAAdAAAAABAO"
+  },
+  {
+    "name":"Cola",
+    "brand":"Mcdonald",
+    "price":1.49,
+    "image":"https://www.google.com/url?sa=i&url=https%3A%2F%2Fimagensemoldes.com.br%2Fpet-2-litros-coca-cola-png%2F&psig=AOvVaw1GCBla3_VaU1cJBbg8yLYr&ust=1601679588043000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMCVn8u_lOwCFQAAAAAdAAAAABAD"
+  },
+  {
+    "name":"Fries",
+    "brand":"Mcdonald",
+    "price":2.99,
+    "image":"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpngimg.com%2Fdownload%2F22006&psig=AOvVaw2HtECtoDiDhVvOz1dJQQBd&ust=1601679668194000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIjbjvC_lOwCFQAAAAAdAAAAABAD"
+  },
+  {
+    "name":"Ice Cream",
+    "brand":"Ben & Jerry's",
+    "price":9.49,
+    "image":"https://www.google.com/url?sa=i&url=https%3A%2F%2Fbr.pinterest.com%2Fpin%2F565201821990477492%2F%3Famp_client_id%3DCLIENT_ID(_)%26mweb_unauth_id%3D%7B%7Bdefault.session%7D%7D%26amp_url%3Dhttps%253A%252F%252Fbr.pinterest.com%252Famp%252Fpin%252F565201821990477492%252F%26from_amp_pin_page%3Dtrue&psig=AOvVaw0FVruMU0fq6wbRFtFLXscA&ust=1601679692399000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPCIiPy_lOwCFQAAAAAdAAAAABAJ"
+  },
+  {
+    "name":"Noodles",
+    "brand":"Hawkers",
+    "price":4.49,
+    "image":"https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.pngall.com%2Fnoodles-png&psig=AOvVaw2pNNl6SDy0eVQo8LcqlnJb&ust=1601679724520000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIi58orAlOwCFQAAAAAdAAAAABAD"
+  },
+  {
+    "name":"Pizza",
+    "brand":"Dominos",
+    "price":17.99,
+    "image":"https://www.google.com/url?sa=i&url=https%3A%2F%2Fbr.pinterest.com%2Fpin%2F326159198013995023%2F&psig=AOvVaw0OG6AnBCmiNB_FompGo2R5&ust=1601679745367000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKDtvZXAlOwCFQAAAAAdAAAAABAJ"
+  },
+  {
+    "name":"Sandwich",
+    "brand":"Hawkers",
+    "price":2.99,
+    "image":"https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.pngreal.com%2Fdownload%2F12013&psig=AOvVaw1fokMOxOfFPJkMHSw5X0LJ&ust=1601679773085000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOCU8qLAlOwCFQAAAAAdAAAAABAD"
+  },
+  {
+    "name":"Wrap",
+    "brand":"Subway",
+    "price":6.99,
+    "image":"https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.pngmart.com%2Fimage%2F156456&psig=AOvVaw1uqDJnHVve1WZkmlCA9nyA&ust=1601679798189000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJjD863AlOwCFQAAAAAdAAAAABAD"
+  }
+];
