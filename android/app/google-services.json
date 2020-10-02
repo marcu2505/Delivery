@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "865088836608",
+    "firebase_url": "https://delivery-regional-7902d.firebaseio.com",
+    "project_id": "delivery-regional-7902d",
+    "storage_bucket": "delivery-regional-7902d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865088836608:android:07ea239ee301f5c62174e5",
+        "android_client_info": {
+          "package_name": "com.example.flutter_login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "865088836608-12p6mspuekgj6v16qr16a2a09b1fpp9l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApz3oJXQhzSLsopzk-xJ8iJuYl--yMNHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "865088836608-12p6mspuekgj6v16qr16a2a09b1fpp9l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
