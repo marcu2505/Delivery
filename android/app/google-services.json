@@ -8,7 +8,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:865088836608:android:07ea239ee301f5c62174e5",
+        "mobilesdk_app_id": "1:865088836608:android:ec35020c932afab42174e5",
         "android_client_info": {
           "package_name": "com.example.flutter_login"
         }
