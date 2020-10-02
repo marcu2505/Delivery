@@ -192,6 +192,7 @@ class _InitScreenState extends State<InitScreen> {
                            scale = 1;
                          }
                        }
+                       //liv
                        return Opacity(
                          opacity: scale,
                          child: Transform(
