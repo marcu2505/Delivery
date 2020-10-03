@@ -24,9 +24,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Login',
       theme: ThemeData(
-        cursorColor: Colors.white,
+        cursorColor: Colors.black,
         primarySwatch: Colors.blue,
-
       ),
       home: PageView(
         controller: pageController,
