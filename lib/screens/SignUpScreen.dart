@@ -489,7 +489,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     context,
                     MaterialPageRoute(
 
-                        builder: (context) => InitScreen()
+                        builder: (context) => HomePage()
                     ),
                   );
 

@@ -202,7 +202,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     context,
                     MaterialPageRoute(
 
-                        builder: (context) => InitScreen()
+                        builder: (context) => HomePage()
                     ),
                   );
                 },
