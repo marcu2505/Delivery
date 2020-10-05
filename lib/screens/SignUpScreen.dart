@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'InitScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -36,15 +37,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
   }
 
-  getValues(){
-    print("Name: " + name.text);
-    print("Phone: " + phone.text);
-    print("CPF: " + cpf.text);
-    print("BirthDate: " + birthDate.text);
-    print("E-mail: " + emailAddress.text);
-    print("Password: " + password.text);
-    print("PasswordRepeat: " + passwordRepeat.text);
-    print("InitDate: " + initDate.toIso8601String());
+  void cadastro() async{
+    // print("Name: " + name.text);
+    // print("Phone: " + phone.text);
+    // print("CPF: " + cpf.text);
+    // print("BirthDate: " + birthDate.text);
+    // print("E-mail: " + emailAddress.text);
+    // print("Password: " + password.text);
+    // print("PasswordRepeat: " + passwordRepeat.text);
+    // print("InitDate: " + initDate.toIso8601String());
+
+    FirebaseAuth auth = FirebaseAuth.instance;
+    try {
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+          email: emailAddress.text,
+          password: password.text
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+
+            builder: (context) => HomePage()
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('A senha é muito fraca, utilize 6 ou mais dígitos.');
+      } else if (e.code == 'email-already-in-use') {
+        print('Já existe uma conta com este email.');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   double displayHeight() => MediaQuery.of(context).size.height;
@@ -484,15 +508,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: displayHeight() / 18,
               child: RaisedButton(
                 onPressed: (){
-                  getValues();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-
-                        builder: (context) => HomePage()
-                    ),
-                  );
-
+                  cadastro();
                 },
                 child: Text('Cadastrar', style: TextStyle(color: Colors.white, fontSize: 20),),
                 shape: RoundedRectangleBorder(
