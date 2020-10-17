@@ -28,7 +28,8 @@ dependencies:
     sdk: flutter
   rxdart: ^0.24.1
   bloc_pattern: ^2.5.1
-  firebase_core: ^0.2.5  # add dependency for Firebase Core
+  firebase_core: ^0.5.0  # add dependency for Firebase Core
+  firebase_auth: ^0.18.1+1
   carousel_pro: ^1.0.0
   flutter_signin_button: ^1.1.0
 
