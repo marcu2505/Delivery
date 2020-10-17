@@ -23,34 +23,28 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           title: Text(
-            'Home',
+            'Inicio',
             style: TextStyle(color: Color(0xFF2c2b2b)),
           ),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.near_me),
+          icon: Icon(Icons.assignment),
           title: Text(
-            'Near By',
+            'Pedidos',
             style: TextStyle(color: Color(0xFF2c2b2b)),
           ),
+
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.card_giftcard),
+          icon: Icon(Icons.person),
           title: Text(
-            'Cart',
-            style: TextStyle(color: Color(0xFF2c2b2b)),
-          ),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(FontAwesomeIcons.user),
-          title: Text(
-            'Account',
+            'Conta',
             style: TextStyle(color: Color(0xFF2c2b2b)),
           ),
         ),
       ],
-      currentIndex: _selectedIndex,
       selectedItemColor: Color(0xFFfd5352),
+      currentIndex: _selectedIndex,
       onTap: _onItemTapped,
     );
   }

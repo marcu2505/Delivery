@@ -16,14 +16,54 @@ class _TopMenusState extends State<TopMenus> {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
-          TopMenuTiles(name: "Burger", imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg", slug: ""),
-          TopMenuTiles(name: "Sushi", imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg", slug: ""),
-          TopMenuTiles(name: "Pizza", imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg", slug: ""),
-          TopMenuTiles(name: "Cake", imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg", slug: ""),
-          TopMenuTiles(name: "Ice Cream", imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg", slug: ""),
-          TopMenuTiles(name: "Soft Drink", imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg", slug: ""),
-          TopMenuTiles(name: "Burger", imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg", slug: ""),
-          TopMenuTiles(name: "Sushi", imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg", slug: ""),
+          TopMenuTiles(
+              name: "Burger",
+              icon: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+              slug: ""),
+          TopMenuTiles(
+              name: "Sushi",
+              icon: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+              slug: ""),
+          TopMenuTiles(
+              name: "Pizza",
+              icon: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+              slug: ""),
+          TopMenuTiles(
+              name: "Açaí",
+              icon: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+              slug: ""),
+          TopMenuTiles(
+              name: "Marmita",
+              icon: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+              slug: ""),
+          TopMenuTiles(
+              name: "Brasileira",
+              icon: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+              slug: ""),
+          TopMenuTiles(
+              name: "Carnes",
+              icon: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+              slug: ""),
+          TopMenuTiles(
+              name: "Doces e bolos",
+              icon: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+              slug: ""),
+          TopMenuTiles(
+              name: "Saudável",
+              icon: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+              slug: ""),
+          TopMenuTiles(
+              name: "Italiana",
+              icon: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+              slug: ""),
+          TopMenuTiles(
+              name: "Fast Food",
+              icon: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+              slug: ""),
+          TopMenuTiles(
+              name: "Bebidas",
+              icon: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+              slug: ""),
         ],
       ),
     );
@@ -32,13 +72,13 @@ class _TopMenusState extends State<TopMenus> {
 
 class TopMenuTiles extends StatelessWidget {
   String name;
-  String imageUrl;
+  String icon;
   String slug;
 
   TopMenuTiles(
       {Key key,
       @required this.name,
-      @required this.imageUrl,
+      @required this.icon,
       @required this.slug})
       : super(key: key);
 
@@ -52,13 +92,7 @@ class TopMenuTiles extends StatelessWidget {
             padding: EdgeInsets.only(left: 10, right: 5, top: 5, bottom: 5),
             decoration: new BoxDecoration(
               borderRadius: BorderRadius.circular(50),
-              boxShadow: [
-                new BoxShadow(
-                  color: Color(0xFFfae3e2),
-                  blurRadius: 25.0,
-                  offset: Offset(0.0, 0.75),
-                ),
-              ]),
+            ),
             child: Card(
                 color: Colors.white,
                 elevation: 0,
@@ -71,12 +105,12 @@ class TopMenuTiles extends StatelessWidget {
                   width: 50,
                   height: 50,
                   child: Center(
-                      child: Image.network(
-                    imageUrl,
-                    width: 24,
-                    height: 24,
-                  )),
-                )),
+                    child: Image.network(
+                      '',
+                    ),
+                  ),
+                ),
+            ),
           ),
           Text(name,
               style: TextStyle(

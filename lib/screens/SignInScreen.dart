@@ -48,7 +48,7 @@ class _SignInScreenState extends State<SignInScreen> {
     return Scaffold(
       backgroundColor: Colors.yellow,
       body: Container(
-         child: SingleChildScrollView( child: Column(
+        child: SingleChildScrollView( child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             SizedBox(
@@ -151,7 +151,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       suffixIcon: GestureDetector(
                         onTap: _togglePassword,
                         child: Icon(
-                           _obscure ? Icons.visibility : Icons.visibility_off,
+                          _obscure ? Icons.visibility : Icons.visibility_off,
                           color: Colors.black,
                         ),
                       ),
@@ -313,15 +313,14 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: displayHeight() / 9//
+                    height: displayHeight() / 9//
                 ),
               ],
             )
           ],
         ),
+        ),
       ),
-    ),
     );
   }
 }
-

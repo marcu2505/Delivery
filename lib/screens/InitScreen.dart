@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber[50],
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
