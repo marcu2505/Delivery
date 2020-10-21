@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         if (snapshot.hasError) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Login',
+            title: 'Delivery Regional',
             theme: ThemeData(
               cursorColor: Colors.black,
               primarySwatch: Colors.blue,

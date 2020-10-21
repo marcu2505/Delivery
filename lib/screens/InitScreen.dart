@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../animation/ScaleRoute.dart';
-import '../widgets/BestFoodWidget.dart';
+import '../widgets/BestRestaurantsWidget.dart';
 import '../widgets/BottomNavBarWidget.dart';
 import '../widgets/PopularFoodsWidget.dart';
 import '../widgets/SearchWidget.dart';
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
             Promo(),
             TopMenus(),
             PopularFoodsWidget(),
-            BestFoodWidget(),
+            BestRestaurantsWidget(),
           ],
         ),
       ),

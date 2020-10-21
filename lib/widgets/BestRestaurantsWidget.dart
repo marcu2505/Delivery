@@ -1,25 +1,26 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class BestFoodWidget extends StatefulWidget {
+class BestRestaurantsWidget extends StatefulWidget {
   @override
-  _BestFoodWidgetState createState() => _BestFoodWidgetState();
+  _BestRestaurantsWidgetState createState() => _BestRestaurantsWidgetState();
 }
 
-class _BestFoodWidgetState extends State<BestFoodWidget> {
+class _BestRestaurantsWidgetState extends State<BestRestaurantsWidget> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          BestFoodTitle(),
-          BestFoodList(),
+          BestRestaurantsTitle(),
+          BestRestaurantsList(),
         ],
       ),
     );
   }
 }
 
-class BestFoodTitle extends StatelessWidget {
+class BestRestaurantsTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,17 +41,18 @@ class BestFoodTitle extends StatelessWidget {
   }
 }
 
-class BestFoodTiles extends StatelessWidget {
+class BestRestaurantsTiles extends StatelessWidget {
   String name;
   String imageUrl;
   String rating;
   String numberOfRating;
   String price;
   String slug;
-  String adress;
+  String address;
   String category;
+  double deliveryFee;
 
-  BestFoodTiles(
+  BestRestaurantsTiles(
       {Key key,
       @required this.name,
       @required this.imageUrl,
@@ -58,8 +60,9 @@ class BestFoodTiles extends StatelessWidget {
       @required this.numberOfRating,
       @required this.price,
       @required this.slug,
-      @required this.adress,
-      @required this.category})
+      @required this.address,
+      @required this.category,
+      @required this.deliveryFee})
       : super(key: key);
 
   @override
@@ -71,7 +74,6 @@ class BestFoodTiles extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(left: 10, right: 5, top: 5, bottom: 5),
             decoration: BoxDecoration(boxShadow: [
-
             ]),
             child: Card(
               semanticContainer: true,
@@ -82,66 +84,65 @@ class BestFoodTiles extends StatelessWidget {
               elevation: 1,
               margin: EdgeInsets.all(5),
               child: Padding(
-                padding: EdgeInsets.all(15),
+                padding: EdgeInsets.only(
+                  top: 8,
+                  bottom: 8,
+                  left: 8,
+                  right: 8,
+                ),
                 child: Row(
                   children: <Widget>[
                     ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      child: Image.network(
-                        imageUrl,
-                        height: MediaQuery.of(context).size.height * 0.15,
-                        width: MediaQuery.of(context).size.height * 0.15,
+                      child: Image.network(imageUrl,
+                        height: MediaQuery.of(context).size.height * 0.12,
+                        width: MediaQuery.of(context).size.height * 0.12,
                         fit: BoxFit.cover,
                       ),
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.05,
                     ),
-                    Container(
+                    Expanded(
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          Text(
-                            name,
+                          Text(name,
                             style: TextStyle(
                               fontSize: 21,
+                              fontFamily: 'BalooBhai',
                             ),
                           ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.01,
-                          ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text(
-                                category,
+                              Text(category,
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                   fontSize: 16,
                                 ),
                               ),
-                              Container(
-                                child: Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.star,
-                                      size: 16,
+                              Row(
+                                children: [
+                                  Icon(Icons.star,
+                                    size: 14,
+                                  ),
+                                  Text(rating,
+                                    style: TextStyle(
+                                      fontSize: 14,
                                     ),
-                                    Text(
-                                      rating,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                  ),
+                                ],
+                              )
                             ],
                           ),
-                          Text(
-                            adress,
+                          Text(address,
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
                           ),
-                          Text(
-                            "Frete grátis",
-                          )
+                          getDeliveryFee(deliveryFee),
                         ],
                       ),
                     ),
@@ -154,16 +155,32 @@ class BestFoodTiles extends StatelessWidget {
       ),
     );
   }
+
+  Text getDeliveryFee(double deliveryFee) {
+    String text = "\nFRETE GRÁTIS";
+    double textSize = 12.0;
+    if(deliveryFee.round() > 0) {
+      text = "\nR\$ " + deliveryFee.toStringAsFixed(2);
+      textSize = 14.0;
+    }
+
+    return Text(text,
+      textAlign: TextAlign.right,
+      style: TextStyle(
+        fontSize: textSize,
+      ),
+    );
+  }
 }
 
-class BestFoodList extends StatelessWidget {
+class BestRestaurantsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
       shrinkWrap: true,
       physics: ClampingScrollPhysics(),
       children: <Widget>[
-        BestFoodTiles(
+        BestRestaurantsTiles(
             name: "Quinta avenida",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             rating: '4.9',
@@ -171,8 +188,9 @@ class BestFoodList extends StatelessWidget {
             price: '\$\$\$',
             slug: "fried_egg",
             category: "Marmitex",
-            adress: "Rua Vaz de Melo, 102"),
-        BestFoodTiles(
+            address: "Rua Vaz de Melo, 102",
+            deliveryFee: 0.00),
+        BestRestaurantsTiles(
             name: "Nova Opção",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             rating: "4.9",
@@ -180,8 +198,9 @@ class BestFoodList extends StatelessWidget {
             price: '\$\$',
             slug: "",
             category: "Almoço",
-            adress: "Rua Helena Silva, 22"),
-        BestFoodTiles(
+            address: "Rua Helena Silva, 22",
+            deliveryFee: 0.00),
+        BestRestaurantsTiles(
             name: "Edd's burguer",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             rating: "4.0",
@@ -189,8 +208,9 @@ class BestFoodList extends StatelessWidget {
             price: '\$\$\$',
             slug: "",
             category: "Hamburguer",
-            adress: "Avenida Braga Viana, 1092"),
-        BestFoodTiles(
+            address: "Avenida Braga Viana, 1092",
+            deliveryFee: 0.00),
+        BestRestaurantsTiles(
             name: "Açaí da praça",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             rating: "4.00",
@@ -198,8 +218,9 @@ class BestFoodList extends StatelessWidget {
             price: '\$',
             slug: "",
             category: "Açaí",
-            adress: "Rua Iolanda Barbosa, 879"),
-        BestFoodTiles(
+            address: "Rua Iolanda Barbosa, 879",
+            deliveryFee: 0.00),
+        BestRestaurantsTiles(
             name: "Subway",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             rating: "4.6",
@@ -207,8 +228,9 @@ class BestFoodList extends StatelessWidget {
             price: '\$\$',
             slug: "",
             category: "Sanduíche",
-            adress: "Avenida Vine Nigo"),
-        BestFoodTiles(
+            address: "Avenida Vine Nigo",
+            deliveryFee: 0.00),
+        BestRestaurantsTiles(
             name: "Burger King",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             rating: "4.00",
@@ -216,8 +238,9 @@ class BestFoodList extends StatelessWidget {
             price: '\$\$\$',
             slug: "",
             category: "Hamburguer",
-            adress: "Rua New York, 666"),
-        BestFoodTiles(
+            address: "Rua New York, 666",
+            deliveryFee: 0.00),
+        BestRestaurantsTiles(
             name: "Pais e Filhos",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             rating: "4.2",
@@ -225,8 +248,9 @@ class BestFoodList extends StatelessWidget {
             price: '\$',
             slug: "",
             category: "Sorveteria",
-            adress: "Avenida Paraguai, 54"),
-        BestFoodTiles(
+            address: "Avenida Paraguai, 54",
+            deliveryFee: 0.00),
+        BestRestaurantsTiles(
             name: "Spolleto",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             rating: '4.9',
@@ -234,8 +258,9 @@ class BestFoodList extends StatelessWidget {
             price: '\$',
             slug: "",
             category: "Italiana",
-            adress: "Rua Visconde Jonas, 671"),
-        BestFoodTiles(
+            address: "Rua Visconde Jonas, 671",
+            deliveryFee: 0.00),
+        BestRestaurantsTiles(
             name: "Refrescar",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             rating: "4.6",
@@ -243,8 +268,9 @@ class BestFoodList extends StatelessWidget {
             price: '\$\$',
             slug: "",
             category: "Bebidas",
-            adress: "Rua Bruna Gaules, 681"),
-        BestFoodTiles(
+            address: "Rua Bruna Gaules, 681",
+            deliveryFee: 4.99),
+        BestRestaurantsTiles(
             name: "Natureba",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             rating: "4.6",
@@ -252,8 +278,9 @@ class BestFoodList extends StatelessWidget {
             price: '\$\$\$',
             slug: "",
             category: "Almoço",
-            adress: "Rua Bosco Vini, 98"),
-        BestFoodTiles(
+            address: "Rua Bosco Vini, 98",
+            deliveryFee: 4.99),
+        BestRestaurantsTiles(
             name: "Aviões da grelha",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             rating: "4.6",
@@ -261,7 +288,8 @@ class BestFoodList extends StatelessWidget {
             price: '\$\$',
             slug: "",
             category: "Carne",
-            adress: "Rua Eni Moura, 128"),
+            address: "Rua Eni Moura, 128",
+            deliveryFee: 4.99),
       ],
     );
   }

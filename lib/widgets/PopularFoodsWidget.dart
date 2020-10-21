@@ -243,7 +243,7 @@ class PopularFoodTitle extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
-            "Popluar Foods",
+            "Popular Foods",
             style: TextStyle(
                 fontSize: 20,
                 color: Color(0xFF3a3a3b),

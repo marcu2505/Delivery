@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'SignUpScreen.dart';
 import 'InitScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class SignInScreen extends StatefulWidget {
   final PageController controller;
@@ -17,6 +20,43 @@ class _SignInScreenState extends State<SignInScreen> {
   final password = TextEditingController();
   final loginDate = DateTime.now();
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
+  Future<String> signInWithGoogle() async {
+    await Firebase.initializeApp();
+
+    final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+    final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+
+    final UserCredential authResult = await _auth.signInWithCredential(credential);
+    final User user = authResult.user;
+
+    if (user != null) {
+      assert(!user.isAnonymous);
+      assert(await user.getIdToken() != null);
+
+      final User currentUser = _auth.currentUser;
+      assert(user.uid == currentUser.uid);
+
+      print('signInWithGoogle succeeded: $user');
+
+      return '$user';
+    }
+
+    return null;
+  }
+
+  void signOutGoogle() async{
+    await googleSignIn.signOut();
+
+    print("User Signed Out");
+  }
 
   getValues(){
     print("E-mail: " + email.text);
@@ -258,11 +298,19 @@ class _SignInScreenState extends State<SignInScreen> {
                   margin: EdgeInsets.symmetric(
                     horizontal: displayWidth() / 35,
                   ),
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/img/google.png'),
-                        fit: BoxFit.cover,
-                      )
+                  child: FlatButton(
+                    onPressed: (){
+                      signInWithGoogle().then((result) {
+                        if (result != null) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()
+                            ),
+                          );
+                        }
+                      });
+                    },
+                    child: Image.asset('assets/img/google.png'),
                   ),
                 ),
                 Container(
