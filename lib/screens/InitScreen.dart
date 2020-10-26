@@ -5,6 +5,7 @@ import '../widgets/BottomNavBarWidget.dart';
 import '../widgets/PopularFoodsWidget.dart';
 import '../widgets/SearchWidget.dart';
 import '../widgets/TopMenus.dart';
+import '../widgets/Top.dart';
 import '../widgets/PromoWidget.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,13 +24,17 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber[50],
+      backgroundColor: Colors.yellow,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             SizedBox(
               height: MediaQuery.of(context).viewPadding.top,
             ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.01,
+            ),
+            Top(),
             SearchWidget(),
             Promo(),
             TopMenus(),

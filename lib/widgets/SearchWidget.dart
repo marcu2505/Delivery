@@ -3,26 +3,63 @@ import 'package:flutter/widgets.dart';
 
 class SearchWidget extends StatelessWidget {
   @override
+
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 10,top: 5,right: 10,bottom: 5),
-      child: TextField(
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          prefixIcon: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Image.asset(
-              'assets/img/logo.png',
-              width: 30,
-              height: 30,
-              fit: BoxFit.cover,
+      padding: EdgeInsets.only(
+        left: MediaQuery.of(context).size.width * 0.08,
+        top: MediaQuery.of(context).size.height * 0.01,
+        right: MediaQuery.of(context).size.width * 0.08,
+        bottom: MediaQuery.of(context).size.height * 0.02,
+      ),
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          cursorColor: Colors.grey,
+          primaryColor: Colors.white,
+        ),
+        child: Material(
+          elevation: 7.0,
+          shadowColor: Colors.grey,
+          borderRadius: const BorderRadius.all(
+            const Radius.circular(20.0),
+          ),
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.06,
+            child:TextField(
+              textAlignVertical: TextAlignVertical.center,
+              autofocus: false,
+              style: TextStyle(fontSize: 18.0, color: Colors.grey),
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.all(10.0),
+                filled: true,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.white
+                  ),
+                  borderRadius: const BorderRadius.all(
+                    const Radius.circular(20.0),
+                  ),
+
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                  borderRadius: const BorderRadius.all(
+                    const Radius.circular(20.0),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                  borderRadius: const BorderRadius.all(
+                    const Radius.circular(20.0),
+                  ),
+                ),
+                prefixIcon: Icon(Icons.search,color: Colors.red,),
+                fillColor: Colors.white,
+                hintStyle: new TextStyle(color: Colors.grey, fontSize: 18.0),
+                hintText: "O que você procura?",
+              ),
             ),
           ),
-          //fillColor: Color(0xFFFAFAFA),
-
-          suffixIcon: Icon(Icons.search,color: Colors.red,),
-          hintStyle: new TextStyle(color: Colors.grey, fontSize: 18),
-          hintText: "O que você quer comer hoje?",
         ),
       ),
     );

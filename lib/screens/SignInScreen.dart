@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_login/main.dart';
 import 'SignUpScreen.dart';
 import 'InitScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -52,10 +53,10 @@ class _SignInScreenState extends State<SignInScreen> {
     return null;
   }
 
-  void signOutGoogle() async{
+  Future <MyApp> signOutGoogle() async{
     await googleSignIn.signOut();
-
     print("User Signed Out");
+    return MyApp();
   }
 
   getValues(){
