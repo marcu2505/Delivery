@@ -218,6 +218,7 @@ class _SignInScreenState extends State<SignInScreen> {
               height: 40,
               alignment: Alignment.centerRight,
               child: FlatButton(
+                onPressed: () => {},
                 child: Text(
                   "Esqueci minha senha",
                   textAlign: TextAlign.right,
