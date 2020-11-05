@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../globals.dart';
 import '../screens/Restaurant.dart';
 import '../animation/ScaleRoute.dart';
 
@@ -57,7 +58,7 @@ class BestRestaurantsTitle extends StatelessWidget {
                     ),
                   ],
                 ),
-                width: MediaQuery.of(context).size.width * 0.94,
+                width: displayWidth * 0.94,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
@@ -97,7 +98,7 @@ class BestRestaurantsTitle extends StatelessWidget {
                     ),
                   ],
                 ),
-                width: MediaQuery.of(context).size.width * 0.94,
+                width: displayWidth * 0.94,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
@@ -137,7 +138,7 @@ class BestRestaurantsTitle extends StatelessWidget {
                     ),
                   ],
                 ),
-                width: MediaQuery.of(context).size.width * 0.94,
+                width: displayWidth * 0.94,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
@@ -256,7 +257,7 @@ class BestRestaurantsTiles extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                            //height: MediaQuery.of(context).size.height * 0.008,
+                            //height: displayHeight * 0.008,
                           ),
                           Text("Pão carne e queijo batata arroz salada".toUpperCase(),
                             style: TextStyle(

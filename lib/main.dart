@@ -1,26 +1,31 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login/globals.dart';
 import 'screens/InitScreen.dart';
 import 'screens/SignInScreen.dart';
 import 'screens/SignUpScreen.dart';
 import 'package:flutter/services.dart';
 
-void main() {
+Future main() async {
+  await DotEnv().load('.env');
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
 
-  Future<void> InicializacaoFirebase() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
-  }
+  // Future<void> InicializacaoFirebase() async {
+  //   WidgetsFlutterBinding.ensureInitialized();
+  //   await Firebase.initializeApp();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    InicializacaoFirebase();
-    final pageController = PageController(initialPage: 1);
+    environment = DotEnv().env['ENVIRONMENT'];
+
+    // InicializacaoFirebase();
     final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+    final pageController = PageController(initialPage: 1);
     SystemChrome.setPreferredOrientations(
         [
           DeviceOrientation.portraitUp,
@@ -31,7 +36,6 @@ class MyApp extends StatelessWidget {
       //Inicializa o FlutterFire
       future: _initialization,
       builder: (context, snapshot) {
-
         if (snapshot.hasError) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,

@@ -1,12 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../animation/ScaleRoute.dart';
-import '../widgets/BestRestaurantsWidget.dart';
+import '../widgets/RestaurantsWidget.dart';
 import '../widgets/BottomNavBarWidget.dart';
-import '../widgets/PopularFoodsWidget.dart';
+import '../widgets/FoodPromosWidget.dart';
 import '../widgets/SearchWidget.dart';
-import '../widgets/TopMenus.dart';
+import '../widgets/CategoriesWidget.dart';
 import '../widgets/Top.dart';
-import '../widgets/PromoWidget.dart';
+import '../widgets/BannerPromosWidget.dart';
+import 'package:flutter_login/globals.dart';
 import '../widgets/MyOrder.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,15 +17,46 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 class _HomePageState extends State<HomePage> {
-  @override
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  double displayHeight() => MediaQuery.of(context).size.height;
-  double displayWidth() => MediaQuery.of(context).size.width;
+  getRests() {
+    firestore
+        .collection('restaurantes')
+        .get()
+        .then((QuerySnapshot querySnapshot) => {
+          querySnapshot.docs.forEach((doc) {
+            print(doc["name"]);
+          })
+    });
+  }
+
+  // Função para filtrar restaurantes por categoria
+  filterRests(String categorySlug) async {
+    var result = await firestore
+        .collection('categorias')
+        .where("slug", isEqualTo: categorySlug)
+        .limit(1)
+        .get();
+    String categoryID =  result.docs.first.id;
+
+    result = await firestore
+        .collection('restaurantes-categorias')
+        .where("category", isEqualTo: categoryID)
+        .get();
+
+    result.docs.forEach((doc) {
+      print(doc.id);  // ID da relação
+      firestore.collection('restaurantes').doc(doc["restaurant"]).get().then((value) => {
+        print(value["name"])
+      });
+    }); // Restaurantes
+  }
 
   getValues() {
     print(MediaQuery.of(context).viewPadding);
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -40,14 +74,22 @@ class _HomePageState extends State<HomePage> {
               height: MediaQuery.of(context).viewPadding.top,
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
+              height: displayHeight * 0.01,
             ),
             Top(),
+            FlatButton(
+              onPressed: () => {
+                filterRests("pizza")
+              },
+              child: Text(
+                "Filter Rests",
+              ),
+            ),
             SearchWidget(),
-            Promo(),
-            TopMenus(),
-            PopularFoodsWidget(),
-            BestRestaurantsWidget(),
+            BannerPromosWidget(),
+            Categories(),
+            FoodPromosWidget(),
+            RestaurantsWidget(),
           ],
         ),
       ),

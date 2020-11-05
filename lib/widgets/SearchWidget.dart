@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_login/globals.dart';
 
 class SearchWidget extends StatelessWidget {
   @override
@@ -7,10 +8,10 @@ class SearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        left: MediaQuery.of(context).size.width * 0.08,
-        top: MediaQuery.of(context).size.height * 0.01,
-        right: MediaQuery.of(context).size.width * 0.08,
-        bottom: MediaQuery.of(context).size.height * 0.02,
+        left: displayWidth * 0.08,
+        top: displayHeight * 0.01,
+        right: displayWidth * 0.08,
+        bottom: displayHeight * 0.02,
       ),
       child: Theme(
         data: Theme.of(context).copyWith(
@@ -24,7 +25,7 @@ class SearchWidget extends StatelessWidget {
             const Radius.circular(20.0),
           ),
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.06,
+            height: displayHeight * 0.06,
             child:TextField(
               textAlignVertical: TextAlignVertical.center,
               autofocus: false,

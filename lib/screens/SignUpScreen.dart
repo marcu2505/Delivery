@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'InitScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_login/globals.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -56,7 +57,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-
             builder: (context) => HomePage()
         ),
       );
@@ -71,8 +71,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
-  double displayHeight() => MediaQuery.of(context).size.height;
-  double displayWidth() => MediaQuery.of(context).size.width;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,17 +80,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             SizedBox(
-              height: displayHeight() / 15,
+              height: displayHeight / 15,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
                   alignment: Alignment.topCenter,
-                  height: displayHeight() / 15,
-                  width: displayWidth() / 7,
+                  height: displayHeight / 15,
+                  width: displayWidth / 7,
                   margin: EdgeInsets.symmetric(
-                    horizontal: displayWidth() / 35,
+                    horizontal: displayWidth / 35,
                   ),
                   decoration: BoxDecoration(
                       image: DecorationImage(
@@ -103,10 +101,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 Container(
                   alignment: Alignment.topCenter,
-                  height: displayHeight() / 15,
-                  width: displayWidth() / 7,
+                  height: displayHeight / 15,
+                  width: displayWidth / 7,
                   margin: EdgeInsets.symmetric(
-                    horizontal: displayWidth() / 35,
+                    horizontal: displayWidth / 35,
                   ),
                   decoration: BoxDecoration(
                       image: DecorationImage(
@@ -122,10 +120,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: <Widget>[
                 Container(
                   height: 1,
-                  width: displayWidth() / 3,
+                  width: displayWidth / 3,
                   color: Colors.white,
                   margin: EdgeInsets.only(
-                    top: displayWidth() / 30,
+                    top: displayWidth / 30,
                   ),
                 ),
                 Container(
@@ -139,27 +137,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   margin: EdgeInsets.only(
                     left: 5,
                     right: 5,
-                    top: displayWidth() / 30,
+                    top: displayWidth / 30,
                   ),
                 ),
                 Container(
                   height: 1,
-                  width: displayWidth() / 3,
+                  width: displayWidth / 3,
                   color: Colors.white,
                   margin: EdgeInsets.only(
-                    top: displayWidth() / 30,
+                    top: displayWidth / 30,
                   ),
                 ),
               ],
             ),
             SizedBox(
-              height: displayHeight() / 50,
+              height: displayHeight / 50,
             ),
             Container(
               margin: EdgeInsets.symmetric(
-                  horizontal: displayWidth() / 10
+                  horizontal: displayWidth / 10
               ),
-              height: displayHeight() / 13,
+              height: displayHeight / 13,
               child: TextFormField(
                 controller: name,
                 keyboardType: TextInputType.name,
@@ -200,11 +198,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             Container(
               margin: EdgeInsets.only(
-                top: displayHeight() / 50,
-                left: displayWidth() / 10,
-                right: displayWidth() / 10,
+                top: displayHeight / 50,
+                left: displayWidth / 10,
+                right: displayWidth / 10,
               ),
-              height: displayHeight() / 13,
+              height: displayHeight / 13,
               child: TextFormField(
                 controller: phone,
                 keyboardType: TextInputType.phone,
@@ -245,11 +243,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             Container(
               margin: EdgeInsets.only(
-                top: displayHeight() / 50,
-                left: displayWidth() / 10,
-                right: displayWidth() / 10,
+                top: displayHeight / 50,
+                left: displayWidth / 10,
+                right: displayWidth / 10,
               ),
-              height: displayHeight() / 13,
+              height: displayHeight / 13,
               child: TextFormField(
                 controller: cpf,
                 keyboardType: TextInputType.number,
@@ -290,11 +288,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             Container(
               margin: EdgeInsets.only(
-                top: displayHeight() / 50,
-                left: displayWidth() / 10,
-                right: displayWidth() / 10,
+                top: displayHeight / 50,
+                left: displayWidth / 10,
+                right: displayWidth / 10,
               ),
-              height: displayHeight() / 13,
+              height: displayHeight / 13,
               child: TextFormField(
                 controller: birthDate,
                 keyboardType: TextInputType.datetime,
@@ -335,11 +333,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             Container(
               margin: EdgeInsets.only(
-                top: displayHeight() / 50,
-                left: displayWidth() / 10,
-                right: displayWidth() / 10,
+                top: displayHeight / 50,
+                left: displayWidth / 10,
+                right: displayWidth / 10,
               ),
-              height: displayHeight() / 13,
+              height: displayHeight / 13,
               child: TextFormField(
                 controller: emailAddress,
                 keyboardType: TextInputType.emailAddress,
@@ -380,11 +378,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             Container(
               margin: EdgeInsets.only(
-                top: displayHeight() / 50,
-                left: displayWidth() / 10,
-                right: displayWidth() / 10,
+                top: displayHeight / 50,
+                left: displayWidth / 10,
+                right: displayWidth / 10,
               ),
-              height: displayHeight() / 13,
+              height: displayHeight / 13,
               child: new Column(
                 children: <Widget>[
                   new TextFormField(
@@ -439,11 +437,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             Container(
               margin: EdgeInsets.only(
-                top: displayHeight() / 50,
-                left: displayWidth() / 10,
-                right: displayWidth() / 10,
+                top: displayHeight / 50,
+                left: displayWidth / 10,
+                right: displayWidth / 10,
               ),
-              height: displayHeight() / 13,
+              height: displayHeight / 13,
               child: new Column(
                 children: <Widget>[
                   new TextFormField(
@@ -497,15 +495,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
             SizedBox(
-              height: displayHeight() / 20,
+              height: displayHeight / 20,
             ),
             Container(
               margin: EdgeInsets.only(
-                left: displayWidth() / 10,
-                right: displayWidth() / 10,
-                bottom: displayWidth() / 12,
+                left: displayWidth / 10,
+                right: displayWidth / 10,
+                bottom: displayWidth / 12,
               ),
-              height: displayHeight() / 18,
+              height: displayHeight / 18,
               child: RaisedButton(
                 onPressed: (){
                   cadastro();

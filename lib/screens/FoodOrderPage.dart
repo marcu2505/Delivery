@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_login/globals.dart';
 
 class FoodOrderPage extends StatefulWidget {
   @override

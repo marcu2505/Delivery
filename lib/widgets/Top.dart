@@ -7,13 +7,14 @@ import 'package:flutter_login/main.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_login/globals.dart';
 
 class Top extends StatelessWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   Future<String> signInWithGoogle() async {
-    await Firebase.initializeApp();
+    // await Firebase.initializeApp();
 
     final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
@@ -51,9 +52,9 @@ class Top extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        left: MediaQuery.of(context).size.width * 0.03,
+        left: displayWidth * 0.03,
         top: 10,
-        right: MediaQuery.of(context).size.width * 0.03,
+        right: displayWidth * 0.03,
         bottom: 10,
       ),
       child: Row(
@@ -62,18 +63,18 @@ class Top extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
             child: Image.asset(
               'assets/img/logo.png',
-              width: MediaQuery.of(context).size.width * 0.16,
-              height: MediaQuery.of(context).size.width * 0.16,
+              width: displayWidth * 0.16,
+              height: displayWidth * 0.16,
               fit: BoxFit.cover,
             ),
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.03,
+            width: displayWidth * 0.03,
           ),
           Column(
             children: <Widget>[
               Container(
-                width: MediaQuery.of(context).size.width * 0.56,
+                width: displayWidth * 0.56,
                 child: Text(
                   "ENTREGAR",
                   style: TextStyle(
@@ -82,7 +83,7 @@ class Top extends StatelessWidget {
                 ),
               ),
               Container(
-                width: MediaQuery.of(context).size.width * 0.56,
+                width: displayWidth * 0.56,
                 child: Text(
                   "Rua Jose Martins, 1068",
                   style: TextStyle(
@@ -94,7 +95,7 @@ class Top extends StatelessWidget {
             ],
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.07,
+            width: displayWidth * 0.07,
           ),
           Container(
             padding: EdgeInsets.all(5),
@@ -109,7 +110,7 @@ class Top extends StatelessWidget {
               onTap: signOutGoogle,
               child: Icon(
                 Icons.edit,
-                size: MediaQuery.of(context).size.width * 0.08,
+                size: displayWidth * 0.08,
                 color: Colors.red,
               ),
             ),

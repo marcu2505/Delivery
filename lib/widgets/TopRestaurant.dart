@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../globals.dart';
 import '../screens/Restaurant.dart';
 import '../animation/ScaleRoute.dart';
 
@@ -16,12 +17,12 @@ class _TopRestaurantState extends State<TopRestaurant> {
         Stack(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.25,
-              width: MediaQuery.of(context).size.width,
+              height: displayHeight * 0.25,
+              width: displayWidth,
               child: Image.network(
                 'https://vikingsbr.com/wp-content/uploads/2019/11/BANNER_BLOG_PENEDO-2.png',
-                height: MediaQuery.of(context).size.height * 0.25,
-                width: MediaQuery.of(context).size.width,
+                height: displayHeight * 0.25,
+                width: displayWidth,
                 fit: BoxFit.cover,
               ),
               decoration: BoxDecoration(
@@ -53,11 +54,11 @@ class _TopRestaurantState extends State<TopRestaurant> {
                   right: 7,
                 ),
                 margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.23,
-                  left: MediaQuery.of(context).size.width * 0.10,
+                  top: displayHeight * 0.23,
+                  left: displayWidth * 0.10,
                 ),
-                height: MediaQuery.of(context).size.height * 0.04,
-                width: MediaQuery.of(context).size.width * 0.18,
+                height: displayHeight * 0.04,
+                width: displayWidth * 0.18,
                 decoration: BoxDecoration(
                   color: Colors.red,
                   borderRadius: BorderRadius.all(
@@ -72,7 +73,7 @@ class _TopRestaurantState extends State<TopRestaurant> {
                 Container(
                   padding: EdgeInsets.only(right: 5, bottom: 5),
                   margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.275,
+                    top: displayHeight * 0.275,
                   ),
                   decoration: BoxDecoration(
                     color: Colors.yellow,
@@ -118,7 +119,7 @@ class _TopRestaurantState extends State<TopRestaurant> {
                                   ],
                                 ),
                                 SizedBox(
-                                  //height: MediaQuery.of(context).size.height * 0.008,
+                                  //height: displayHeight * 0.008,
                                 ),
                                 Container(
                                   child: Row(
@@ -134,7 +135,7 @@ class _TopRestaurantState extends State<TopRestaurant> {
                                                 color: Colors.white,
                                               ),
                                               SizedBox(
-                                                width: MediaQuery.of(context).size.width * 0.01,
+                                                width: displayWidth * 0.01,
                                               ),
                                               Text("40 - 45Min",
                                                 style: TextStyle(
@@ -170,7 +171,7 @@ class _TopRestaurantState extends State<TopRestaurant> {
                                               color: Colors.white,
                                             ),
                                             SizedBox(
-                                              width: MediaQuery.of(context).size.width * 0.01,
+                                              width: displayWidth * 0.01,
                                             ),
                                             Text("Pedido mínimo: R\$25.00",
                                               style: TextStyle(
@@ -227,11 +228,11 @@ class _TopRestaurantState extends State<TopRestaurant> {
                   fit: BoxFit.cover,
                 ),
                 margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.185,
-                  left: MediaQuery.of(context).size.width * 0.7,
+                  top: displayHeight * 0.185,
+                  left: displayWidth * 0.7,
                 ),
-                height: MediaQuery.of(context).size.height * 0.12,
-                width: MediaQuery.of(context).size.width * 0.25,
+                height: displayHeight * 0.12,
+                width: displayWidth * 0.25,
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.all(

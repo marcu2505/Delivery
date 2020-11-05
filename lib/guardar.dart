@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:slider_button/slider_button.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
-
+import 'package:flutter_login/globals.dart';
 
 class InitScreen extends StatefulWidget {
   @override
@@ -31,10 +31,6 @@ class _InitScreenState extends State<InitScreen> {
 
   @override
 
-
-  double displayHeight() => MediaQuery.of(context).size.height;
-  double displayWidth() => MediaQuery.of(context).size.width;
-
   final textStyle = TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold,);
 
   Widget build(BuildContext context) {
@@ -47,11 +43,11 @@ class _InitScreenState extends State<InitScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               SizedBox(
-                height: displayHeight() / 7,
+                height: displayHeight / 7,
               ),
               CarouselSlider(
                   options: CarouselOptions(
-                    height: displayHeight() / 4,
+                    height: displayHeight / 4,
                     autoPlay: true,
                     autoPlayInterval: Duration(seconds: 5),
                   ),
@@ -65,8 +61,8 @@ class _InitScreenState extends State<InitScreen> {
                         child: Image.network(
                           item,
                           fit: BoxFit.cover,
-                          width: displayWidth() * 0.99,
-                          height: displayHeight() /4,
+                          width: displayWidth * 0.99,
+                          height: displayHeight /4,
                         ),
                       ),
                     ),

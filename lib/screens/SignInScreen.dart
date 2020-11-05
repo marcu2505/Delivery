@@ -6,6 +6,7 @@ import 'InitScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_login/globals.dart';
 
 class SignInScreen extends StatefulWidget {
   final PageController controller;
@@ -25,7 +26,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   Future<String> signInWithGoogle() async {
-    await Firebase.initializeApp();
+    // await Firebase.initializeApp();
 
     final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
@@ -53,26 +54,52 @@ class _SignInScreenState extends State<SignInScreen> {
     return null;
   }
 
-  Future <MyApp> signOutGoogle() async{
+  Future <MyApp> signOutGoogle() async {
     await googleSignIn.signOut();
     print("User Signed Out");
     return MyApp();
   }
 
-  getValues(){
-    print("E-mail: " + email.text);
-    print("Password: " + password.text);
-    print("LoginDate: " + loginDate.toIso8601String());
+  void loginWithEmail() async {
+    if (environment == "development") {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => HomePage()
+        ),
+      );
+    }
+
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: email.text.trim(),
+          password: password.text
+      );
+      if (userCredential.user != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomePage()
+          ),
+        );
+      }
+    } on FirebaseAuthException catch(e) {
+      if(e.code == "wrong-password") {
+        print("Senha incorreta.");
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
-  void dispose(){
+  void dispose() {
     myController.dispose();
     super.dispose();
   }
 
   bool _obscure = true;
 
-  void _togglePassword(){
+  void _togglePassword() {
     setState(() {
       _obscure = !_obscure;
     });
@@ -81,11 +108,11 @@ class _SignInScreenState extends State<SignInScreen> {
   final PageController pageController;
   _SignInScreenState(this.pageController);
 
-  double displayHeight() => MediaQuery.of(context).size.height;
-  double displayWidth() => MediaQuery.of(context).size.width;
-
   @override
   Widget build(BuildContext context) {
+    displayHeight = MediaQuery.of(context).size.height;
+    displayWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.yellow,
       body: Container(
@@ -93,23 +120,23 @@ class _SignInScreenState extends State<SignInScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             SizedBox(
-              height: displayHeight() / 10,
+              height: displayHeight / 10,
             ),
             Container(
-              height: displayHeight() / 3,
+              height: displayHeight / 3,
               child: Image(
                 image: AssetImage('assets/img/deliveryRegional.png'),
                 fit: BoxFit.contain,
-                height: displayHeight() / 6,
-                width: displayWidth() / 2,
+                height: displayHeight / 6,
+                width: displayWidth / 2,
               ),
             ),
 
             Container(
               margin: EdgeInsets.symmetric(
-                  horizontal: displayWidth() / 10
+                  horizontal: displayWidth / 10
               ),
-              height: displayHeight() / 13,
+              height: displayHeight / 13,
               child: TextFormField(
                 controller: email,
                 keyboardType: TextInputType.emailAddress,
@@ -150,13 +177,13 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
 
             SizedBox(
-              height: displayHeight() / 30,
+              height: displayHeight / 30,
             ),
             Container(
               margin: EdgeInsets.symmetric(
-                  horizontal: displayWidth() / 10
+                  horizontal: displayWidth / 10
               ),
-              height: displayHeight() / 13,
+              height: displayHeight / 13,
               child: new Column(
                 children: <Widget>[
                   new TextFormField(
@@ -212,7 +239,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
             Container(
               margin: EdgeInsets.only(
-                right: displayWidth() / 20,
+                right: displayWidth / 20,
                 top: 2,
               ),
               height: 40,
@@ -228,25 +255,18 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
 
 //            SizedBox(
-//              height: displayHeight() / 30,
+//              height: displayHeight / 30,
 //            ),
             Container(
               margin: EdgeInsets.only(
-                left: displayWidth() / 10,
-                right: displayWidth() / 10,
-                bottom: displayWidth() / 12,
+                left: displayWidth / 10,
+                right: displayWidth / 10,
+                bottom: displayWidth / 12,
               ),
-              height: displayHeight() / 18,
+              height: displayHeight / 18,
               child: RaisedButton(
                 onPressed: (){
-                  getValues();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-
-                        builder: (context) => HomePage()
-                    ),
-                  );
+                  loginWithEmail();
                 },
                 child: Text('Entrar', style: TextStyle(color: Colors.white, fontSize: 20),),
                 shape: RoundedRectangleBorder(
@@ -260,10 +280,10 @@ class _SignInScreenState extends State<SignInScreen> {
               children: <Widget>[
                 Container(
                   height: 1,
-                  width: displayWidth() / 3,
+                  width: displayWidth / 3,
                   color: Colors.white,
                   margin: EdgeInsets.only(
-                    bottom: displayWidth() / 18,
+                    bottom: displayWidth / 18,
                   ),
                 ),
                 Container(
@@ -277,15 +297,15 @@ class _SignInScreenState extends State<SignInScreen> {
                   margin: EdgeInsets.only(
                     left: 5,
                     right: 5,
-                    bottom: displayWidth() / 18,
+                    bottom: displayWidth / 18,
                   ),
                 ),
                 Container(
                   height: 1,
-                  width: displayWidth() / 3,
+                  width: displayWidth / 3,
                   color: Colors.white,
                   margin: EdgeInsets.only(
-                    bottom: displayWidth() / 18,
+                    bottom: displayWidth / 18,
                   ),
                 ),
               ],
@@ -295,10 +315,10 @@ class _SignInScreenState extends State<SignInScreen> {
               children: <Widget>[
                 Container(
                   alignment: Alignment.topCenter,
-                  height: displayHeight() / 15,
-                  width: displayWidth() / 7,
+                  height: displayHeight / 15,
+                  width: displayWidth / 7,
                   margin: EdgeInsets.symmetric(
-                    horizontal: displayWidth() / 35,
+                    horizontal: displayWidth / 35,
                   ),
                   child: FlatButton(
                     onPressed: (){
@@ -317,10 +337,10 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 Container(
                   alignment: Alignment.topCenter,
-                  height: displayHeight() / 15,
-                  width: displayWidth() / 7,
+                  height: displayHeight / 15,
+                  width: displayWidth / 7,
                   margin: EdgeInsets.symmetric(
-                    horizontal: displayWidth() / 35,
+                    horizontal: displayWidth / 35,
                   ),
                   decoration: BoxDecoration(
                       image: DecorationImage(
@@ -336,7 +356,7 @@ class _SignInScreenState extends State<SignInScreen> {
               children: <Widget>[
                 Container(
 //                  margin: EdgeInsets.only(
-//                    top: displayHeight() / 40,
+//                    top: displayHeight / 40,
 //                  ),
                   alignment: Alignment.topCenter,
                   child: RichText(
@@ -363,7 +383,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
                 SizedBox(
-                    height: displayHeight() / 9//
+                    height: displayHeight / 9
                 ),
               ],
             )

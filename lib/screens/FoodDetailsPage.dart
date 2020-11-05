@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login/widgets/RestaurantAll.dart';
-import '../animation/ScaleRoute.dart';
-import '../widgets/BestRestaurantsWidget.dart';
 import '../widgets/BottomNavBarWidget.dart';
-import '../widgets/PopularFoodsWidget.dart';
-import '../widgets/SearchWidget.dart';
-import '../widgets/TopMenus.dart';
-import '../widgets/Top.dart';
-import '../widgets/PromoWidget.dart';
-import '../widgets/Topdetail.dat.dart';
+import '../widgets/Topdetail.dart';
 import '../widgets/Details.dart';
 
 class FoodDetailsPage extends StatefulWidget {

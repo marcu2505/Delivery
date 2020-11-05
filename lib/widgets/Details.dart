@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../globals.dart';
+
 class Details extends StatefulWidget {
   @override
   _DetailsState createState() => _DetailsState();
@@ -21,7 +23,7 @@ class _DetailsState extends State<Details> {
                     size: 24,
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.02,
+                    width: displayWidth * 0.02,
                   ),
                   Text(
                     "ALGUMA OBSERVAÇÃO?",
@@ -35,10 +37,10 @@ class _DetailsState extends State<Details> {
             Center(
               child: Padding(
                 padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.08,
-                  top: MediaQuery.of(context).size.height * 0.01,
-                  right: MediaQuery.of(context).size.width * 0.08,
-                  bottom: MediaQuery.of(context).size.height * 0.02,
+                  left: displayWidth * 0.08,
+                  top: displayHeight * 0.01,
+                  right: displayWidth * 0.08,
+                  bottom: displayHeight * 0.02,
                 ),
                 child: Theme(
                   data: Theme.of(context).copyWith(
@@ -53,7 +55,7 @@ class _DetailsState extends State<Details> {
                       const Radius.circular(20.0),
                     ),
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.10,
+                      height: displayHeight * 0.10,
                       child:TextField(
                         textAlignVertical: TextAlignVertical.center,
                         keyboardType: TextInputType.multiline,
@@ -97,8 +99,8 @@ class _DetailsState extends State<Details> {
             ),
             Container(
               margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.02,
-                //bottom: MediaQuery.of(context).size.height * 0.01,
+                top: displayHeight * 0.02,
+                //bottom: displayHeight * 0.01,
               ),
               child: Center(
                 child: Text(
@@ -121,11 +123,11 @@ class _DetailsState extends State<Details> {
                         color: Colors.red,
                       ),
                       padding: EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width * 0.015,
-                        left: MediaQuery.of(context).size.width * 0.015,
+                        right: displayWidth * 0.015,
+                        left: displayWidth * 0.015,
                       ),
                       margin: EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width * 0.02,
+                        right: displayWidth * 0.02,
                       ),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -143,7 +145,7 @@ class _DetailsState extends State<Details> {
                         ),
                       ),
                       margin: EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width * 0.02,
+                        right: displayWidth * 0.02,
                       ),
                     ),
                     Container(
@@ -153,8 +155,8 @@ class _DetailsState extends State<Details> {
                         color: Colors.red,
                       ),
                       padding: EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width * 0.015,
-                        left: MediaQuery.of(context).size.width * 0.015,
+                        right: displayWidth * 0.015,
+                        left: displayWidth * 0.015,
                       ),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -178,9 +180,9 @@ class _DetailsState extends State<Details> {
                 ),
               ),
               margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.02
+                top: displayHeight * 0.02
               ),
-              width: MediaQuery.of(context).size.width * 0.85,
+              width: displayWidth * 0.85,
               decoration: BoxDecoration(
                 color: Colors.red,
                 borderRadius: BorderRadius.all(

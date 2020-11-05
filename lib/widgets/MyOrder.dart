@@ -1,13 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../animation/ScaleRoute.dart';
-import '../widgets/BestRestaurantsWidget.dart';
+import '../globals.dart';
 import '../widgets/BottomNavBarWidget.dart';
-import '../widgets/PopularFoodsWidget.dart';
-import '../widgets/SearchWidget.dart';
-import '../widgets/TopMenus.dart';
-import '../widgets/Top.dart';
-import '../widgets/PromoWidget.dart';
 
 class MyOrder extends StatefulWidget {
   @override
@@ -15,15 +9,11 @@ class MyOrder extends StatefulWidget {
 }
 
 class _MyOrderState extends State<MyOrder> {
-  @override
-
-  double displayHeight() => MediaQuery.of(context).size.height;
-  double displayWidth() => MediaQuery.of(context).size.width;
-
   getValues() {
     print(MediaQuery.of(context).viewPadding);
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.yellow,
@@ -34,7 +24,7 @@ class _MyOrderState extends State<MyOrder> {
               height: MediaQuery.of(context).viewPadding.top,
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.06,
+              height: displayHeight * 0.06,
             ),
             Container(
               child: Row(
@@ -44,8 +34,8 @@ class _MyOrderState extends State<MyOrder> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Container(
-                          width: MediaQuery.of(context).size.width * 0.05,
-                          height: MediaQuery.of(context).size.width * 0.05,
+                          width: displayWidth * 0.05,
+                          height: displayWidth * 0.05,
                           decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.all(
@@ -63,7 +53,7 @@ class _MyOrderState extends State<MyOrder> {
                         ),
                       ]
                     ),
-                    width: MediaQuery.of(context).size.width * 0.46,
+                    width: displayWidth * 0.46,
                     decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.only(
@@ -74,11 +64,11 @@ class _MyOrderState extends State<MyOrder> {
                       )
                     ),
                     margin: EdgeInsets.only(
-                      right: MediaQuery.of(context).size.width * 0.01,
+                      right: displayWidth * 0.01,
                     ),
                     padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.03,
-                      right: MediaQuery.of(context).size.width * 0.03,
+                      left: displayWidth * 0.03,
+                      right: displayWidth * 0.03,
                     ),
                   ),
                   Container(
@@ -86,8 +76,8 @@ class _MyOrderState extends State<MyOrder> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Container(
-                          width: MediaQuery.of(context).size.width * 0.05,
-                          height: MediaQuery.of(context).size.width * 0.05,
+                          width: displayWidth * 0.05,
+                          height: displayWidth * 0.05,
                           decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.all(
@@ -105,7 +95,7 @@ class _MyOrderState extends State<MyOrder> {
                         ),
                       ]
                     ),
-                    width: MediaQuery.of(context).size.width * 0.46,
+                    width: displayWidth * 0.46,
                     decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.only(
@@ -116,11 +106,11 @@ class _MyOrderState extends State<MyOrder> {
                       )
                     ),
                     margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.01,
+                      left: displayWidth * 0.01,
                     ),
                     padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.03,
-                      right: MediaQuery.of(context).size.width * 0.03,
+                      left: displayWidth * 0.03,
+                      right: displayWidth * 0.03,
                     ),
                   ),
                 ],
@@ -131,11 +121,11 @@ class _MyOrderState extends State<MyOrder> {
                 ),
               ),
               margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.03,
-                right: MediaQuery.of(context).size.width * 0.03,
-                top: MediaQuery.of(context).size.height * 0.03 ,
+                left: displayWidth * 0.03,
+                right: displayWidth * 0.03,
+                top: displayHeight * 0.03 ,
               ),
-              width: MediaQuery.of(context).size.width * 0.94,
+              width: displayWidth * 0.94,
             ),
             Container(
               child: Row(
@@ -175,17 +165,17 @@ class _MyOrderState extends State<MyOrder> {
                             ),
                           ),
                           padding: EdgeInsets.only(
-                            right: MediaQuery.of(context).size.width * 0.01,
-                            left: MediaQuery.of(context).size.width * 0.01,
+                            right: displayWidth * 0.01,
+                            left: displayWidth * 0.01,
                           ),
                         ),
                       ],
                     ),
                     margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02,
-                      bottom: MediaQuery.of(context).size.height * 0.02,
+                      top: displayHeight * 0.02,
+                      bottom: displayHeight * 0.02,
                     ),
-                    width: MediaQuery.of(context).size.width * 0.87,
+                    width: displayWidth * 0.87,
                   ),
                 ],
               ),
@@ -195,10 +185,10 @@ class _MyOrderState extends State<MyOrder> {
                 ),
               ),
               margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.03,
-                right: MediaQuery.of(context).size.width * 0.03,
-                top: MediaQuery.of(context).size.height * 0.04,
-                bottom: MediaQuery.of(context).size.height * 0.04,
+                left: displayWidth * 0.03,
+                right: displayWidth * 0.03,
+                top: displayHeight * 0.04,
+                bottom: displayHeight * 0.04,
               ),
             ),
             Container(
@@ -223,7 +213,7 @@ class _MyOrderState extends State<MyOrder> {
                 ),
               ),
               margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.001,
+                top: displayHeight * 0.001,
               ),
               decoration: BoxDecoration(
                 color: Colors.red,
@@ -232,8 +222,8 @@ class _MyOrderState extends State<MyOrder> {
                   bottom: BorderSide(width: 3.0, color: Colors.black),
                 ),
               ),
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.06,
+              width: displayWidth,
+              height: displayHeight * 0.06,
             ),
             Container(
               child: Center(
@@ -247,9 +237,9 @@ class _MyOrderState extends State<MyOrder> {
                   )
               ),
               margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.15,
-                right: MediaQuery.of(context).size.width * 0.15,
-                top: MediaQuery.of(context).size.height * 0.03,
+                left: displayWidth * 0.15,
+                right: displayWidth * 0.15,
+                top: displayHeight * 0.03,
               ),
               decoration: BoxDecoration(
                 color: Colors.red,
@@ -257,7 +247,7 @@ class _MyOrderState extends State<MyOrder> {
                   Radius.circular(10),
                 ),
               ),
-              width: MediaQuery.of(context).size.width * 0.7,
+              width: displayWidth * 0.7,
             ),
             Container(
               margin: EdgeInsets.only(
@@ -288,7 +278,7 @@ class _MyOrderState extends State<MyOrder> {
                         ),
                       ],
                     ),
-                    width: MediaQuery.of(context).size.width * 0.84,
+                    width: displayWidth * 0.84,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(
@@ -296,9 +286,9 @@ class _MyOrderState extends State<MyOrder> {
                       ),
                     ),
                     margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.08,
-                      right: MediaQuery.of(context).size.width * 0.01,
-                      top: MediaQuery.of(context).size.height * 0.03,
+                      left: displayWidth * 0.08,
+                      right: displayWidth * 0.01,
+                      top: displayHeight * 0.03,
                     ),
                   ),
                 ],
@@ -333,7 +323,7 @@ class _MyOrderState extends State<MyOrder> {
                         ),
                       ],
                     ),
-                    width: MediaQuery.of(context).size.width * 0.94,
+                    width: displayWidth * 0.94,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(
@@ -356,9 +346,9 @@ class _MyOrderState extends State<MyOrder> {
                   )
               ),
               margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.03,
-                right: MediaQuery.of(context).size.width * 0.03,
-                top: MediaQuery.of(context).size.height * 0.09,
+                left: displayWidth * 0.03,
+                right: displayWidth * 0.03,
+                top: displayHeight * 0.09,
               ),
               decoration: BoxDecoration(
                 color: Colors.red,
@@ -366,7 +356,7 @@ class _MyOrderState extends State<MyOrder> {
                   Radius.circular(10),
                 ),
               ),
-              width: MediaQuery.of(context).size.width * 0.94,
+              width: displayWidth * 0.94,
             ),
           ],
         ),

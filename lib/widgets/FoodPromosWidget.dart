@@ -3,23 +3,24 @@ import 'package:flutter/material.dart';
 import '../animation/RotationRoute.dart';
 import '../animation/ScaleRoute.dart';
 import '../screens/FoodDetailsPage.dart';
+import 'package:flutter_login/globals.dart';
 
-class PopularFoodsWidget extends StatefulWidget {
+class FoodPromosWidget extends StatefulWidget {
   @override
-  _PopularFoodsWidgetState createState() => _PopularFoodsWidgetState();
+  _FoodPromosWidgetState createState() => _FoodPromosWidgetState();
 }
 
-class _PopularFoodsWidgetState extends State<PopularFoodsWidget> {
+class _FoodPromosWidgetState extends State<FoodPromosWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.377,
+      height: displayHeight * 0.377,
       width: double.infinity,
       child: Column(
         children: <Widget>[
-          PopularFoodTitle(),
+          FoodPromosTitle(),
           Expanded(
-            child: PopularFoodItems(),
+            child: FoodPromosItems(),
           )
         ],
       ),
@@ -27,7 +28,42 @@ class _PopularFoodsWidgetState extends State<PopularFoodsWidget> {
   }
 }
 
-class PopularFoodTiles extends StatelessWidget {
+class FoodPromosTitle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(
+        top: 3,
+      ),
+      padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2),
+            child: Text(
+              "Promoções",
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontFamily: 'BalooBhai',
+                  fontWeight: FontWeight.w300
+              ),
+            ),
+            decoration: BoxDecoration(
+              //color: Colors.red,
+              borderRadius: BorderRadius.all(
+                Radius.circular(5),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FoodPromosTile extends StatelessWidget {
   String name;
   String imageUrl;
   String image;
@@ -36,7 +72,7 @@ class PopularFoodTiles extends StatelessWidget {
   String description;
   String slug;
 
-  PopularFoodTiles(
+  FoodPromosTile(
       {Key key,
       @required this.name,
       @required this.imageUrl,
@@ -77,8 +113,8 @@ class PopularFoodTiles extends StatelessWidget {
                     // left: 5,
                     //bottom: 5,
                   ),
-                  width: MediaQuery.of(context).size.width * 0.55,
-                  //height:  MediaQuery.of(context).size.height * 0.29,
+                  width: displayWidth * 0.55,
+                  //height:  displayHeight * 0.29,
                   child: Column(children: <Widget>[
                       Container(
                         child: Stack(
@@ -89,7 +125,7 @@ class PopularFoodTiles extends StatelessWidget {
                                 child: Image.network(
                                   imageUrl,
                                   fit: BoxFit.cover,
-                                  width: MediaQuery.of(context).size.width * 0.4,
+                                  width: displayWidth * 0.4,
                                   height: 80,
                                 ),
                               ),
@@ -102,11 +138,11 @@ class PopularFoodTiles extends StatelessWidget {
                             //       // child: Image.network(
                             //       //   imageUrl,
                             //       //   fit: BoxFit.cover,
-                            //       //   width: MediaQuery.of(context).size.width * 0.4,
+                            //       //   width: displayWidth * 0.4,
                             //       //   height: 80,
                             //       // ),
-                            //       width: 32, //MediaQuery.of(context).size.width * 0.1,
-                            //       height: 32, //MediaQuery.of(context).size.height * 0.04,
+                            //       width: 32, //displayWidth * 0.1,
+                            //       height: 32, //displayHeight * 0.04,
                             //       decoration: BoxDecoration(
                             //         color: Colors.black,
                             //         borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -167,13 +203,13 @@ class PopularFoodTiles extends StatelessWidget {
                               borderRadius: BorderRadius.all(Radius.circular(8.0)),
                               color: Colors.red,
                             ),
-                            width: MediaQuery.of(context).size.width * 0.15,
-                            height: MediaQuery.of(context).size.height * 0.03,
+                            width: displayWidth * 0.15,
+                            height: displayHeight * 0.03,
                           ),
                           Container(
                             child: Icon(
                               Icons.arrow_forward,
-                              size: MediaQuery.of(context).size.height * 0.03,
+                              size: displayHeight * 0.03,
                             ),
                           ),
                           Container(
@@ -193,20 +229,20 @@ class PopularFoodTiles extends StatelessWidget {
                               borderRadius: BorderRadius.all(Radius.circular(8.0)),
                               color: Colors.green,
                             ),
-                            width: MediaQuery.of(context).size.width * 0.13,
-                            height: MediaQuery.of(context).size.height * 0.03,
+                            width: displayWidth * 0.13,
+                            height: displayHeight * 0.03,
                           ),
                         ],
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.01,
+                        height: displayHeight * 0.01,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
                             margin: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).size.height * 0.015,
+                              bottom: displayHeight * 0.015,
                             ),
                             child: Align(
                               alignment: Alignment.center,
@@ -224,8 +260,8 @@ class PopularFoodTiles extends StatelessWidget {
                               borderRadius: BorderRadius.all(Radius.circular(8.0)),
                               color: Colors.yellow,
                             ),
-                            width: MediaQuery.of(context).size.width * 0.40,
-                            height: MediaQuery.of(context).size.height * 0.033,
+                            width: displayWidth * 0.40,
+                            height: displayHeight * 0.033,
                           ),
                         ],
                       ),
@@ -240,49 +276,14 @@ class PopularFoodTiles extends StatelessWidget {
   }
 }
 
-class PopularFoodTitle extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-        top: 3,
-      ),
-      padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2),
-            child: Text(
-              "Promoções",
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                  fontFamily: 'BalooBhai',
-                  fontWeight: FontWeight.w300
-              ),
-            ),
-            decoration: BoxDecoration(
-              //color: Colors.red,
-              borderRadius: BorderRadius.all(
-                Radius.circular(5),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class PopularFoodItems extends StatelessWidget {
+class FoodPromosItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
       padding: EdgeInsets.zero,
       scrollDirection: Axis.horizontal,
       children: <Widget>[
-        PopularFoodTiles(
+        FoodPromosTile(
             name: "Fried Egg",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
@@ -290,7 +291,7 @@ class PopularFoodItems extends StatelessWidget {
             price_1: '10.00',
             description: "Pão, bacon, tomate, ovo",
             slug: "fried_egg"),
-        PopularFoodTiles(
+        FoodPromosTile(
             name: "Mixed Vegetable",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
@@ -298,7 +299,7 @@ class PopularFoodItems extends StatelessWidget {
             price_1: '10.00',
             description: "Pão, bacon, tomate, ovo",
             slug: ""),
-        PopularFoodTiles(
+        FoodPromosTile(
             name: "Salad With Chicken",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
@@ -306,7 +307,7 @@ class PopularFoodItems extends StatelessWidget {
             price_1: '10.00',
             description: "Pão, bacon, tomate, ovo",
             slug: ""),
-        PopularFoodTiles(
+        FoodPromosTile(
             name: "Mixed Salad",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
@@ -314,7 +315,7 @@ class PopularFoodItems extends StatelessWidget {
             price_1: '10.00',
             description: "Pão, bacon, tomate, ovo",
             slug: ""),
-        PopularFoodTiles(
+        FoodPromosTile(
             name: "Red meat,Salad",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
@@ -322,7 +323,7 @@ class PopularFoodItems extends StatelessWidget {
             price_1: '10.00',
             description: "Pão, bacon, tomate, ovo",
             slug: ""),
-        PopularFoodTiles(
+        FoodPromosTile(
             name: "Mixed Salad",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
@@ -330,7 +331,7 @@ class PopularFoodItems extends StatelessWidget {
             price_1: '10.00',
             description: "Pão, bacon, tomate, ovo",
             slug: ""),
-        PopularFoodTiles(
+        FoodPromosTile(
             name: "Potato,Meat fry",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
@@ -338,7 +339,7 @@ class PopularFoodItems extends StatelessWidget {
             price_1: '10.00',
             description: "Pão, bacon, tomate, ovo",
             slug: ""),
-        PopularFoodTiles(
+        FoodPromosTile(
             name: "Fried Egg",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
@@ -346,7 +347,7 @@ class PopularFoodItems extends StatelessWidget {
             price_1: '10.00',
             description: "Pão, bacon, tomate, ovo",
             slug: "fried_egg"),
-        PopularFoodTiles(
+        FoodPromosTile(
             name: "Red meat,Salad",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
             image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
