@@ -8,16 +8,24 @@ import '../widgets/SearchWidget.dart';
 import '../widgets/TopMenus.dart';
 import '../widgets/Top.dart';
 import '../widgets/PromoWidget.dart';
-import '../widgets/Topdetail.dat.dart';
-import '../widgets/Details.dart';
+import '../widgets/TopRestaurant.dart';
 
-class FoodDetailsPage extends StatefulWidget {
+class Restaurant extends StatefulWidget {
   @override
-  _FoodDetailsPageState createState() => _FoodDetailsPageState();
+  _RestaurantState createState() => _RestaurantState();
 }
 
-class _FoodDetailsPageState extends State<FoodDetailsPage> {
+class _RestaurantState extends State<Restaurant> {
   @override
+  double displayHeight() => MediaQuery.of(context).size.height;
+  double displayWidth() => MediaQuery.of(context).size.width;
+
+  getValues() {
+    print(MediaQuery
+        .of(context)
+        .viewPadding);
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.yellow,
@@ -30,8 +38,9 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                   .viewPadding
                   .top,
             ),
-            TopDetail(),
-            Details(),
+
+            TopRestaurant(),
+            RestaurantAll(),
           ],
         ),
       ),

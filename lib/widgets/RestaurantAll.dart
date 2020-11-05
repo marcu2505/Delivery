@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../screens/Restaurant.dart';
 import '../animation/ScaleRoute.dart';
 
-class BestRestaurantsWidget extends StatefulWidget {
+class RestaurantAll extends StatefulWidget {
   @override
-  _BestRestaurantsWidgetState createState() => _BestRestaurantsWidgetState();
+  _RestaurantAllState createState() => _RestaurantAllState();
 }
 
-class _BestRestaurantsWidgetState extends State<BestRestaurantsWidget> {
+class _RestaurantAllState extends State<RestaurantAll> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -22,37 +22,133 @@ class _BestRestaurantsWidgetState extends State<BestRestaurantsWidget> {
   }
 }
 
+
 class BestRestaurantsTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-        top: 3,
-      ),
-      padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(left: 5, right: 5, top: 0, bottom: 0),
-            child: Text(
-              "Estabelecimentos".toUpperCase(),
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontFamily: 'BalooBhai',
-                fontWeight: FontWeight.w300
-              ),
-            ),
-            decoration: BoxDecoration(
-              //color: Colors.red,
-              borderRadius: BorderRadius.all(
-                Radius.circular(5),
-              ),
-            ),
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.only(
+            top: 0,
           ),
-        ],
-      ),
+          padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 5, top: 2, bottom: 2),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      "Açaí",
+                      style: TextStyle(
+                          fontSize: 27,
+                          color: Colors.black,
+                          fontFamily: 'BalooBhai',
+                          fontWeight: FontWeight.w300
+                      ),
+                    ),
+                    Icon(
+                      Icons.keyboard_arrow_right,
+                      color: Colors.black,
+                      size: 35,
+                    ),
+                  ],
+                ),
+                width: MediaQuery.of(context).size.width * 0.94,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(
+            top: 0,
+          ),
+          padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 5, top: 2, bottom: 2),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      "Hamburguer",
+                      style: TextStyle(
+                          fontSize: 27,
+                          color: Colors.black,
+                          fontFamily: 'BalooBhai',
+                          fontWeight: FontWeight.w300
+                      ),
+                    ),
+                    Icon(
+                      Icons.keyboard_arrow_right,
+                      color: Colors.black,
+                      size: 35,
+                    ),
+                  ],
+                ),
+                width: MediaQuery.of(context).size.width * 0.94,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(
+            top: 0,
+          ),
+          padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 5, top: 2, bottom: 2),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      "Pizza",
+                      style: TextStyle(
+                          fontSize: 27,
+                          color: Colors.black,
+                          fontFamily: 'BalooBhai',
+                          fontWeight: FontWeight.w300
+                      ),
+                    ),
+                    Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Colors.black,
+                      size: 35,
+                    ),
+                  ],
+                ),
+                width: MediaQuery.of(context).size.width * 0.94,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
@@ -70,15 +166,15 @@ class BestRestaurantsTiles extends StatelessWidget {
 
   BestRestaurantsTiles(
       {Key key,
-      @required this.name,
-      @required this.imageUrl,
-      @required this.rating,
-      @required this.numberOfRating,
-      @required this.price,
-      @required this.slug,
-      @required this.address,
-      @required this.category,
-      @required this.deliveryFee})
+        @required this.name,
+        @required this.imageUrl,
+        @required this.rating,
+        @required this.numberOfRating,
+        @required this.price,
+        @required this.slug,
+        @required this.address,
+        @required this.category,
+        @required this.deliveryFee})
       : super(key: key);
 
   @override
@@ -90,7 +186,7 @@ class BestRestaurantsTiles extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(left: 10, right: 5, top: 5, bottom: 5),
+            padding: EdgeInsets.only(left: 5, right: 5, top: 2.5, bottom: 2.5),
             decoration: BoxDecoration(
               //color: Colors.black,
             ),
@@ -98,50 +194,47 @@ class BestRestaurantsTiles extends StatelessWidget {
               semanticContainer: true,
               clipBehavior: Clip.antiAliasWithSaveLayer,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(21.0),
+                borderRadius: BorderRadius.circular(10.0),
               ),
               elevation: 1,
-              margin: EdgeInsets.all(5),
+              margin: EdgeInsets.only(
+                left: 5,
+                right: 5,
+                top: 0,
+                bottom: 0,
+              ),
               child: Padding(
                 padding: EdgeInsets.only(
-                  top: 8,
-                  bottom: 8,
-                  left: 8,
+                  top: 5,
+                  bottom: 5,
+                  left: 20,
                   right: 8,
                 ),
                 child: Row(
                   children: <Widget>[
-                    ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      child: Image.network(imageUrl,
-                        height: MediaQuery.of(context).size.height * 0.13,
-                        width: MediaQuery.of(context).size.height * 0.13,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.02,
-                    ),
                     Expanded(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          Text(name.toUpperCase(),
-                            style: TextStyle(
-                              fontSize: 21,
-                              fontFamily: 'BalooBhai',
-                            ),
-                          ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Container(
-                                child: Text(category.toUpperCase(),
-                                  textAlign: TextAlign.left,
+                                child: Text(name.toUpperCase(),
                                   style: TextStyle(
-                                    fontSize: 12,
+                                    fontSize: 21,
                                     fontFamily: 'BalooBhai',
+                                  ),
+                                ),
+
+                              ),
+                              Container(
+                                child: Text("R\$ " + rating.toUpperCase() + "0",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: 'BalooBhai',
+                                    color: Colors.white,
                                   ),
                                 ),
                                 padding: EdgeInsets.only(
@@ -154,72 +247,22 @@ class BestRestaurantsTiles extends StatelessWidget {
                                   right: 10,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.yellow,
+                                  color: Colors.red,
                                   borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
+                                    Radius.circular(15),
                                   ),
                                 ),
-                              ),
-                              Row(
-                                children: [
-                                  Image.network(
-                                    'https://cdn.pixabay.com/photo/2013/07/13/10/22/star-157086_1280.png',
-                                    width: 14,
-                                    height: 14,
-                                  ),
-
-                                  Text(rating,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: 'BalooBhai',
-                                    ),
-                                  ),
-                                ],
                               ),
                             ],
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.008,
+                            //height: MediaQuery.of(context).size.height * 0.008,
                           ),
-                          Row(
-                            children: <Widget>[
-                              ClipRRect(
-                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                child: Image.asset(
-                                  'assets/img/logo.png',
-                                  width: MediaQuery.of(context).size.width * 0.06,
-                                  height: MediaQuery.of(context).size.width * 0.06,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Text(address.toUpperCase(),
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: 'BalooBhai',
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            textDirection: TextDirection.rtl,
-                            children: [
-                              Container(
-                                child: getDeliveryFee(deliveryFee),
-                                padding: EdgeInsets.only(
-                                  top: 2,
-                                  bottom: 2,
-                                  left: 5,
-                                  right: 5,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5),
-                                  ),
-                                ),
-                              ),
-                            ],
+                          Text("Pão carne e queijo batata arroz salada".toUpperCase(),
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: 'BalooBhai',
+                            ),
                           ),
                         ],
                       ),

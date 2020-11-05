@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login/guardar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BottomNavBarWidget extends StatefulWidget {
   @override
   _BottomNavBarWidgetState createState() => _BottomNavBarWidgetState();
+}
+
+void navigateToScreens(index){
+  if(index == 0){
+    InitScreen();
+  }
 }
 
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
@@ -13,33 +20,40 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
     void _onItemTapped(int index) {
       setState(() {
         _selectedIndex = index;
-//        navigateToScreens(index);
+        navigateToScreens(index);
       });
     }
 
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.yellow,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.home, color: Colors.black,),
           title: Text(
-            'Inicio',
-            style: TextStyle(color: Color(0xFF2c2b2b)),
+            'Lojas',
+            style: TextStyle(color: Colors.black),
           ),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.assignment),
+          icon: Icon(Icons.filter_list, color: Colors.black,),
+          title: Text(
+            'Filtro',
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.assignment, color: Colors.black,),
           title: Text(
             'Pedidos',
-            style: TextStyle(color: Color(0xFF2c2b2b)),
+            style: TextStyle(color: Colors.black),
           ),
-
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.person, color: Colors.black,),
           title: Text(
             'Conta',
-            style: TextStyle(color: Color(0xFF2c2b2b)),
+            style: TextStyle(color: Colors.black),
           ),
         ),
       ],

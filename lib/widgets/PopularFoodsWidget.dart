@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../animation/RotationRoute.dart';
 import '../animation/ScaleRoute.dart';
@@ -12,7 +13,7 @@ class _PopularFoodsWidgetState extends State<PopularFoodsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 265,
+      height: MediaQuery.of(context).size.height * 0.377,
       width: double.infinity,
       child: Column(
         children: <Widget>[
@@ -29,18 +30,20 @@ class _PopularFoodsWidgetState extends State<PopularFoodsWidget> {
 class PopularFoodTiles extends StatelessWidget {
   String name;
   String imageUrl;
-  String rating;
-  String numberOfRating;
-  String price;
+  String image;
+  String price_0;
+  String price_1;
+  String description;
   String slug;
 
   PopularFoodTiles(
       {Key key,
       @required this.name,
       @required this.imageUrl,
-      @required this.rating,
-      @required this.numberOfRating,
-      @required this.price,
+      @required this.image,
+      @required this.price_0,
+      @required this.price_1,
+      @required this.description,
       @required this.slug})
       : super(key: key);
 
@@ -53,180 +56,183 @@ class PopularFoodTiles extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(left: 10, right: 5, top: 5, bottom: 5),
+            padding: EdgeInsets.only(left: 10, right: 5, top: 5),
             decoration: BoxDecoration(boxShadow: [
-              /* BoxShadow(
-                color: Color(0xFFfae3e2),
-                blurRadius: 15.0,
-                offset: Offset(0, 0.75),
-              ),*/
             ]),
             child: Card(
                 color: Colors.white,
                 elevation: 0,
                 margin: EdgeInsets.only(
-                  top: 10,
+                  top: 5,
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: const BorderRadius.all(
-                    Radius.circular(5.0),
+                    Radius.circular(21.0),
                   ),
                 ),
                 child: Container(
-                  width: 170,
-                  height: 210,
-                  child: Column(
-                    children: <Widget>[
-                      Stack(
-                        children: <Widget>[
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Container(
-                              alignment: Alignment.topRight,
-                              width: double.infinity,
-                              padding: EdgeInsets.only(right: 5, top: 5),
-                              child: Container(
-                                height: 28,
-                                width: 28,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white70,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color(0xFFfae3e2),
-                                        blurRadius: 25.0,
-                                        offset: Offset(0.0, 0.75),
-                                      ),
-                                    ]),
-                                child: Icon(
-                                  Icons.favorite,
-                                  color: Color(0xFFfb3132),
-                                  size: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Center(
+                  padding: EdgeInsets.only(
+                    top: 7,
+                    // right: 5,
+                    // left: 5,
+                    //bottom: 5,
+                  ),
+                  width: MediaQuery.of(context).size.width * 0.55,
+                  //height:  MediaQuery.of(context).size.height * 0.29,
+                  child: Column(children: <Widget>[
+                      Container(
+                        child: Stack(
+                          children: <Widget>[
+                            Center(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                 child: Image.network(
                                   imageUrl,
                                   fit: BoxFit.cover,
-                                  width: 120,
-                                  height: 120,
-                            )),
-                          )
-                        ],
+                                  width: MediaQuery.of(context).size.width * 0.4,
+                                  height: 80,
+                                ),
+                              ),
+                            ),
+                            // ClipRRect(
+                            //   borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                            //   child: Align(
+                            //     alignment: FractionalOffset.bottomLeft,
+                            //     child: Container(
+                            //       // child: Image.network(
+                            //       //   imageUrl,
+                            //       //   fit: BoxFit.cover,
+                            //       //   width: MediaQuery.of(context).size.width * 0.4,
+                            //       //   height: 80,
+                            //       // ),
+                            //       width: 32, //MediaQuery.of(context).size.width * 0.1,
+                            //       height: 32, //MediaQuery.of(context).size.height * 0.04,
+                            //       decoration: BoxDecoration(
+                            //         color: Colors.black,
+                            //         borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // )
+                          ],
+                        ),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Container(
-                            alignment: Alignment.bottomLeft,
-                            padding: EdgeInsets.only(left: 5, top: 5),
-                            child: Text(name,
-                                style: TextStyle(
-                                    color: Color(0xFF6e6e71),
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500)),
-                          ),
-                          Container(
-                            alignment: Alignment.topRight,
-                            padding: EdgeInsets.only(right: 5),
-                            child: Container(
-                              height: 28,
-                              width: 28,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white70,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color(0xFFfae3e2),
-                                      blurRadius: 25.0,
-                                      offset: Offset(0.0, 0.75),
-                                    ),
-                                  ]),
-                              child: Icon(
-                                Icons.near_me,
-                                color: Color(0xFFfb3132),
-                                size: 16,
-                              ),
+                          Text(
+                            name,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'BalooBhai',
                             ),
                           ),
                         ],
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Container(
-                                alignment: Alignment.topLeft,
-                                padding: EdgeInsets.only(left: 5, top: 5),
-                                child: Text(rating,
+                          Text(
+                            description,
+                            style: TextStyle(
+                              color: Color(0xAF3a3a3b),
+                              fontWeight: FontWeight.w100,
+                              fontSize: 14,
+                              fontFamily: 'BalooBhai',
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            child: Align(
+                              alignment: Alignment.center,
+                               child: Center(
+                                  child: Text(
+                                    price_0,
                                     style: TextStyle(
-                                        color: Color(0xFF6e6e71),
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w400)),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(top: 3, left: 5),
-                                child: Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.star,
-                                      size: 10,
-                                      color: Color(0xFFfb3132),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w100,
+                                      fontSize: 14,
+                                      fontFamily: 'BalooBhai',
+                                      decoration: TextDecoration.lineThrough,
                                     ),
-                                    Icon(
-                                      Icons.star,
-                                      size: 10,
-                                      color: Color(0xFFfb3132),
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      size: 10,
-                                      color: Color(0xFFfb3132),
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      size: 10,
-                                      color: Color(0xFFfb3132),
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      size: 10,
-                                      color: Color(0xFF9b9b9c),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                alignment: Alignment.topLeft,
-                                padding: EdgeInsets.only(left: 5, top: 5),
-                                child: Text("($numberOfRating)",
-                                    style: TextStyle(
-                                        color: Color(0xFF6e6e71),
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w400)),
-                              ),
-                            ],
+                                    textAlign: TextAlign.center,
+                                  ),
+                               ),
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                              color: Colors.red,
+                            ),
+                            width: MediaQuery.of(context).size.width * 0.15,
+                            height: MediaQuery.of(context).size.height * 0.03,
                           ),
                           Container(
-                            alignment: Alignment.bottomLeft,
-                            padding: EdgeInsets.only(left: 5, top: 5, right: 5),
-                            child: Text('\$' + price,
+                            child: Icon(
+                              Icons.arrow_forward,
+                              size: MediaQuery.of(context).size.height * 0.03,
+                            ),
+                          ),
+                          Container(
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                price_1,
                                 style: TextStyle(
-                                    color: Color(0xFF6e6e71),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600)),
-                          )
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w100,
+                                  fontSize: 14,
+                                  fontFamily: 'BalooBhai',
+                                ),
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                              color: Colors.green,
+                            ),
+                            width: MediaQuery.of(context).size.width * 0.13,
+                            height: MediaQuery.of(context).size.height * 0.03,
+                          ),
                         ],
-                      )
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.01,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).size.height * 0.015,
+                            ),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                'QUERO ESSE',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w100,
+                                  fontSize: 16,
+                                  fontFamily: 'BalooBhai',
+                                ),
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                              color: Colors.yellow,
+                            ),
+                            width: MediaQuery.of(context).size.width * 0.40,
+                            height: MediaQuery.of(context).size.height * 0.033,
+                          ),
+                        ],
+                      ),
                     ],
                   ),
-                )),
+                )
+            ),
           ),
         ],
       ),
@@ -238,22 +244,31 @@ class PopularFoodTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(
+        top: 3,
+      ),
       padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Text(
-            "Popular Foods",
-            style: TextStyle(
-                fontSize: 20,
-                color: Color(0xFF3a3a3b),
-                fontWeight: FontWeight.w300),
+          Container(
+            padding: EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2),
+            child: Text(
+              "Promoções",
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontFamily: 'BalooBhai',
+                  fontWeight: FontWeight.w300
+              ),
+            ),
+            decoration: BoxDecoration(
+              //color: Colors.red,
+              borderRadius: BorderRadius.all(
+                Radius.circular(5),
+              ),
+            ),
           ),
-          Text(
-            "See all",
-            style: TextStyle(
-                fontSize: 16, color: Colors.blue, fontWeight: FontWeight.w100),
-          )
         ],
       ),
     );
@@ -264,70 +279,80 @@ class PopularFoodItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: EdgeInsets.zero,
       scrollDirection: Axis.horizontal,
       children: <Widget>[
         PopularFoodTiles(
             name: "Fried Egg",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            rating: '4.9',
-            numberOfRating: '200',
-            price: '15.06',
+            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+            price_0: '20.00',
+            price_1: '10.00',
+            description: "Pão, bacon, tomate, ovo",
             slug: "fried_egg"),
         PopularFoodTiles(
             name: "Mixed Vegetable",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            rating: "4.9",
-            numberOfRating: "100",
-            price: "17.03",
+            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+            price_0: '20.00',
+            price_1: '10.00',
+            description: "Pão, bacon, tomate, ovo",
             slug: ""),
         PopularFoodTiles(
             name: "Salad With Chicken",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            rating: "4.0",
-            numberOfRating: "50",
-            price: "11.00",
+            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+            price_0: '20.00',
+            price_1: '10.00',
+            description: "Pão, bacon, tomate, ovo",
             slug: ""),
         PopularFoodTiles(
             name: "Mixed Salad",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            rating: "4.00",
-            numberOfRating: "100",
-            price: "11.10",
+            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+            price_0: '20.00',
+            price_1: '10.00',
+            description: "Pão, bacon, tomate, ovo",
             slug: ""),
         PopularFoodTiles(
             name: "Red meat,Salad",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            rating: "4.6",
-            numberOfRating: "150",
-            price: "12.00",
+            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+            price_0: '20.00',
+            price_1: '10.00',
+            description: "Pão, bacon, tomate, ovo",
             slug: ""),
         PopularFoodTiles(
             name: "Mixed Salad",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            rating: "4.00",
-            numberOfRating: "100",
-            price: "11.10",
+            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+            price_0: '20.00',
+            price_1: '10.00',
+            description: "Pão, bacon, tomate, ovo",
             slug: ""),
         PopularFoodTiles(
             name: "Potato,Meat fry",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            rating: "4.2",
-            numberOfRating: "70",
-            price: "23.0",
+            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+            price_0: '20.00',
+            price_1: '10.00',
+            description: "Pão, bacon, tomate, ovo",
             slug: ""),
         PopularFoodTiles(
             name: "Fried Egg",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            rating: '4.9',
-            numberOfRating: '200',
-            price: '15.06',
+            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+            price_0: '20.00',
+            price_1: '10.00',
+            description: "Pão, bacon, tomate, ovo",
             slug: "fried_egg"),
         PopularFoodTiles(
             name: "Red meat,Salad",
             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            rating: "4.6",
-            numberOfRating: "150",
-            price: "12.00",
+            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+            price_0: '20.00',
+            price_1: '10.00',
+            description: "Pão, bacon, tomate, ovo",
             slug: ""),
       ],
     );
