@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Details extends StatefulWidget {
@@ -45,6 +46,7 @@ class _DetailsState extends State<Details> {
                     primaryColor: Colors.white,
                   ),
                   child: Material(
+                    color: Colors.white,
                     elevation: 7.0,
                     shadowColor: Colors.grey,
                     borderRadius: const BorderRadius.all(
@@ -55,9 +57,10 @@ class _DetailsState extends State<Details> {
                       child:TextField(
                         textAlignVertical: TextAlignVertical.center,
                         keyboardType: TextInputType.multiline,
-                        minLines: 2,
+                        minLines: 1,
+                        maxLines: 2,
                         autofocus: false,
-                        style: TextStyle(fontSize: 18.0, color: Colors.grey),
+                        style: TextStyle(fontSize: 18.0, color: Colors.grey, fontFamily: 'BalooBhai',),
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(10.0),
                           filled: true,
@@ -83,12 +86,105 @@ class _DetailsState extends State<Details> {
                             ),
                           ),
                           fillColor: Colors.white,
-                          hintStyle: new TextStyle(color: Colors.grey, fontSize: 18.0),
-                          hintText: "Ex.: Sem pão e com ovo",
+                          hintStyle: new TextStyle(color: Colors.grey, fontSize: 18.0, fontFamily: 'BalooBhai',),
+                          hintText: "Ex.: Sem cebola e ovo",
                         ),
                       ),
                     ),
                   ),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.02,
+                //bottom: MediaQuery.of(context).size.height * 0.01,
+              ),
+              child: Center(
+                child: Text(
+                  "Quantidade".toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontFamily: 'BalooBhai',
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      child: Icon(
+                        Icons.remove,
+                        size: 40,
+                        color: Colors.red,
+                      ),
+                      padding: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width * 0.015,
+                        left: MediaQuery.of(context).size.width * 0.015,
+                      ),
+                      margin: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width * 0.02,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      child: Text(
+                        "1".toUpperCase(),
+                        style: TextStyle(
+                          fontSize: 35,
+                          fontFamily: 'BalooBhai',
+                        ),
+                      ),
+                      margin: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width * 0.02,
+                      ),
+                    ),
+                    Container(
+                      child: Icon(
+                        Icons.add,
+                        size: 40,
+                        color: Colors.red,
+                      ),
+                      padding: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width * 0.015,
+                        left: MediaQuery.of(context).size.width * 0.015,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ]
+              ),
+            ),
+            Container(
+              child: Center(
+                child: Text(
+                  "Adicionar ao carrinho".toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'BalooBhai',
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.02
+              ),
+              width: MediaQuery.of(context).size.width * 0.85,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
                 ),
               ),
             ),

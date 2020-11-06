@@ -7,6 +7,7 @@ import '../widgets/SearchWidget.dart';
 import '../widgets/TopMenus.dart';
 import '../widgets/Top.dart';
 import '../widgets/PromoWidget.dart';
+import '../widgets/MyOrder.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -24,6 +25,13 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, ScaleRoute(page: MyOrder()));
+        },
+        child: Icon(Icons.shopping_cart, color: Colors.white,),
+        backgroundColor: Colors.red,
+      ),
       backgroundColor: Colors.yellow,
       body: SingleChildScrollView(
         child: Column(

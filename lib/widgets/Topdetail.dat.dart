@@ -117,7 +117,7 @@ class _TopDetailState extends State<TopDetail> {
                                           children: [
                                             Text("R\$ 32.00",
                                               style: TextStyle(
-                                                fontSize: 20,
+                                                fontSize: 18,
                                                 fontFamily: 'BalooBhai',
                                                 color: Colors.white,
                                               ),

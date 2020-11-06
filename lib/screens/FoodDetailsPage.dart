@@ -21,6 +21,13 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.yellow,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        child: Icon(Icons.shopping_cart, color: Colors.white,),
+        backgroundColor: Colors.red,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -32,6 +39,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
             ),
             TopDetail(),
             Details(),
+
           ],
         ),
       ),
