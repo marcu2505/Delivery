@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login/widgets/RestaurantAll.dart';
+import '../animation/ScaleRoute.dart';
 import '../widgets/BottomNavBarWidget.dart';
+import 'package:flutter_login/globals.dart';
+import '../widgets/SearchWidget.dart';
+import '../widgets/Top.dart';
 import '../widgets/Topdetail.dart';
 import '../widgets/Details.dart';
 
@@ -31,7 +36,6 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
             ),
             TopDetail(),
             Details(),
-
           ],
         ),
       ),

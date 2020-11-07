@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_login/globals.dart';
 
-class Categories extends StatefulWidget {
+class CategoriesWidget extends StatefulWidget {
   @override
-  _CategoriesState createState() => _CategoriesState();
+  _CategoriesWidgetState createState() => _CategoriesWidgetState();
 }
 
-class _CategoriesState extends State<Categories> {
+class _CategoriesWidgetState extends State<CategoriesWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(

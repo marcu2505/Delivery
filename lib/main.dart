@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login/globals.dart';
-import 'screens/InitScreen.dart';
+import 'globals.dart';
+import 'screens/HomePage.dart';
 import 'screens/SignInScreen.dart';
 import 'screens/SignUpScreen.dart';
 import 'package:flutter/services.dart';

@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../animation/ScaleRoute.dart';
+import 'package:flutter_login/animation/ScaleRoute.dart';
 import '../widgets/RestaurantsWidget.dart';
 import '../widgets/BottomNavBarWidget.dart';
 import '../widgets/FoodPromosWidget.dart';
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
             ),
             SearchWidget(),
             BannerPromosWidget(),
-            Categories(),
+            CategoriesWidget(),
             FoodPromosWidget(),
             RestaurantsWidget(),
           ],

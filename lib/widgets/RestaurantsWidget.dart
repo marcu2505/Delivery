@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
 import 'package:flutter_login/globals.dart';
 import 'package:flutter_login/screens/Restaurant.dart';
-import 'package:flutter_login/widgets/FoodPromosWidget.dart';
 
 class RestaurantsWidget extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
-import 'InitScreen.dart';
+import 'HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_login/globals.dart';
 
