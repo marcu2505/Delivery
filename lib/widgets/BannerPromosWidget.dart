@@ -1,9 +1,12 @@
+import 'package:carousel_pro/carousel_pro.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_login/globals.dart';
+import 'package:carousel_indicator/carousel_indicator.dart';
 
 class BannerPromosWidget extends StatefulWidget {
   @override
@@ -12,6 +15,7 @@ class BannerPromosWidget extends StatefulWidget {
 
 int _total = 0;
 int _current = 0;
+List<bool> active;
 
 class _BannerPromosWidgetState extends State<BannerPromosWidget> {
   List<String> images = [
@@ -27,24 +31,24 @@ class _BannerPromosWidgetState extends State<BannerPromosWidget> {
       children: [
         BannerPromosCarousel(),
         // TODO: Implementar marcador de posição embaixo
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: snapshot.data.docs.map((promo) {
-        //     int index = snapshot.data.docs.indexOf(promo);
-        //     print(index);
-        //     return Container(
-        //       width: 8.0,
-        //       height: 8.0,
-        //       margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-        //       decoration: BoxDecoration(
-        //         shape: BoxShape.circle,
-        //         color: _current == index
-        //             ? Color.fromRGBO(0, 0, 0, 0.9)
-        //             : Color.fromRGBO(0, 0, 0, 0.4),
-        //       ),
-        //     );
-        //   }).toList(),
-        // ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: active.map((isActive) {
+            // int index = snapshot.data.docs.indexOf(promo);
+            // print(index);
+            return Container(
+              width: 8.0,
+              height: 8.0,
+              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: isActive// _current == index
+                    ? Color.fromRGBO(0, 0, 0, 0.9)
+                    : Color.fromRGBO(0, 0, 0, 0.4),
+              ),
+            );
+          }).toList(),
+        ),
       ],
     );
   }
@@ -105,11 +109,13 @@ class BannerPromoTile extends StatelessWidget {
 class BannerPromosCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('promocoes').where("type", isEqualTo: "banner").snapshots(),
+    return new FutureBuilder(
+      future: FirebaseFirestore.instance.collection('promocoes').where("type", isEqualTo: "banner").get(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if(!snapshot.hasData) return new Text("Carregando promoções...");
         _total = snapshot.data.size;
+        active = List.filled(_total, false);
+        print(active.toString());
         return new CarouselSlider(
           options: CarouselOptions(
             autoPlay: true,
@@ -119,6 +125,8 @@ class BannerPromosCarousel extends StatelessWidget {
             aspectRatio: 2.0,
             onPageChanged: (index, reason) {
               _current = index;
+              active = List.filled(active.length, false);
+              active[index] = true;
             }
           ),
           items: snapshot.data.docs.map((promo) {

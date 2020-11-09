@@ -19,17 +19,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  getRests() {
-    firestore
-        .collection('restaurantes')
-        .get()
-        .then((QuerySnapshot querySnapshot) => {
-          querySnapshot.docs.forEach((doc) {
-            print(doc["name"]);
-          })
-    });
-  }
-
   // Função para filtrar restaurantes por categoria
   filterRests(String categorySlug) async {
     var result = await firestore
