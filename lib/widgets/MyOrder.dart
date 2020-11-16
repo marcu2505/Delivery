@@ -23,9 +23,9 @@ class _MyOrderState extends State<MyOrder> {
             SizedBox(
               height: MediaQuery.of(context).viewPadding.top,
             ),
-            SizedBox(
-              height: displayHeight * 0.06,
-            ),
+            // SizedBox(
+            //   height: displayHeight * 0.01,
+            // ),
             Container(
               child: Row(
                 children: <Widget>[
@@ -33,15 +33,8 @@ class _MyOrderState extends State<MyOrder> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Container(
-                          width: displayWidth * 0.05,
-                          height: displayWidth * 0.05,
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
+                        Icon(
+                          Icons.trip_origin
                         ),
                         Text(
                           "Entregar aqui".toUpperCase(),
@@ -65,25 +58,19 @@ class _MyOrderState extends State<MyOrder> {
                     ),
                     margin: EdgeInsets.only(
                       right: displayWidth * 0.01,
+                      left: displayWidth * 0.01,
                     ),
                     padding: EdgeInsets.only(
-                      left: displayWidth * 0.03,
-                      right: displayWidth * 0.03,
+                      left: displayWidth * 0.01,
+                      right: displayWidth * 0.01,
                     ),
                   ),
                   Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Container(
-                          width: displayWidth * 0.05,
-                          height: displayWidth * 0.05,
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
+                        Icon(
+                          Icons.lens
                         ),
                         Text(
                           "Retirar na loja".toUpperCase(),
@@ -105,27 +92,29 @@ class _MyOrderState extends State<MyOrder> {
                         topRight: Radius.circular(10),
                       )
                     ),
-                    margin: EdgeInsets.only(
-                      left: displayWidth * 0.01,
-                    ),
+                    // margin: EdgeInsets.only(
+                    //   left: displayWidth * 0.01,
+                    //   right: displayWidth * 0.01,
+                    // ),
                     padding: EdgeInsets.only(
-                      left: displayWidth * 0.03,
-                      right: displayWidth * 0.03,
+                      left: displayWidth * 0.01,
+                      right: displayWidth * 0.01,
                     ),
                   ),
                 ],
               ),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
+                // borderRadius: BorderRadius.all(
+                //   Radius.circular(10),
+                // ),
+                color: Colors.red,
               ),
-              margin: EdgeInsets.only(
-                left: displayWidth * 0.03,
-                right: displayWidth * 0.03,
-                top: displayHeight * 0.03 ,
+              padding: EdgeInsets.only(
+                left: displayWidth * 0.015,
+                right: displayWidth * 0.015,
               ),
-              width: displayWidth * 0.94,
+              width: displayWidth,
+              height: displayWidth * 0.18,
             ),
             Container(
               child: Row(
@@ -230,15 +219,15 @@ class _MyOrderState extends State<MyOrder> {
                   child: Text(
                     "ÚLTIMO DESEJO",
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: 18,
                       fontFamily: 'BalooBhai',
                       color: Colors.white,
                     ),
                   )
               ),
               margin: EdgeInsets.only(
-                left: displayWidth * 0.15,
-                right: displayWidth * 0.15,
+                left: displayWidth * 0.2,
+                right: displayWidth * 0.2,
                 top: displayHeight * 0.03,
               ),
               decoration: BoxDecoration(
@@ -247,13 +236,13 @@ class _MyOrderState extends State<MyOrder> {
                   Radius.circular(10),
                 ),
               ),
-              width: displayWidth * 0.7,
+              width: displayWidth * 0.6,
             ),
             Container(
               margin: EdgeInsets.only(
                 top: 0,
               ),
-              padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+              padding: EdgeInsets.only(left: 0, right: 0, top: 5, bottom: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -265,7 +254,7 @@ class _MyOrderState extends State<MyOrder> {
                         Text(
                           "BEBIDAS",
                           style: TextStyle(
-                              fontSize: 27,
+                              fontSize: 22,
                               color: Colors.black,
                               fontFamily: 'BalooBhai',
                               fontWeight: FontWeight.w300
@@ -278,7 +267,7 @@ class _MyOrderState extends State<MyOrder> {
                         ),
                       ],
                     ),
-                    width: displayWidth * 0.84,
+                    width: displayWidth * 0.74,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(
@@ -286,9 +275,9 @@ class _MyOrderState extends State<MyOrder> {
                       ),
                     ),
                     margin: EdgeInsets.only(
-                      left: displayWidth * 0.08,
-                      right: displayWidth * 0.01,
-                      top: displayHeight * 0.03,
+                      left: displayWidth * 0.13,
+                      right: displayWidth * 0.13,
+                      top: displayHeight * 0.005,
                     ),
                   ),
                 ],
@@ -298,7 +287,7 @@ class _MyOrderState extends State<MyOrder> {
               margin: EdgeInsets.only(
                 top: 0,
               ),
-              padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+              padding: EdgeInsets.only(left: 0, right: 0, top: 5, bottom: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -310,7 +299,7 @@ class _MyOrderState extends State<MyOrder> {
                         Text(
                           "SOBREMESA",
                           style: TextStyle(
-                              fontSize: 27,
+                              fontSize: 22,
                               color: Colors.black,
                               fontFamily: 'BalooBhai',
                               fontWeight: FontWeight.w300
@@ -323,16 +312,57 @@ class _MyOrderState extends State<MyOrder> {
                         ),
                       ],
                     ),
-                    width: displayWidth * 0.94,
+                    width: displayWidth * 0.74,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
                       ),
                     ),
+                    margin: EdgeInsets.only(
+                      left: displayWidth * 0.13,
+                      right: displayWidth * 0.13,
+                      top: displayHeight * 0.005,
+                    ),
                   ),
                 ],
               ),
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                top: displayHeight * 0.1,
+              ),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    child: Text(
+                      "subtotal: 60.70".toUpperCase(),
+                      style: TextStyle(
+                          fontSize: 27,
+                          color: Colors.white,
+                          fontFamily: 'BalooBhai',
+                          fontWeight: FontWeight.w300
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    margin: EdgeInsets.only(
+                      left: 0,
+                    ),
+                  ),
+                ],
+              ),
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(width: 3, color: Colors.black),
+                  bottom: BorderSide(width: 3, color: Colors.black),
+                ),
+              ),
+              width: displayHeight,
             ),
             Container(
               child: Center(

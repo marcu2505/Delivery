@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/guardar.dart';
+import '../widgets/Filter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_login/globals.dart';
 
@@ -11,6 +12,8 @@ class BottomNavBarWidget extends StatefulWidget {
 void navigateToScreens(index){
   if(index == 0){
     InitScreen();
+  }else if(index == 1){
+    Filter();
   }
 }
 
@@ -24,7 +27,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         navigateToScreens(index);
       });
     }
-
+    
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       backgroundColor: Colors.yellow,

@@ -10,6 +10,8 @@ import '../widgets/CategoriesWidget.dart';
 import '../widgets/Top.dart';
 import '../widgets/BannerPromosWidget.dart';
 import 'package:flutter_login/globals.dart';
+import '../widgets/Filter.dart';
+import '../widgets/Profile.dart';
 import '../widgets/MyOrder.dart';
 
 class HomePage extends StatefulWidget {
@@ -75,6 +77,22 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SearchWidget(),
+            RaisedButton(
+              child: Text(
+                "Filtro",
+              ),
+              onPressed: (){
+                Navigator.push(context, ScaleRoute(page: Filter()));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "Perfil",
+              ),
+              onPressed: (){
+                Navigator.push(context, ScaleRoute(page: Profile()));
+              },
+            ),
             BannerPromosWidget(),
             CategoriesWidget(),
             FoodPromosWidget(),

@@ -31,24 +31,24 @@ class _BannerPromosWidgetState extends State<BannerPromosWidget> {
       children: [
         BannerPromosCarousel(),
         // TODO: Implementar marcador de posição embaixo
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: active.map((isActive) {
-            // int index = snapshot.data.docs.indexOf(promo);
-            // print(index);
-            return Container(
-              width: 8.0,
-              height: 8.0,
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: isActive// _current == index
-                    ? Color.fromRGBO(0, 0, 0, 0.9)
-                    : Color.fromRGBO(0, 0, 0, 0.4),
-              ),
-            );
-          }).toList(),
-        ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: active.map((isActive) {
+        //     // int index = snapshot.data.docs.indexOf(promo);
+        //     // print(index);
+        //     return Container(
+        //       width: 8.0,
+        //       height: 8.0,
+        //       margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+        //       decoration: BoxDecoration(
+        //         shape: BoxShape.circle,
+        //         color: isActive// _current == index
+        //             ? Color.fromRGBO(0, 0, 0, 0.9)
+        //             : Color.fromRGBO(0, 0, 0, 0.4),
+        //       ),
+        //     );
+        //   }).toList(),
+        // ),
       ],
     );
   }
