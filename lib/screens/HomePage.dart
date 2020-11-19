@@ -13,6 +13,7 @@ import 'package:flutter_login/globals.dart';
 import '../widgets/Filter.dart';
 import '../widgets/Profile.dart';
 import '../widgets/MyOrder.dart';
+import '../widgets/Orders.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -91,6 +92,14 @@ class _HomePageState extends State<HomePage> {
               ),
               onPressed: (){
                 Navigator.push(context, ScaleRoute(page: Profile()));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "Pedidos",
+              ),
+              onPressed: (){
+                Navigator.push(context, ScaleRoute(page: Orders()));
               },
             ),
             BannerPromosWidget(),

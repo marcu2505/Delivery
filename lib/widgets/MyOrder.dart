@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../globals.dart';
 import '../widgets/BottomNavBarWidget.dart';
 
@@ -329,16 +330,83 @@ class _MyOrderState extends State<MyOrder> {
               ),
             ),
             Container(
+              child: Center(
+                  child: Text(
+                    "CUPOM DE DESCONTO",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'BalooBhai',
+                      color: Colors.white,
+                    ),
+                  )
+              ),
               margin: EdgeInsets.only(
-                top: displayHeight * 0.1,
+                left: displayWidth * 0.2,
+                right: displayWidth * 0.2,
+                top: displayHeight * 0.03,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              width: displayWidth * 0.6,
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                top: 0,
+              ),
+              padding: EdgeInsets.only(left: 0, right: 0, top: 5, bottom: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(left: 10, right: 5, top: 2, bottom: 2),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          "ADICIONAR CUPOM",
+                          style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.black,
+                              fontFamily: 'BalooBhai',
+                              fontWeight: FontWeight.w300
+                          ),
+                        ),
+                      ],
+                    ),
+                    width: displayWidth * 0.74,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    margin: EdgeInsets.only(
+                      left: displayWidth * 0.13,
+                      right: displayWidth * 0.13,
+                      top: displayHeight * 0.005,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                top: displayHeight * 0.03,
               ),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
                     child: Text(
                       "subtotal: 60.70".toUpperCase(),
                       style: TextStyle(
-                          fontSize: 27,
+                          fontSize: 14,
                           color: Colors.white,
                           fontFamily: 'BalooBhai',
                           fontWeight: FontWeight.w300
@@ -347,13 +415,98 @@ class _MyOrderState extends State<MyOrder> {
                     decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                        Radius.circular(4),
                       ),
                     ),
                     margin: EdgeInsets.only(
-                      left: 0,
+                      left: 10,
+                      top: 3,
+                      bottom: 3,
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 5,
                     ),
                   ),
+                  Container(
+                    child: Text(
+                      "taxa de entrega: 60.70".toUpperCase(),
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontFamily: 'BalooBhai',
+                          fontWeight: FontWeight.w300
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4),
+                      ),
+                    ),
+                    margin: EdgeInsets.only(
+                      left: 10,
+                      top: 3,
+                      bottom: 3,
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 5,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: Text(
+                          "desconto: 60.70".toUpperCase(),
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontFamily: 'BalooBhai',
+                              fontWeight: FontWeight.w300
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(4),
+                          ),
+                        ),
+                        margin: EdgeInsets.only(
+                          left: 10,
+                          top: 3,
+                          bottom: 3,
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 5,
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          "total: 60.70".toUpperCase(),
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontFamily: 'BalooBhai',
+                              fontWeight: FontWeight.w300
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(4),
+                          ),
+                        ),
+                        margin: EdgeInsets.only(
+                          right: 10,
+                          top: 3,
+                          bottom: 3,
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 5,
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
               decoration: BoxDecoration(
@@ -378,7 +531,7 @@ class _MyOrderState extends State<MyOrder> {
               margin: EdgeInsets.only(
                 left: displayWidth * 0.03,
                 right: displayWidth * 0.03,
-                top: displayHeight * 0.09,
+                top: displayHeight * 0.03,
               ),
               decoration: BoxDecoration(
                 color: Colors.red,
