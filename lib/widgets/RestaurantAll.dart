@@ -23,7 +23,6 @@ class _RestaurantAllState extends State<RestaurantAll> {
   }
 }
 
-
 class BestRestaurantsTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -89,7 +89,7 @@ class _DetailsState extends State<Details> {
                           ),
                           fillColor: Colors.white,
                           hintStyle: new TextStyle(color: Colors.grey, fontSize: 18.0, fontFamily: 'BalooBhai',),
-                          hintText: "Ex.: Sem cebola e ovo",
+                          hintText: "Ex.: Sem cebola e ovo".toUpperCase(),
                         ),
                       ),
                     ),
