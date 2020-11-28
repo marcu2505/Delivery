@@ -2,10 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
-import '../globals.dart';
-import '../widgets/BottomNavBarWidget.dart';
-import '../widgets/Coupon.dart';
-import '../widgets/Adress.dart';
+import 'package:flutter_login/globals.dart';
+import 'package:flutter_login/widgets/Coupon.dart';
+import 'package:flutter_login/widgets/Address.dart';
 
 
 class Final extends StatefulWidget {
@@ -130,7 +129,7 @@ class _FinalState extends State<Final> {
                                       ),
                                       GestureDetector(
                                         onTap: (){
-                                          Navigator.push(context, ScaleRoute(page: Adress()));
+                                          Navigator.push(context, ScaleRoute(page: Address()));
                                         },
                                         child: Container(
                                           child: Icon(
@@ -623,7 +622,6 @@ class _FinalState extends State<Final> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBarWidget(),
     );
   }
 }

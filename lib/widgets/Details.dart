@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
-import '../globals.dart';
+import 'package:flutter_login/globals.dart';
 
 class Details extends StatefulWidget {
   @override

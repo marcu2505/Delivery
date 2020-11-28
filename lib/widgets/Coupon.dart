@@ -1,10 +1,8 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../globals.dart';
-import '../widgets/BottomNavBarWidget.dart';
+import 'package:flutter_login/globals.dart';
 
 class Coupon extends StatefulWidget {
   @override
@@ -191,7 +189,6 @@ class _CouponState extends State<Coupon> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBarWidget(),
     );
   }
 }

@@ -1,10 +1,18 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login/screens/HomePage.dart';
+import 'package:flutter_login/screens/MainPage.dart';
+import 'package:flutter_login/screens/PasswordRecoveryPage.dart';
+import 'package:flutter_login/screens/SignUpPage.dart';
+import 'package:flutter_login/screens/SplashPage.dart';
+import 'package:flutter_login/screens/FilterPage.dart';
+import 'package:flutter_login/screens/OrdersPage.dart';
+import 'package:flutter_login/screens/ProfilePage.dart';
+import 'package:get/get.dart';
 import 'globals.dart';
-import 'screens/HomePage.dart';
-import 'screens/SignInScreen.dart';
-import 'screens/SignUpScreen.dart';
+import 'screens/LoginPage.dart';
 import 'package:flutter/services.dart';
 
 Future main() async {
@@ -24,7 +32,7 @@ class MyApp extends StatelessWidget {
     environment = DotEnv().env['ENVIRONMENT'];
 
     // InicializacaoFirebase();
-    final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+    final Future<FirebaseApp> firebaseInitialize = Firebase.initializeApp();
     final pageController = PageController(initialPage: 1);
     SystemChrome.setPreferredOrientations(
         [
@@ -34,7 +42,7 @@ class MyApp extends StatelessWidget {
     );
     return FutureBuilder(
       //Inicializa o FlutterFire
-      future: _initialization,
+      future: firebaseInitialize,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return MaterialApp(
@@ -60,21 +68,45 @@ class MyApp extends StatelessWidget {
         }
 
         if (snapshot.connectionState == ConnectionState.done) {
-          return MaterialApp(
+          return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Login',
+            initialRoute: '/',
+            defaultTransition: Transition.native,
+            locale: Locale('pt', 'BR'),
             theme: ThemeData(
               cursorColor: Colors.black,
               primarySwatch: Colors.blue,
             ),
-            home: PageView(
-              controller: pageController,
-              children: <Widget>[
-                Scaffold(
-                  body: SignInScreen(pageController),
-                ),
-              ],
-            ),
+            getPages: [
+              GetPage(
+                  name: '/',
+                  page: () => SplashPage()
+              ),
+              GetPage(
+                  name: '/main',
+                  page: () => MainPage()
+              ),
+              GetPage(
+                  name: '/login',
+                  page: () => LoginPage()
+              ),
+              GetPage(
+                  name: '/signup',
+                  page: () => SignUpPage()
+              ),
+              GetPage(
+                  name: '/forgot-password',
+                  page: () => PasswordRecoveryPage()
+              )
+            ],
+            // home: PageView(
+            //   controller: pageController,
+            //   children: <Widget>[
+            //     Scaffold(
+            //       body: SplashPage(),
+            //     ),
+            //   ],
+            // ),
           );
         }
 

@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:slider_button/slider_button.dart';
-import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter_login/globals.dart';
+import 'package:flutter_login/ui/Layout.dart';
 
 class InitScreen extends StatefulWidget {
   @override
@@ -23,21 +22,17 @@ class _InitScreenState extends State<InitScreen> {
     'https://tvefamosos.uai.com.br/wp-content/uploads/sites/2/2020/05/flor-e-delfina-e1588561522220-950x534.jpg',
   ];
 
-  @override
   void initState() {
     super.initState();
     pageController = PageController(initialPage: 1);
   }
 
-  @override
-
   final textStyle = TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold,);
 
+  @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-      backgroundColor: Colors.amber[50],
-      body: Container(
+    return Layout.render(
+      content: Container(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

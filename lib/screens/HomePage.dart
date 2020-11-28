@@ -1,20 +1,20 @@
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
-import '../widgets/RestaurantsWidget.dart';
-import '../widgets/BottomNavBarWidget.dart';
-import '../widgets/FoodPromosWidget.dart';
-import '../widgets/SearchWidget.dart';
-import '../widgets/CategoriesWidget.dart';
-import '../widgets/Top.dart';
-import '../widgets/BannerPromosWidget.dart';
+import 'package:flutter_login/ui/Layout.dart';
+import 'package:flutter_login/screens/FilterPage.dart';
+import 'package:flutter_login/screens/OrdersPage.dart';
+import 'package:flutter_login/screens/ProfilePage.dart';
+import 'package:flutter_login/widgets/RestaurantsWidget.dart';
+import 'package:flutter_login/widgets/FoodPromosWidget.dart';
+import 'package:flutter_login/widgets/SearchWidget.dart';
+import 'package:flutter_login/widgets/CategoriesWidget.dart';
+import 'package:flutter_login/widgets/Top.dart';
+import 'package:flutter_login/widgets/BannerPromosWidget.dart';
 import 'package:flutter_login/globals.dart';
-import '../widgets/Filter.dart';
-import '../widgets/Profile.dart';
-import '../widgets/MyOrder.dart';
-import '../widgets/Orders.dart';
-import '../widgets/Chat.dart';
+import 'package:flutter_login/widgets/MyOrder.dart';
+import 'package:flutter_login/widgets/Chat.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -45,80 +45,82 @@ class _HomePageState extends State<HomePage> {
     }); // Restaurantes
   }
 
-  getValues() {
-    print(MediaQuery.of(context).viewPadding);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, ScaleRoute(page: MyOrder()));
-        },
-        child: Icon(Icons.shopping_cart, color: Colors.white,),
-        backgroundColor: Colors.red,
-      ),
-      backgroundColor: Colors.yellow,
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: MediaQuery.of(context).viewPadding.top,
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            height: MediaQuery.of(context).viewPadding.top,
+          ),
+          SizedBox(
+            height: displayHeight * 0.01,
+          ),
+          Top(),
+          FlatButton(
+            onPressed: () => {
+              filterRests("pizza")
+            },
+            child: Text(
+              "Filter Rests",
             ),
-            SizedBox(
-              height: displayHeight * 0.01,
-            ),
-            Top(),
-            FlatButton(
-              onPressed: () => {
-                filterRests("pizza")
-              },
-              child: Text(
-                "Filter Rests",
-              ),
-            ),
-            SearchWidget(),
-            RaisedButton(
-              child: Text(
-                "Filtro",
-              ),
-              onPressed: (){
-                Navigator.push(context, ScaleRoute(page: Filter()));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "Perfil",
-              ),
-              onPressed: (){
-                Navigator.push(context, ScaleRoute(page: Profile()));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "Pedidos",
-              ),
-              onPressed: (){
-                Navigator.push(context, ScaleRoute(page: Orders()));
-              },
-            ),
-            RaisedButton(
+          ),
+          SearchWidget(),
+          // RaisedButton(
+          //   child: Text(
+          //     "Usuário Autenticado?",
+          //   ),
+          //   onPressed: () async {
+          //     var user = FirebaseAuth.instance.currentUser;
+          //     user.reload();
+          //     user.emailVerified ? print("Email autenticado") : print("Email não autenticado");
+          //     print(user.email + " " + user.emailVerified.toString());
+          //   },
+          // ),
+          // RaisedButton(
+          //   child: Text(
+          //     "Enviar Email",
+          //   ),
+          //   onPressed: () async {
+          //     var user = FirebaseAuth.instance.currentUser;
+          //     await user.sendEmailVerification();
+          //     print("Email enviado!");
+          //   },
+          // ),
+          // RaisedButton(
+          //   child: Text(
+          //     "Teste Usuário",
+          //   ),
+          //   onPressed: () async {
+          //     var user = FirebaseAuth.instance.currentUser;
+          //     print(user.toString());
+          //   },
+          // ),
+          // RaisedButton(
+          //   child: Text(
+          //     "Atualiza Usuário",
+          //   ),
+          //   onPressed: () async {
+          //     var user = FirebaseAuth.instance.currentUser;
+          //     user.updateProfile(
+          //         displayName: "Victor Hugo",
+          //         photoURL: "https://randomuser.me/api/portraits/men/99.jpg"
+          //     );
+          //   },
+          // ),
+          RaisedButton(
               child: Text(
                 "Chat",
               ),
               onPressed: (){
                 Navigator.push(context, ScaleRoute(page: Chat()));
               },
-            ),
-            BannerPromosWidget(),
-            CategoriesWidget(),
-            FoodPromosWidget(),
-            RestaurantsWidget(),
-          ],
-        ),
+            ),BannerPromosWidget(),
+          CategoriesWidget(),
+          FoodPromosWidget(),
+          RestaurantsWidget(),
+        ],
       ),
-      bottomNavigationBar: BottomNavBarWidget(),
     );
   }
 }

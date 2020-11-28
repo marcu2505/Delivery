@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_login/globals.dart';
+import 'package:flutter_login/ui/Layout.dart';
 
 class FoodOrderPage extends StatefulWidget {
   @override
@@ -12,33 +12,34 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xFFFAFAFA),
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: Color(0xFF3a3737),
-            ),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          title: Center(
-            child: Text(
-              "Item Carts",
-              style: TextStyle(
-                  color: Color(0xFF3a3737),
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          brightness: Brightness.light,
-          actions: <Widget>[
-            CartIconWithBadge(),
-          ],
-        ),
-        body: SingleChildScrollView(
+    return Layout.render(
+      // TODO: implementar essa parte com o GetX
+        // appBar: AppBar(
+        //   backgroundColor: Color(0xFFFAFAFA),
+        //   elevation: 0,
+        //   leading: IconButton(
+        //     icon: Icon(
+        //       Icons.arrow_back_ios,
+        //       color: Color(0xFF3a3737),
+        //     ),
+        //     onPressed: () => Navigator.of(context).pop(),
+        //   ),
+        //   title: Center(
+        //     child: Text(
+        //       "Item Carts",
+        //       style: TextStyle(
+        //           color: Color(0xFF3a3737),
+        //           fontWeight: FontWeight.w600,
+        //           fontSize: 18),
+        //       textAlign: TextAlign.center,
+        //     ),
+        //   ),
+        //   brightness: Brightness.light,
+        //   actions: <Widget>[
+        //     CartIconWithBadge(),
+        //   ],
+        // ),
+        content: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.all(15),
             child: Column(

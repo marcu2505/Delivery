@@ -2,10 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
-import '../globals.dart';
-import '../widgets/BottomNavBarWidget.dart';
-import '../widgets/Coupon.dart';
-import '../widgets/Adress.dart';
+import 'package:flutter_login/globals.dart';
+import 'package:flutter_login/widgets/Coupon.dart';
+import 'package:flutter_login/widgets/Address.dart';
 
 
 class MyAdress extends StatefulWidget {
@@ -109,7 +108,7 @@ class _MyAdressState extends State<MyAdress> {
                                       ),
                                       GestureDetector(
                                         onTap: (){
-                                          Navigator.push(context, ScaleRoute(page: Adress()));
+                                          Navigator.push(context, ScaleRoute(page: Address()));
                                         },
                                         child: Container(
                                           child: Icon(
@@ -196,7 +195,7 @@ class _MyAdressState extends State<MyAdress> {
                                       ),
                                       GestureDetector(
                                         onTap: (){
-                                          Navigator.push(context, ScaleRoute(page: Adress()));
+                                          Navigator.push(context, ScaleRoute(page: Address()));
                                         },
                                         child: Container(
                                           child: Icon(
@@ -283,7 +282,7 @@ class _MyAdressState extends State<MyAdress> {
                                       ),
                                       GestureDetector(
                                         onTap: (){
-                                          Navigator.push(context, ScaleRoute(page: Adress()));
+                                          Navigator.push(context, ScaleRoute(page: Address()));
                                         },
                                         child: Container(
                                           child: Icon(
@@ -370,7 +369,7 @@ class _MyAdressState extends State<MyAdress> {
                                       ),
                                       GestureDetector(
                                         onTap: (){
-                                          Navigator.push(context, ScaleRoute(page: Adress()));
+                                          Navigator.push(context, ScaleRoute(page: Address()));
                                         },
                                         child: Container(
                                           child: Icon(
@@ -457,7 +456,7 @@ class _MyAdressState extends State<MyAdress> {
                                       ),
                                       GestureDetector(
                                         onTap: (){
-                                          Navigator.push(context, ScaleRoute(page: Adress()));
+                                          Navigator.push(context, ScaleRoute(page: Address()));
                                         },
                                         child: Container(
                                           child: Icon(
@@ -494,7 +493,7 @@ class _MyAdressState extends State<MyAdress> {
             ),
             GestureDetector(
               onTap: (){
-                Navigator.push(context, ScaleRoute(page: Adress()));
+                Navigator.push(context, ScaleRoute(page: Address()));
               },
               child: Container(
                 child: Center(
@@ -524,7 +523,6 @@ class _MyAdressState extends State<MyAdress> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBarWidget(),
     );
   }
 }

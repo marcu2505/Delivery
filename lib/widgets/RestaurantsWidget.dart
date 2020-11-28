@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
 import 'package:flutter_login/globals.dart';
-import 'package:flutter_login/screens/Restaurant.dart';
+import 'package:flutter_login/screens/RestaurantPage.dart';
 
 class RestaurantsWidget extends StatefulWidget {
   @override
@@ -87,7 +87,7 @@ class RestaurantTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, ScaleRoute(page: Restaurant()));
+        Navigator.push(context, ScaleRoute(page: RestaurantPage()));
       },
       child: Column(
         children: <Widget>[

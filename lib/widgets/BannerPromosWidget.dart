@@ -1,12 +1,9 @@
-import 'package:carousel_pro/carousel_pro.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_login/globals.dart';
-import 'package:carousel_indicator/carousel_indicator.dart';
 
 class BannerPromosWidget extends StatefulWidget {
   @override

@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login/widgets/RestaurantAll.dart';
-import '../animation/ScaleRoute.dart';
-import '../widgets/BottomNavBarWidget.dart';
-import 'package:flutter_login/globals.dart';
-import '../widgets/SearchWidget.dart';
-import '../widgets/Top.dart';
-import '../widgets/Topdetail.dart';
-import '../widgets/Details.dart';
+import 'package:flutter_login/ui/Layout.dart';
+import 'package:flutter_login/widgets/Topdetail.dart';
+import 'package:flutter_login/widgets/Details.dart';
 
 class FoodDetailsPage extends StatefulWidget {
   @override
@@ -16,8 +11,7 @@ class FoodDetailsPage extends StatefulWidget {
 class _FoodDetailsPageState extends State<FoodDetailsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.yellow,
+    return Layout.render(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Add your onPressed code here!
@@ -25,7 +19,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
         child: Icon(Icons.shopping_cart, color: Colors.white,),
         backgroundColor: Colors.red,
       ),
-      body: SingleChildScrollView(
+      content: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             SizedBox(
@@ -39,7 +33,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBarWidget(),
+      // bottomNavigationBar: BottomNavBarWidget(),
     );
   }
 }

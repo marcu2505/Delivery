@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import '../animation/ScaleRoute.dart';
-import '../globals.dart';
-import '../screens/FoodDetailsPage.dart';
+import 'package:flutter_login/animation/ScaleRoute.dart';
+import 'package:flutter_login/globals.dart';
+import 'package:flutter_login/screens/FoodDetailsPage.dart';
 
 class FoodPromosWidget extends StatefulWidget {
   @override

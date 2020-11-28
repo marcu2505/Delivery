@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter_login/main.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_login/globals.dart';
@@ -40,12 +37,6 @@ class Top extends StatelessWidget {
     }
 
     return null;
-  }
-
-  Future <MyApp> signOutGoogle() async{
-    await googleSignIn.signOut();
-    print("User Signed Out");
-    return MyApp();
   }
 
   @override
@@ -107,7 +98,7 @@ class Top extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             child: GestureDetector(
-              onTap: signOutGoogle,
+              onTap: () {},
               child: Icon(
                 Icons.edit,
                 size: displayWidth * 0.08,

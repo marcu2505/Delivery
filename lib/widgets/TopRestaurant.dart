@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import '../globals.dart';
-import '../screens/Restaurant.dart';
-import '../animation/ScaleRoute.dart';
+import 'package:flutter_login/globals.dart';
 
 class TopRestaurant extends StatefulWidget {
   @override

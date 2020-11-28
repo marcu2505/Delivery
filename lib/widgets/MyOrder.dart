@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
-import '../globals.dart';
-import '../widgets/BottomNavBarWidget.dart';
-import '../widgets/Coupon.dart';
+import 'package:flutter_login/globals.dart';
+import 'package:flutter_login/ui/Layout.dart';
+import 'package:flutter_login/widgets/Coupon.dart';
 import 'Final.dart';
 
 class MyOrder extends StatefulWidget {
@@ -19,9 +18,8 @@ class _MyOrderState extends State<MyOrder> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.yellow,
-      body: SingleChildScrollView(
+    return Layout.render(
+      content: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             SizedBox(
@@ -560,7 +558,7 @@ class _MyOrderState extends State<MyOrder> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBarWidget(),
+      // bottomNavigationBar: BottomNavBarWidget(),
     );
   }
 }

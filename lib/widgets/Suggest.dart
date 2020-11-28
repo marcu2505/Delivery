@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../globals.dart';
-import '../widgets/BottomNavBarWidget.dart';
+import 'package:flutter_login/globals.dart';
+import 'package:flutter_login/ui/Layout.dart';
 
 class Suggest extends StatefulWidget {
   @override
@@ -12,11 +11,11 @@ class _SuggestState extends State<Suggest> {
   getValues() {
     print(MediaQuery.of(context).viewPadding);
   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.yellow,
-      body: SingleChildScrollView(
+    return Layout.render(
+      content: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             SizedBox(
@@ -404,7 +403,7 @@ class _SuggestState extends State<Suggest> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBarWidget(),
+      // bottomNavigationBar: BottomNavBarWidget(),
     );
   }
 }

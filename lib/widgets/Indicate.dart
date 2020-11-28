@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../globals.dart';
-import '../widgets/BottomNavBarWidget.dart';
+import 'package:flutter_login/globals.dart';
+import 'package:flutter_login/ui/Layout.dart';
 
 class Indicate extends StatefulWidget {
   @override
@@ -15,9 +14,8 @@ class _IndicateState extends State<Indicate> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.yellow,
-      body: SingleChildScrollView(
+    return Layout.render(
+      content: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             SizedBox(
@@ -295,7 +293,7 @@ class _IndicateState extends State<Indicate> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBarWidget(),
+      // bottomNavigationBar: BottomNavBarWidget(),
     );
   }
 }

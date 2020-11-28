@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../globals.dart';
-import '../widgets/BottomNavBarWidget.dart';
+import 'package:flutter_login/globals.dart';
 
-class Adress extends StatefulWidget {
+class Address extends StatefulWidget {
   @override
-  _AdressState createState() => _AdressState();
+  _AddressState createState() => _AddressState();
 }
 
-class _AdressState extends State<Adress> {
+class _AddressState extends State<Address> {
   getValues() {
     print(MediaQuery.of(context).viewPadding);
   }
@@ -340,7 +339,6 @@ class _AdressState extends State<Adress> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBarWidget(),
     );
   }
 }

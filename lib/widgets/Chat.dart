@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../globals.dart';
-import '../widgets/BottomNavBarWidget.dart';
+import 'package:flutter_login/globals.dart';
 
 class Chat extends StatefulWidget {
   @override
@@ -136,7 +135,6 @@ class _ChatState extends State<Chat> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBarWidget(),
     );
   }
 }
