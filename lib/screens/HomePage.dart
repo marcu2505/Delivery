@@ -14,6 +14,7 @@ import '../widgets/Filter.dart';
 import '../widgets/Profile.dart';
 import '../widgets/MyOrder.dart';
 import '../widgets/Orders.dart';
+import '../widgets/Chat.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -100,6 +101,14 @@ class _HomePageState extends State<HomePage> {
               ),
               onPressed: (){
                 Navigator.push(context, ScaleRoute(page: Orders()));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "Chat",
+              ),
+              onPressed: (){
+                Navigator.push(context, ScaleRoute(page: Chat()));
               },
             ),
             BannerPromosWidget(),

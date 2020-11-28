@@ -99,7 +99,7 @@ class _DetailsState extends State<Details> {
             ),
             Container(
               margin: EdgeInsets.only(
-                top: displayHeight * 0.02,
+                //top: displayHeight * 0.02,
                 //bottom: displayHeight * 0.01,
               ),
               child: Center(
@@ -173,7 +173,7 @@ class _DetailsState extends State<Details> {
                 child: Text(
                   "Adicionar ao carrinho".toUpperCase(),
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 22,
                     fontFamily: 'BalooBhai',
                     color: Colors.white,
                   ),
@@ -181,6 +181,10 @@ class _DetailsState extends State<Details> {
               ),
               margin: EdgeInsets.only(
                 top: displayHeight * 0.02
+              ),
+              padding: EdgeInsets.only(
+                top: displayHeight * 0.003,
+                bottom: displayHeight * 0.003,
               ),
               width: displayWidth * 0.85,
               decoration: BoxDecoration(

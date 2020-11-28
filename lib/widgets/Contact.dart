@@ -35,16 +35,9 @@ class _ContactState extends State<Contact> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              width: displayWidth * 0.96,
-              margin: EdgeInsets.only(
-                left: displayWidth * 0.02,
-                right: displayWidth * 0.02,
-              ),
+              width: displayWidth,
               decoration: BoxDecoration(
                   color: Colors.red,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  )
               ),
               padding: EdgeInsets.only(
                 top: displayHeight * 0.01,
@@ -115,12 +108,142 @@ class _ContactState extends State<Contact> {
                   )
               ),
             ),
-            //Mensagem
+            //Nome
             Center(
               child: Padding(
                 padding: EdgeInsets.only(
                   //left: displayWidth * 0.08,
                   top: displayHeight * 0.05,
+                  //right: displayWidth * 0.08,
+                  //bottom: displayHeight * 0.02,
+                ),
+                child: Theme(
+                  data: Theme.of(context).copyWith(
+                    cursorColor: Colors.grey,
+                    primaryColor: Colors.white,
+                  ),
+                  child: Material(
+                    color: Colors.white,
+                    elevation: 7.0,
+                    shadowColor: Colors.grey,
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(20.0),
+                    ),
+                    child: Container(
+                      height: displayHeight * 0.065,
+                      width: displayWidth * 0.9,
+                      child:TextField(
+                        textAlignVertical: TextAlignVertical.center,
+                        keyboardType: TextInputType.multiline,
+                        minLines: 1,
+                        maxLines: 1,
+                        autofocus: false,
+                        style: TextStyle(fontSize: 18.0, color: Colors.grey, fontFamily: 'BalooBhai',),
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10.0),
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.white
+                            ),
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(20.0),
+                            ),
+
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(20.0),
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(20.0),
+                            ),
+                          ),
+                          fillColor: Colors.white,
+                          hintStyle: new TextStyle(color: Colors.grey, fontSize: 18.0, fontFamily: 'BalooBhai',),
+                          hintText: "nome".toUpperCase(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            //Celular
+            Center(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  //left: displayWidth * 0.08,
+                  top: displayHeight * 0.02,
+                  //right: displayWidth * 0.08,
+                  //bottom: displayHeight * 0.02,
+                ),
+                child: Theme(
+                  data: Theme.of(context).copyWith(
+                    cursorColor: Colors.grey,
+                    primaryColor: Colors.white,
+                  ),
+                  child: Material(
+                    color: Colors.white,
+                    elevation: 7.0,
+                    shadowColor: Colors.grey,
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(20.0),
+                    ),
+                    child: Container(
+                      height: displayHeight * 0.065,
+                      width: displayWidth * 0.9,
+                      child:TextField(
+                        textAlignVertical: TextAlignVertical.center,
+                        keyboardType: TextInputType.multiline,
+                        minLines: 1,
+                        maxLines: 1,
+                        autofocus: false,
+                        style: TextStyle(fontSize: 18.0, color: Colors.grey, fontFamily: 'BalooBhai',),
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10.0),
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.white
+                            ),
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(20.0),
+                            ),
+
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(20.0),
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(20.0),
+                            ),
+                          ),
+                          fillColor: Colors.white,
+                          hintStyle: new TextStyle(color: Colors.grey, fontSize: 18.0, fontFamily: 'BalooBhai',),
+                          hintText: "telefone".toUpperCase(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            //Mensagem
+            Center(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  //left: displayWidth * 0.08,
+                  top: displayHeight * 0.02,
                   //right: displayWidth * 0.08,
                   bottom: displayHeight * 0.02,
                 ),

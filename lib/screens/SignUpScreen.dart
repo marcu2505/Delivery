@@ -74,8 +74,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow,
       body: Container(
-        color: Colors.yellow,
+        //color: Colors.yellow,
         child: SingleChildScrollView(child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -87,30 +88,51 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: <Widget>[
                 Container(
                   alignment: Alignment.topCenter,
-                  height: displayHeight / 15,
-                  width: displayWidth / 7,
-                  margin: EdgeInsets.symmetric(
-                    horizontal: displayWidth / 35,
+                  height: 50,
+                  width: 50,
+                  // margin: EdgeInsets.symmetric(
+                  //   horizontal: displayWidth / 35,
+                  // ),
+                  //color: Colors.red,
+                  child: FlatButton(
+                    // onPressed: (){
+                    //   signInWithGoogle().then((result) {
+                    //     if (result != null) {
+                    //       Navigator.of(context).push(
+                    //         MaterialPageRoute(
+                    //             builder: (context) => HomePage()
+                    //         ),
+                    //       );
+                    //     }
+                    //   });
+                    // },
+
+                    //child: Image.asset('assets/img/google.png'),
                   ),
                   decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/img/google.png'),
-                        fit: BoxFit.cover,
-                      )
+                    image: DecorationImage(
+                      image: AssetImage('assets/img/google.png'),
+                      fit: BoxFit.cover,
+                    ),
+                    //color: Colors.red,
                   ),
+                ),
+                SizedBox(
+                  width: displayWidth * 0.05,
                 ),
                 Container(
                   alignment: Alignment.topCenter,
-                  height: displayHeight / 15,
-                  width: displayWidth / 7,
-                  margin: EdgeInsets.symmetric(
-                    horizontal: displayWidth / 35,
-                  ),
+                  height: 50,
+                  width: 50,
+                  // margin: EdgeInsets.symmetric(
+                  //   horizontal: displayWidth / 35,
+                  // ),
                   decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/img/Instagram-circle-icon-1.png'),
-                        fit: BoxFit.cover,
-                      )
+                    image: DecorationImage(
+                      image: AssetImage('assets/img/iconface.png'),
+                      fit: BoxFit.cover,
+                    ),
+                    //color: Colors.green,
                   ),
                 )
               ],
@@ -195,52 +217,73 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 style: TextStyle(fontSize: 14, color: Colors.black),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                top: displayHeight / 50,
-                left: displayWidth / 10,
-                right: displayWidth / 10,
-              ),
-              height: displayHeight / 13,
-              child: TextFormField(
-                controller: phone,
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                    borderRadius: const BorderRadius.all(
-                      const Radius.circular(50.0),
-                    ),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 10,
+                    offset: Offset(0, 7), // changes position of shadow
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                    borderRadius: const BorderRadius.all(
-                      const Radius.circular(50.0),
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                    borderRadius: const BorderRadius.all(
-                      const Radius.circular(50.0),
-                    ),
-                  ),
-                  filled: true,
-                  prefixIcon: Icon(
-                    Icons.phone,
-                    color: Colors.black,
-                  ),
-                  labelText: "Telefone",
-                  labelStyle: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 15,
-                  ),
-                ),
-                style: TextStyle(fontSize: 14, color: Colors.black),
+                ],
               ),
             ),
+            //telefone
+            // Container(
+            //   margin: EdgeInsets.only(
+            //     top: displayHeight / 50,
+            //     left: displayWidth / 10,
+            //     right: displayWidth / 10,
+            //   ),
+            //   height: displayHeight / 13,
+            //   child: TextFormField(
+            //     controller: phone,
+            //     keyboardType: TextInputType.phone,
+            //     decoration: InputDecoration(
+            //       fillColor: Colors.white,
+            //       border: OutlineInputBorder(
+            //         borderSide: BorderSide(color: Colors.white),
+            //         borderRadius: const BorderRadius.all(
+            //           const Radius.circular(50.0),
+            //         ),
+            //       ),
+            //       enabledBorder: OutlineInputBorder(
+            //         borderSide: BorderSide(color: Colors.white),
+            //         borderRadius: const BorderRadius.all(
+            //           const Radius.circular(50.0),
+            //         ),
+            //       ),
+            //       focusedBorder: OutlineInputBorder(
+            //         borderSide: BorderSide(color: Colors.white),
+            //         borderRadius: const BorderRadius.all(
+            //           const Radius.circular(50.0),
+            //         ),
+            //       ),
+            //       filled: true,
+            //       prefixIcon: Icon(
+            //         Icons.phone,
+            //         color: Colors.black,
+            //       ),
+            //       labelText: "Telefone",
+            //       labelStyle: TextStyle(
+            //         color: Colors.black,
+            //         fontWeight: FontWeight.w400,
+            //         fontSize: 15,
+            //       ),
+            //     ),
+            //     style: TextStyle(fontSize: 14, color: Colors.black),
+            //   ),
+            //   decoration: BoxDecoration(
+            //     boxShadow: [
+            //       BoxShadow(
+            //         color: Colors.grey.withOpacity(0.3),
+            //         spreadRadius: 1,
+            //         blurRadius: 10,
+            //         offset: Offset(0, 7), // changes position of shadow
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Container(
               margin: EdgeInsets.only(
                 top: displayHeight / 50,
@@ -284,6 +327,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 style: TextStyle(fontSize: 14, color: Colors.black),
+              ),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 10,
+                    offset: Offset(0, 7), // changes position of shadow
+                  ),
+                ],
               ),
             ),
             Container(
@@ -330,6 +383,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 style: TextStyle(fontSize: 14, color: Colors.black),
               ),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 10,
+                    offset: Offset(0, 7), // changes position of shadow
+                  ),
+                ],
+              ),
             ),
             Container(
               margin: EdgeInsets.only(
@@ -374,6 +437,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 style: TextStyle(fontSize: 14, color: Colors.black),
+              ),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 10,
+                    offset: Offset(0, 7), // changes position of shadow
+                  ),
+                ],
               ),
             ),
             Container(
@@ -431,6 +504,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     style: TextStyle(fontSize: 14, color: Colors.black),
+                  ),
+                ],
+              ),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 10,
+                    offset: Offset(0, 7), // changes position of shadow
                   ),
                 ],
               ),
@@ -493,9 +576,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ],
               ),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 10,
+                    offset: Offset(0, 7), // changes position of shadow
+                  ),
+                ],
+              ),
             ),
             SizedBox(
-              height: displayHeight / 20,
+              height: displayHeight / 9,
             ),
             Container(
               margin: EdgeInsets.only(
@@ -510,7 +603,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 },
                 child: Text('Cadastrar', style: TextStyle(color: Colors.white, fontSize: 20),),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 color: Colors.red,
               ),

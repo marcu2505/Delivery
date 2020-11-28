@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
+import 'package:flutter_login/widgets/Coupon.dart';
 import 'package:flutter_login/widgets/Indicate.dart';
+import 'package:flutter_login/widgets/MyAdress.dart';
 import '../globals.dart';
 import '../widgets/BottomNavBarWidget.dart';
 import '../widgets/Indicate.dart';
 import '../widgets/Contact.dart';
 import '../widgets/Suggest.dart';
+import '../widgets/ScanQrCode.dart';
+import '../widgets/MyAdress.dart';
 
 
 class Profile extends StatefulWidget {
@@ -73,6 +77,14 @@ class _ProfileState extends State<Profile> {
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: Offset(0, 7), // changes position of shadow
+                  ),
+                ],
               ),
               //width: displayWidth * 0.9,
             ),
@@ -83,14 +95,14 @@ class _ProfileState extends State<Profile> {
               },
               child: Container(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
                       child: Text(
                         "Indique e acumule".toUpperCase(),
                         style: TextStyle(
                             fontSize: 23,
-                            color: Colors.black,
+                            color: Colors.white,
                             fontFamily: 'BalooBhai',
                             fontWeight: FontWeight.w300
                         ),
@@ -98,20 +110,6 @@ class _ProfileState extends State<Profile> {
                       // margin: EdgeInsets.only(
                       //   right: displayWidth * 0.15,
                       // ),
-                    ),
-                    Container(
-                      child: Icon(
-                        Icons.card_giftcard,
-                        size: 28,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(50),
-                        ),
-                      ),
-                      margin: EdgeInsets.only(
-                        bottom: displayHeight * 0.01,
-                      ),
                     ),
                   ],
                 ),
@@ -127,65 +125,86 @@ class _ProfileState extends State<Profile> {
                   right: displayWidth * 0.03,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.red,
                   borderRadius: BorderRadius.all(
                     Radius.circular(10),
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: Offset(0, 7), // changes position of shadow
+                    ),
+                  ],
                 ),
                 //width: displayWidth * 0.9,
               ),
             ),
             //Meus endereços
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    child: Icon(
-                      Icons.local_pizza,
-                      size: 28,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(50),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context, ScaleRoute(page: MyAdress()));
+              },
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      child: Icon(
+                        Icons.local_pizza,
+                        size: 28,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50),
+                        ),
+                      ),
+                      margin: EdgeInsets.only(
+                        bottom: displayHeight * 0.01,
+                        right: displayWidth * 0.02,
                       ),
                     ),
-                    margin: EdgeInsets.only(
-                      bottom: displayHeight * 0.01,
-                      right: displayWidth * 0.02,
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      "MEUS ENDEREÇOS".toUpperCase(),
-                      style: TextStyle(
-                          fontSize: 23,
-                          color: Colors.black,
-                          fontFamily: 'BalooBhai',
-                          fontWeight: FontWeight.w300
+                    Container(
+                      child: Text(
+                        "MEUS ENDEREÇOS".toUpperCase(),
+                        style: TextStyle(
+                            fontSize: 23,
+                            color: Colors.black,
+                            fontFamily: 'BalooBhai',
+                            fontWeight: FontWeight.w300
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              margin: EdgeInsets.only(
-                top: displayHeight * 0.05,
-                left: displayWidth * 0.05,
-                right: displayWidth * 0.05,
-              ),
-              padding: EdgeInsets.only(
-                //bottom: displayHeight * 0.005,
-                top: displayHeight * 0.005,
-                left: displayWidth * 0.01,
-                right: displayWidth * 0.01,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+                  ],
                 ),
+                margin: EdgeInsets.only(
+                  top: displayHeight * 0.05,
+                  left: displayWidth * 0.05,
+                  right: displayWidth * 0.05,
+                ),
+                padding: EdgeInsets.only(
+                  //bottom: displayHeight * 0.005,
+                  top: displayHeight * 0.005,
+                  left: displayWidth * 0.01,
+                  right: displayWidth * 0.01,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: Offset(0, 7), // changes position of shadow
+                    ),
+                  ],
+                ),
+                //width: displayWidth * 0.9,
               ),
-              //width: displayWidth * 0.9,
             ),
             //Meus dados
             Container(
@@ -236,60 +255,146 @@ class _ProfileState extends State<Profile> {
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
-              ),
-              //width: displayWidth * 0.9,
-            ),
-            //Cupons de desconto
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    child: Icon(
-                      Icons.keyboard,
-                      size: 28,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(50),
-                      ),
-                    ),
-                    margin: EdgeInsets.only(
-                      bottom: displayHeight * 0.01,
-                      right: displayWidth * 0.02,
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      "Meus Cupons".toUpperCase(),
-                      style: TextStyle(
-                          fontSize: 23,
-                          color: Colors.black,
-                          fontFamily: 'BalooBhai',
-                          fontWeight: FontWeight.w300
-                      ),
-                    ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: Offset(0, 7), // changes position of shadow
                   ),
                 ],
               ),
-              margin: EdgeInsets.only(
-                top: displayHeight * 0.02,
-                left: displayWidth * 0.05,
-                right: displayWidth * 0.05,
-              ),
-              padding: EdgeInsets.only(
-                //bottom: displayHeight * 0.005,
-                top: displayHeight * 0.005,
-                left: displayWidth * 0.01,
-                right: displayWidth * 0.01,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ),
               //width: displayWidth * 0.9,
+            ),
+            //Leitor qr code
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context, ScaleRoute(page: ScanQrCode()));
+              },
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      child: Icon(
+                        Icons.tablet_android,
+                        size: 28,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50),
+                        ),
+                      ),
+                      margin: EdgeInsets.only(
+                        bottom: displayHeight * 0.01,
+                        right: displayWidth * 0.02,
+                      ),
+                    ),
+                    Container(
+                      child: Text(
+                        "Leitor Qr Code".toUpperCase(),
+                        style: TextStyle(
+                            fontSize: 23,
+                            color: Colors.black,
+                            fontFamily: 'BalooBhai',
+                            fontWeight: FontWeight.w300
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                margin: EdgeInsets.only(
+                  top: displayHeight * 0.02,
+                  left: displayWidth * 0.05,
+                  right: displayWidth * 0.05,
+                ),
+                padding: EdgeInsets.only(
+                  //bottom: displayHeight * 0.005,
+                  top: displayHeight * 0.005,
+                  left: displayWidth * 0.01,
+                  right: displayWidth * 0.01,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: Offset(0, 7), // changes position of shadow
+                    ),
+                  ],
+                ),
+                //width: displayWidth * 0.9,
+              ),
+            ),
+            //Cupons de desconto
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context, ScaleRoute(page: Coupon()));
+              },
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      child: Icon(
+                        Icons.keyboard,
+                        size: 28,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50),
+                        ),
+                      ),
+                      margin: EdgeInsets.only(
+                        bottom: displayHeight * 0.01,
+                        right: displayWidth * 0.02,
+                      ),
+                    ),
+                    Container(
+                      child: Text(
+                        "Meus Cupons".toUpperCase(),
+                        style: TextStyle(
+                            fontSize: 23,
+                            color: Colors.black,
+                            fontFamily: 'BalooBhai',
+                            fontWeight: FontWeight.w300
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                margin: EdgeInsets.only(
+                  top: displayHeight * 0.02,
+                  left: displayWidth * 0.05,
+                  right: displayWidth * 0.05,
+                ),
+                padding: EdgeInsets.only(
+                  //bottom: displayHeight * 0.005,
+                  top: displayHeight * 0.005,
+                  left: displayWidth * 0.01,
+                  right: displayWidth * 0.01,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: Offset(0, 7), // changes position of shadow
+                    ),
+                  ],
+                ),
+                //width: displayWidth * 0.9,
+              ),
             ),
             //Seja um entregador
             Container(
@@ -340,6 +445,14 @@ class _ProfileState extends State<Profile> {
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: Offset(0, 7), // changes position of shadow
+                  ),
+                ],
               ),
               //width: displayWidth * 0.9,
             ),
@@ -365,9 +478,9 @@ class _ProfileState extends State<Profile> {
                   ),
                   Container(
                     child: Text(
-                      "Cadastrar estabeleci".toUpperCase(),
+                      "Cadastrar estabelecimento".toUpperCase(),
                       style: TextStyle(
-                          fontSize: 23,
+                          fontSize: 19,
                           color: Colors.black,
                           fontFamily: 'BalooBhai',
                           fontWeight: FontWeight.w300
@@ -392,6 +505,14 @@ class _ProfileState extends State<Profile> {
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: Offset(0, 7), // changes position of shadow
+                  ),
+                ],
               ),
               //width: displayWidth * 0.9,
             ),
@@ -402,22 +523,8 @@ class _ProfileState extends State<Profile> {
               },
               child: Container(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Container(
-                      child: Text(
-                        "Fale conosco".toUpperCase(),
-                        style: TextStyle(
-                            fontSize: 23,
-                            color: Colors.black,
-                            fontFamily: 'BalooBhai',
-                            fontWeight: FontWeight.w300
-                        ),
-                      ),
-                      // margin: EdgeInsets.only(
-                      //   right: displayWidth * 0.15,
-                      // ),
-                    ),
                     Container(
                       child: Icon(
                         Icons.phone,
@@ -430,6 +537,18 @@ class _ProfileState extends State<Profile> {
                       ),
                       margin: EdgeInsets.only(
                         bottom: displayHeight * 0.01,
+                        right: displayWidth * 0.02,
+                      ),
+                    ),
+                    Container(
+                      child: Text(
+                        "Fale conosco".toUpperCase(),
+                        style: TextStyle(
+                            fontSize: 23,
+                            color: Colors.black,
+                            fontFamily: 'BalooBhai',
+                            fontWeight: FontWeight.w300
+                        ),
                       ),
                     ),
                   ],
@@ -442,14 +561,22 @@ class _ProfileState extends State<Profile> {
                 padding: EdgeInsets.only(
                   //bottom: displayHeight * 0.005,
                   top: displayHeight * 0.005,
-                  left: displayWidth * 0.03,
-                  right: displayWidth * 0.03,
+                  left: displayWidth * 0.01,
+                  right: displayWidth * 0.01,
                 ),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(10),
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: Offset(0, 7), // changes position of shadow
+                    ),
+                  ],
                 ),
                 //width: displayWidth * 0.9,
               ),
@@ -460,58 +587,64 @@ class _ProfileState extends State<Profile> {
                 Navigator.push(context, ScaleRoute(page: Suggest()));
               },
               child: Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          "Sugerir estabeleci".toUpperCase(),
-                          style: TextStyle(
-                              fontSize: 23,
-                              color: Colors.black,
-                              fontFamily: 'BalooBhai',
-                              fontWeight: FontWeight.w300
-                          ),
-                        ),
-                        // margin: EdgeInsets.only(
-                        //   right: displayWidth * 0.15,
-                        // ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      child: Icon(
+                        Icons.store,
+                        size: 28,
                       ),
-                      Container(
-                        child: Icon(
-                          Icons.store,
-                          size: 28,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(50),
-                          ),
-                        ),
-                        margin: EdgeInsets.only(
-                          bottom: displayHeight * 0.01,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50),
                         ),
                       ),
-                    ],
-                  ),
-                  margin: EdgeInsets.only(
-                    top: displayHeight * 0.02,
-                    left: displayWidth * 0.05,
-                    right: displayWidth * 0.05,
-                  ),
-                  padding: EdgeInsets.only(
-                    //bottom: displayHeight * 0.005,
-                    top: displayHeight * 0.005,
-                    left: displayWidth * 0.03,
-                    right: displayWidth * 0.03,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
+                      margin: EdgeInsets.only(
+                        bottom: displayHeight * 0.01,
+                        right: displayWidth * 0.02,
+                      ),
                     ),
-                  ),
-                  //width: displayWidth * 0.9,
+                    Container(
+                      child: Text(
+                        "Sugerir estabelecimento".toUpperCase(),
+                        style: TextStyle(
+                            fontSize: 19,
+                            color: Colors.black,
+                            fontFamily: 'BalooBhai',
+                            fontWeight: FontWeight.w300
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+                margin: EdgeInsets.only(
+                  top: displayHeight * 0.05,
+                  left: displayWidth * 0.05,
+                  right: displayWidth * 0.05,
+                ),
+                padding: EdgeInsets.only(
+                  //bottom: displayHeight * 0.005,
+                  top: displayHeight * 0.005,
+                  left: displayWidth * 0.01,
+                  right: displayWidth * 0.01,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: Offset(0, 7), // changes position of shadow
+                    ),
+                  ],
+                ),
+                //width: displayWidth * 0.9,
+              ),
             ),
             //Sair
             Container(
@@ -523,7 +656,7 @@ class _ProfileState extends State<Profile> {
                       "Sair desta conta".toUpperCase(),
                       style: TextStyle(
                           fontSize: 23,
-                          color: Colors.black,
+                          color: Colors.white,
                           fontFamily: 'BalooBhai',
                           fontWeight: FontWeight.w300
                       ),
@@ -536,6 +669,7 @@ class _ProfileState extends State<Profile> {
                     child: Icon(
                       Icons.exit_to_app,
                       size: 28,
+                      color: Colors.white,
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(
@@ -560,12 +694,23 @@ class _ProfileState extends State<Profile> {
                 right: displayWidth * 0.03,
               ),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Colors.red,
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: Offset(0, 7), // changes position of shadow
+                  ),
+                ],
               ),
               //width: displayWidth * 0.9,
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).viewPadding.top,
             ),
           ],
         ),

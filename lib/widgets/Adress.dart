@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../globals.dart';
 import '../widgets/BottomNavBarWidget.dart';
 
-class Suggest extends StatefulWidget {
+class Adress extends StatefulWidget {
   @override
-  _SuggestState createState() => _SuggestState();
+  _AdressState createState() => _AdressState();
 }
 
-class _SuggestState extends State<Suggest> {
+class _AdressState extends State<Adress> {
   getValues() {
     print(MediaQuery.of(context).viewPadding);
   }
@@ -25,7 +25,7 @@ class _SuggestState extends State<Suggest> {
             //Fale conosco
             Container(
               child: Text(
-                "Sugerir estabelecimento".toUpperCase(),
+                "adicionar endereço".toUpperCase(),
                 style: TextStyle(
                   fontSize: 23,
                   color: Colors.white,
@@ -36,75 +36,11 @@ class _SuggestState extends State<Suggest> {
               ),
               width: displayWidth,
               decoration: BoxDecoration(
-                color: Colors.red,
+                  color: Colors.red,
               ),
               padding: EdgeInsets.only(
                 top: displayHeight * 0.01,
                 bottom: displayHeight * 0.01,
-              ),
-            ),
-            //Titulo
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Não encontrou o que você queria?".toUpperCase(),
-                    style: TextStyle(
-                      fontSize: 19,
-                      color: Colors.black,
-                      fontFamily: 'BalooBhai',
-                      fontWeight: FontWeight.w300,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-              width: displayWidth * 0.96,
-              margin: EdgeInsets.only(
-                left: displayWidth * 0.02,
-                right: displayWidth * 0.02,
-                top: displayHeight * 0.02,
-              ),
-              decoration: BoxDecoration(
-                //color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  )
-              ),
-              padding: EdgeInsets.only(
-                top: displayHeight * 0.01,
-                //bottom: displayHeight * 0.01,
-              ),
-            ),
-            //Valor
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Deixe aqui a sua sugestão para que possamos entrar\nem contato com o estabelecimento".toUpperCase(),
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.black,
-                      fontFamily: 'BalooBhai',
-                      fontWeight: FontWeight.w300,
-                    ),
-                    //textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-              width: displayWidth * 0.96,
-              margin: EdgeInsets.only(
-                left: displayWidth * 0.02,
-                right: displayWidth * 0.02,
-                //top: displayHeight * 0.05,
-              ),
-              decoration: BoxDecoration(
-                //color: Colors.red,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  )
               ),
             ),
             //Nome do estabelecimento
@@ -164,7 +100,7 @@ class _SuggestState extends State<Suggest> {
                           ),
                           fillColor: Colors.white,
                           hintStyle: new TextStyle(color: Colors.grey, fontSize: 18.0, fontFamily: 'BalooBhai',),
-                          hintText: "Nome do estabelecimento".toUpperCase(),
+                          hintText: "Endereço".toUpperCase(),
                         ),
                       ),
                     ),
@@ -229,7 +165,7 @@ class _SuggestState extends State<Suggest> {
                           ),
                           fillColor: Colors.white,
                           hintStyle: new TextStyle(color: Colors.grey, fontSize: 18.0, fontFamily: 'BalooBhai',),
-                          hintText: "Endereço".toUpperCase(),
+                          hintText: "Complemento".toUpperCase(),
                         ),
                       ),
                     ),
@@ -359,7 +295,7 @@ class _SuggestState extends State<Suggest> {
                           ),
                           fillColor: Colors.white,
                           hintStyle: new TextStyle(color: Colors.grey, fontSize: 18.0, fontFamily: 'BalooBhai',),
-                          hintText: "Telefone do estabelecimento".toUpperCase(),
+                          hintText: "Apelido".toUpperCase(),
                         ),
                       ),
                     ),
@@ -373,7 +309,7 @@ class _SuggestState extends State<Suggest> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "Enviar sugestão".toUpperCase(),
+                    "Enviar endereço".toUpperCase(),
                     style: TextStyle(
                       fontSize: 22,
                       color: Colors.white,

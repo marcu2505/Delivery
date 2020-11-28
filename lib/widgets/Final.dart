@@ -5,14 +5,15 @@ import 'package:flutter_login/animation/ScaleRoute.dart';
 import '../globals.dart';
 import '../widgets/BottomNavBarWidget.dart';
 import '../widgets/Coupon.dart';
-import 'Final.dart';
+import '../widgets/Adress.dart';
 
-class MyOrder extends StatefulWidget {
+
+class Final extends StatefulWidget {
   @override
-  _MyOrderState createState() => _MyOrderState();
+  _FinalState createState() => _FinalState();
 }
 
-class _MyOrderState extends State<MyOrder> {
+class _FinalState extends State<Final> {
   getValues() {
     print(MediaQuery.of(context).viewPadding);
   }
@@ -30,96 +31,312 @@ class _MyOrderState extends State<MyOrder> {
             // SizedBox(
             //   height: displayHeight * 0.01,
             // ),
-            //inicial
+            //onde entregar
             Container(
+              child: Text(
+                "Finalizar pedidos".toUpperCase(),
+                style: TextStyle(
+                  fontSize: 23,
+                  color: Colors.white,
+                  fontFamily: 'BalooBhai',
+                  fontWeight: FontWeight.w300,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              width: displayWidth,
+              decoration: BoxDecoration(
+                color: Colors.red,
+              ),
+              padding: EdgeInsets.only(
+                top: displayHeight * 0.01,
+                bottom: displayHeight * 0.01,
+              ),
+            ),
+            //onde entregar
+            Container(
+              child: Center(
+                  child: Text(
+                    "Onde entregar".toUpperCase(),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'BalooBhai',
+                      color: Colors.white,
+                    ),
+                  )
+              ),
+              margin: EdgeInsets.only(
+                left: displayWidth * 0.2,
+                right: displayWidth * 0.2,
+                top: displayHeight * 0.03,
+                bottom: displayWidth * 0.005,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              width: displayWidth * 0.6,
+            ),
+            //endereço
+            Container(
+              child: Card(
+                semanticContainer: true,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(21.0),
+                ),
+                elevation: 1,
+                margin: EdgeInsets.all(5),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: 8,
+                    bottom: 8,
+                    left: 8,
+                    right: 8,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            child: Icon(
+                              Icons.local_pizza,
+                              size: 50,
+                            ),
+                          ),
+                          SizedBox(
+                            width: displayWidth * 0.02,
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        "Casa do mozão".toUpperCase(),
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.black,
+                                            fontFamily: 'BalooBhai',
+                                            fontWeight: FontWeight.w300
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: (){
+                                          Navigator.push(context, ScaleRoute(page: Adress()));
+                                        },
+                                        child: Container(
+                                          child: Icon(
+                                            Icons.more_vert,
+                                            size: 20,
+                                          ),
+                                          padding: EdgeInsets.only(
+                                            left: displayWidth * 0.05,
+                                            right: displayWidth * 0.05,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Text(
+                                  "103 norte alameda 04 lote 2".toUpperCase(),
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontFamily: 'BalooBhai',
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            //pagamento
+            Container(
+              child: Center(
+                  child: Text(
+                    "Pagamento".toUpperCase(),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'BalooBhai',
+                      color: Colors.white,
+                    ),
+                  )
+              ),
+              margin: EdgeInsets.only(
+                left: displayWidth * 0.2,
+                right: displayWidth * 0.2,
+                top: displayHeight * 0.03,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              width: displayWidth * 0.6,
+            ),
+            //dinheiro
+            Container(
+              margin: EdgeInsets.only(
+                top: 0,
+              ),
+              padding: EdgeInsets.only(left: 0, right: 0, top: 5, bottom: 5),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Container(
+                    padding: EdgeInsets.only(left: 10, right: 5, top: 2, bottom: 2),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Icon(
-                          Icons.trip_origin
-                        ),
                         Text(
-                          "Entregar aqui".toUpperCase(),
+                          "dinheiro".toUpperCase(),
                           style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'BalooBhai',
-                            color: Colors.white,
+                              fontSize: 22,
+                              color: Colors.black,
+                              fontFamily: 'BalooBhai',
+                              fontWeight: FontWeight.w300
                           ),
                         ),
-                      ]
+                      ],
                     ),
-                    width: displayWidth * 0.46,
+                    width: displayWidth * 0.74,
                     decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        topLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                      )
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
                     ),
                     margin: EdgeInsets.only(
-                      right: displayWidth * 0.01,
-                      left: displayWidth * 0.01,
-                    ),
-                    padding: EdgeInsets.only(
-                      left: displayWidth * 0.01,
-                      right: displayWidth * 0.01,
-                    ),
-                  ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Icon(
-                          Icons.lens
-                        ),
-                        Text(
-                          "Retirar na loja".toUpperCase(),
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'BalooBhai',
-                            color: Colors.white,
-                          ),
-                        ),
-                      ]
-                    ),
-                    width: displayWidth * 0.46,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        topLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                      )
-                    ),
-                    // margin: EdgeInsets.only(
-                    //   left: displayWidth * 0.01,
-                    //   right: displayWidth * 0.01,
-                    // ),
-                    padding: EdgeInsets.only(
-                      left: displayWidth * 0.01,
-                      right: displayWidth * 0.01,
+                      left: displayWidth * 0.13,
+                      right: displayWidth * 0.13,
+                      top: displayHeight * 0.005,
                     ),
                   ),
                 ],
               ),
+            ),
+            //cartão
+            Container(
+              margin: EdgeInsets.only(
+                top: 0,
+              ),
+              padding: EdgeInsets.only(left: 0, right: 0, top: 5, bottom: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(left: 10, right: 5, top: 2, bottom: 2),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "cartão".toUpperCase(),
+                          style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.black,
+                              fontFamily: 'BalooBhai',
+                              fontWeight: FontWeight.w300
+                          ),
+                        ),
+                      ],
+                    ),
+                    width: displayWidth * 0.74,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    margin: EdgeInsets.only(
+                      left: displayWidth * 0.13,
+                      right: displayWidth * 0.13,
+                      top: displayHeight * 0.005,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            //online
+            Container(
+              margin: EdgeInsets.only(
+                top: 0,
+              ),
+              padding: EdgeInsets.only(left: 0, right: 0, top: 5, bottom: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(left: 10, right: 5, top: 2, bottom: 2),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "online".toUpperCase(),
+                          style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.black,
+                              fontFamily: 'BalooBhai',
+                              fontWeight: FontWeight.w300
+                          ),
+                        ),
+                      ],
+                    ),
+                    width: displayWidth * 0.74,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    margin: EdgeInsets.only(
+                      left: displayWidth * 0.13,
+                      right: displayWidth * 0.13,
+                      top: displayHeight * 0.005,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            //resumo
+            Container(
+              child: Center(
+                  child: Text(
+                    "Resumo".toUpperCase(),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'BalooBhai',
+                      color: Colors.white,
+                    ),
+                  )
+              ),
+              margin: EdgeInsets.only(
+                left: displayWidth * 0.2,
+                right: displayWidth * 0.2,
+                top: displayHeight * 0.03,
+              ),
               decoration: BoxDecoration(
-                // borderRadius: BorderRadius.all(
-                //   Radius.circular(10),
-                // ),
                 color: Colors.red,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
               ),
-              padding: EdgeInsets.only(
-                left: displayWidth * 0.015,
-                right: displayWidth * 0.015,
-              ),
-              width: displayWidth,
-              height: displayWidth * 0.18,
+              width: displayWidth * 0.6,
             ),
             //produto
             Container(
@@ -167,8 +384,8 @@ class _MyOrderState extends State<MyOrder> {
                       ],
                     ),
                     margin: EdgeInsets.only(
-                      top: displayHeight * 0.02,
-                      bottom: displayHeight * 0.02,
+                      //top: displayHeight * 0.01,
+                      //bottom: displayHeight * 0.02,
                     ),
                     width: displayWidth * 0.87,
                   ),
@@ -182,228 +399,74 @@ class _MyOrderState extends State<MyOrder> {
               margin: EdgeInsets.only(
                 left: displayWidth * 0.03,
                 right: displayWidth * 0.03,
-                top: displayHeight * 0.04,
-                bottom: displayHeight * 0.04,
+                top: displayHeight * 0.02,
               ),
             ),
-            //adicionar
+            //produto
             Container(
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(
-                      Icons.add,
-                      color: Colors.yellow,
-                      size: 35,
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.close,
+                    color: Colors.red,
+                  ),
+                  Container(
+                    //color: Colors.black,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          child: Text(
+                            "Bacon ao barbecue",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'BalooBhai',
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: Text(
+                            "R\$ 34.50",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'BalooBhai',
+                              color: Colors.white,
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          padding: EdgeInsets.only(
+                            right: displayWidth * 0.01,
+                            left: displayWidth * 0.01,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      "ADICIONAR MAIS PRODUTOS",
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontFamily: 'BalooBhai',
-                        color: Colors.white,
-                      ),
+                    margin: EdgeInsets.only(
+                      //top: displayHeight * 0.01,
+                      //bottom: displayHeight * 0.02,
                     ),
-                  ],
-                ),
-              ),
-              margin: EdgeInsets.only(
-                top: displayHeight * 0.001,
+                    width: displayWidth * 0.87,
+                  ),
+                ],
               ),
               decoration: BoxDecoration(
-                color: Colors.red,
-                border: Border(
-                  top: BorderSide(width: 3.0, color: Colors.black),
-                  bottom: BorderSide(width: 3.0, color: Colors.black),
-                ),
-              ),
-              width: displayWidth,
-              height: displayHeight * 0.06,
-            ),
-            //ultimo
-            Container(
-              child: Center(
-                  child: Text(
-                    "ÚLTIMO DESEJO",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'BalooBhai',
-                      color: Colors.white,
-                    ),
-                  )
-              ),
-              margin: EdgeInsets.only(
-                left: displayWidth * 0.2,
-                right: displayWidth * 0.2,
-                top: displayHeight * 0.03,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.red,
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
               ),
-              width: displayWidth * 0.6,
-            ),
-            //bebidas
-            Container(
               margin: EdgeInsets.only(
-                top: 0,
-              ),
-              padding: EdgeInsets.only(left: 0, right: 0, top: 5, bottom: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(left: 10, right: 5, top: 2, bottom: 2),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "BEBIDAS",
-                          style: TextStyle(
-                              fontSize: 22,
-                              color: Colors.black,
-                              fontFamily: 'BalooBhai',
-                              fontWeight: FontWeight.w300
-                          ),
-                        ),
-                        Icon(
-                          Icons.keyboard_arrow_right,
-                          color: Colors.black,
-                          size: 35,
-                        ),
-                      ],
-                    ),
-                    width: displayWidth * 0.74,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    margin: EdgeInsets.only(
-                      left: displayWidth * 0.13,
-                      right: displayWidth * 0.13,
-                      top: displayHeight * 0.005,
-                    ),
-                  ),
-                ],
+                left: displayWidth * 0.03,
+                right: displayWidth * 0.03,
+                top: displayHeight * 0.02,
               ),
             ),
-            //sobremesa
-            Container(
-              margin: EdgeInsets.only(
-                top: 0,
-              ),
-              padding: EdgeInsets.only(left: 0, right: 0, top: 5, bottom: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(left: 10, right: 5, top: 2, bottom: 2),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "SOBREMESA",
-                          style: TextStyle(
-                              fontSize: 22,
-                              color: Colors.black,
-                              fontFamily: 'BalooBhai',
-                              fontWeight: FontWeight.w300
-                          ),
-                        ),
-                        Icon(
-                          Icons.keyboard_arrow_right,
-                          color: Colors.black,
-                          size: 35,
-                        ),
-                      ],
-                    ),
-                    width: displayWidth * 0.74,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    margin: EdgeInsets.only(
-                      left: displayWidth * 0.13,
-                      right: displayWidth * 0.13,
-                      top: displayHeight * 0.005,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            //cupom
-            Container(
-              child: Center(
-                  child: Text(
-                    "CUPOM DE DESCONTO",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'BalooBhai',
-                      color: Colors.white,
-                    ),
-                  )
-              ),
-              margin: EdgeInsets.only(
-                left: displayWidth * 0.2,
-                right: displayWidth * 0.2,
-                top: displayHeight * 0.03,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ),
-              width: displayWidth * 0.6,
-            ),
-            //adicionar
-            Container(
-              margin: EdgeInsets.only(
-                top: 0,
-              ),
-              padding: EdgeInsets.only(left: 0, right: 0, top: 5, bottom: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(left: 10, right: 5, top: 2, bottom: 2),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "ADICIONAR CUPOM",
-                          style: TextStyle(
-                              fontSize: 22,
-                              color: Colors.black,
-                              fontFamily: 'BalooBhai',
-                              fontWeight: FontWeight.w300
-                          ),
-                        ),
-                      ],
-                    ),
-                    width: displayWidth * 0.74,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    margin: EdgeInsets.only(
-                      left: displayWidth * 0.13,
-                      right: displayWidth * 0.13,
-                      top: displayHeight * 0.005,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            //preços
             Container(
               margin: EdgeInsets.only(
                 top: displayHeight * 0.03,
@@ -530,12 +593,12 @@ class _MyOrderState extends State<MyOrder> {
             ),
             GestureDetector(
               onTap: (){
-                Navigator.push(context, ScaleRoute(page: Final()));
+                Navigator.push(context, ScaleRoute(page: Coupon()));
               },
               child: Container(
                 child: Center(
                     child: Text(
-                      "TUDO CERTO",
+                      "Fazer Pedido".toUpperCase(),
                       style: TextStyle(
                         fontSize: 25,
                         fontFamily: 'BalooBhai',

@@ -90,7 +90,7 @@ class CategoriesTitle extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2),
             child: Text(
-              "Categorias",
+              "Categorias".toUpperCase(),
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,

@@ -35,16 +35,9 @@ class _IndicateState extends State<Indicate> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              width: displayWidth * 0.96,
-              margin: EdgeInsets.only(
-                left: displayWidth * 0.02,
-                right: displayWidth * 0.02,
-              ),
+              width: displayWidth,
               decoration: BoxDecoration(
                 color: Colors.red,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                )
               ),
               padding: EdgeInsets.only(
                 top: displayHeight * 0.01,
@@ -137,7 +130,7 @@ class _IndicateState extends State<Indicate> {
                   Text(
                     "Ver termos e condições".toUpperCase(),
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 17,
                       color: Colors.black,
                       fontFamily: 'BalooBhai',
                       fontWeight: FontWeight.w300,
@@ -252,7 +245,7 @@ class _IndicateState extends State<Indicate> {
               margin: EdgeInsets.only(
                 left: displayWidth * 0.02,
                 right: displayWidth * 0.02,
-                top: displayHeight * 0.05,
+                top: displayHeight * 0.02,
               ),
               decoration: BoxDecoration(
                 //color: Colors.red,
