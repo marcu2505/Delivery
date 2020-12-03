@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_login/globals.dart';
 
 class Address extends StatefulWidget {
@@ -8,6 +10,13 @@ class Address extends StatefulWidget {
 }
 
 class _AddressState extends State<Address> {
+  TextEditingController adress = new TextEditingController();
+  TextEditingController complement = new TextEditingController();
+  TextEditingController reference_point = new TextEditingController();
+  TextEditingController name = new TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
   getValues() {
     print(MediaQuery.of(context).viewPadding);
   }
@@ -67,6 +76,8 @@ class _AddressState extends State<Address> {
                       height: displayHeight * 0.07,
                       width: displayWidth * 0.9,
                       child:TextField(
+
+                        controller: adress,
                         textAlignVertical: TextAlignVertical.center,
                         keyboardType: TextInputType.multiline,
                         minLines: 1,
@@ -132,6 +143,7 @@ class _AddressState extends State<Address> {
                       height: displayHeight * 0.07,
                       width: displayWidth * 0.9,
                       child:TextField(
+                        controller: complement,
                         textAlignVertical: TextAlignVertical.center,
                         keyboardType: TextInputType.multiline,
                         minLines: 1,
@@ -197,6 +209,7 @@ class _AddressState extends State<Address> {
                       height: displayHeight * 0.07,
                       width: displayWidth * 0.9,
                       child:TextField(
+                        controller: reference_point,
                         textAlignVertical: TextAlignVertical.center,
                         keyboardType: TextInputType.multiline,
                         minLines: 1,
@@ -262,6 +275,7 @@ class _AddressState extends State<Address> {
                       height: displayHeight * 0.07,
                       width: displayWidth * 0.9,
                       child:TextField(
+                        controller: name,
                         textAlignVertical: TextAlignVertical.center,
                         keyboardType: TextInputType.multiline,
                         minLines: 1,
@@ -303,39 +317,52 @@ class _AddressState extends State<Address> {
               ),
             ),
             //Enviar
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "Enviar endereço".toUpperCase(),
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.white,
-                      fontFamily: 'BalooBhai',
-                      fontWeight: FontWeight.w300,
+            GestureDetector(
+              onTap: () async {
+                print(FirebaseAuth.instance.currentUser.uid);
+                await FirebaseFirestore.instance.collection('usuarios').doc(FirebaseAuth.instance.currentUser.uid).collection('enderecos').add(
+                  {
+                    'endereco': adress.text,
+                    'complemento': complement.text,
+                    'ponto-referencia': reference_point.text,
+                    'nome': name.text,
+                  }
+                );
+              },
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Enviar endereço".toUpperCase(),
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.white,
+                        fontFamily: 'BalooBhai',
+                        fontWeight: FontWeight.w300,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
+                  ],
+                ),
+                width: displayWidth * 0.96,
+                margin: EdgeInsets.only(
+                  left: displayWidth * 0.02,
+                  right: displayWidth * 0.02,
+                  top: displayHeight * 0.07,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
                   ),
-                ],
-              ),
-              width: displayWidth * 0.96,
-              margin: EdgeInsets.only(
-                left: displayWidth * 0.02,
-                right: displayWidth * 0.02,
-                top: displayHeight * 0.07,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+                ),
+                padding: EdgeInsets.only(
+                  top: displayHeight * 0.003,
+                  bottom: displayHeight * 0.003,
                 ),
               ),
-              padding: EdgeInsets.only(
-                top: displayHeight * 0.003,
-                bottom: displayHeight * 0.003,
-              ),
-            ),
+            )
           ],
         ),
       ),

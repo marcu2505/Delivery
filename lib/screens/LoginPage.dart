@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_login/services/database.dart';
 import 'package:flutter_login/ui/Layout.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,10 +15,11 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final myController = TextEditingController();
 
+  DatabaseMethods databaseMethods = new DatabaseMethods();
+
   final email = TextEditingController();
   final password = TextEditingController();
   final loginDate = DateTime.now();
-
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<UserCredential> googleLogin() async {
@@ -35,13 +37,13 @@ class _LoginPageState extends State<LoginPage> {
   void emailLogin() async {
     try {
       if (environment == "development" && email.text == "" && password.text == "") {
-        email.text = "testes.texugo@gmail.com";
-        password.text = "batataMagica20";
+        email.text = "bots.texugo@gmail.com";
+        password.text = "Bola1234";
       }
 
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
           email: email.text.trim(),
-          password: password.text
+          password: password.text,
       );
       if (userCredential.user != null) {
         Get.offAndToNamed('/main');
@@ -325,6 +327,11 @@ class _LoginPageState extends State<LoginPage> {
                         image: AssetImage('assets/img/iconface.png'),
                         fit: BoxFit.cover,
                       ),
+                    ),
+                    child: FlatButton(
+                      onPressed: (){
+
+                      },
                     ),
                   )
                 ],

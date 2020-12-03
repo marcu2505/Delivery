@@ -44,6 +44,14 @@ dependencies:
   rxdart: ^0.24.1
   slider_button: ^0.6.0
   url_launcher: ^5.4.11
+  dash_chat: ^1.1.15
+  dio: ^3.0.10
+  stripe_native: ^1.2.3
+  cloud_functions: ^0.7.2
+  fluttertoast: ^4.0.1
+  built_value: ^7.0.0
+  built_collection: ^4.0.0
+  meta: ^1.1.6
 
 flutter_icons:
   android: "launcher_icon"
@@ -53,6 +61,11 @@ flutter_icons:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  build: ^1.1.0
+  build_runner: ^1.2.3
+  source_gen:  ^0.9.4+1
+  built_value_generator: ^7.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

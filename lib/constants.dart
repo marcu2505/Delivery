@@ -78,3 +78,9 @@ const CATEGORY_DATA = [
   }
 
 ];
+
+class Constants{
+  static String myName = "";
+}
+
+

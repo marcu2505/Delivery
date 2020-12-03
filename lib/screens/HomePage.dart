@@ -6,6 +6,7 @@ import 'package:flutter_login/ui/Layout.dart';
 import 'package:flutter_login/screens/FilterPage.dart';
 import 'package:flutter_login/screens/OrdersPage.dart';
 import 'package:flutter_login/screens/ProfilePage.dart';
+import 'package:flutter_login/widgets/GooglePay.dart';
 import 'package:flutter_login/widgets/RestaurantsWidget.dart';
 import 'package:flutter_login/widgets/FoodPromosWidget.dart';
 import 'package:flutter_login/widgets/SearchWidget.dart';
@@ -109,13 +110,22 @@ class _HomePageState extends State<HomePage> {
           //   },
           // ),
           RaisedButton(
-              child: Text(
-                "Chat",
-              ),
-              onPressed: (){
-                Navigator.push(context, ScaleRoute(page: Chat()));
-              },
-            ),BannerPromosWidget(),
+            child: Text(
+              "Chat",
+            ),
+            onPressed: (){
+              Navigator.push(context, ScaleRoute(page: Chat()));
+            },
+          ),
+          RaisedButton(
+            child: Text(
+              "Google pay",
+            ),
+            onPressed: (){
+             // Navigator.push(context, ScaleRoute(page: GooglePay()));
+            },
+          ),
+          BannerPromosWidget(),
           CategoriesWidget(),
           FoodPromosWidget(),
           RestaurantsWidget(),
