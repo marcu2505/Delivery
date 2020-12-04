@@ -1,6 +1,9 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter_login/services/database.dart';
+import 'package:flutter_login/dialog.dart';
 import 'package:flutter_login/ui/Layout.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,16 +16,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final myController = TextEditingController();
-
-  DatabaseMethods databaseMethods = new DatabaseMethods();
-
-  final email = TextEditingController();
-  final password = TextEditingController();
-  final loginDate = DateTime.now();
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future<UserCredential> googleLogin() async {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  void googleLogin() async {
     final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
     final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
@@ -31,45 +30,47 @@ class _LoginPageState extends State<LoginPage> {
       idToken: googleAuth.idToken,
     );
 
-    return await auth.signInWithCredential(credential);
-  }
+    UserCredential userCredential = await auth.signInWithCredential(credential);
+    var user = userCredential.user;
+    if(user != null) {
+      var result = await FirebaseFirestore.instance.collection('usuarios').doc(user.uid).get();
+      if(result != null && result.data() != null) {
+        int signUpStep = result.data()["etapa_cadastro"];
+        switch(signUpStep) {
+          case 2:
+            showMessageDialog(context: context, message: "Conclua seu cadastro");
+            Get.offAndToNamed('/extra-data');
+            break;
 
-  void emailLogin() async {
-    try {
-      if (environment == "development" && email.text == "" && password.text == "") {
-        email.text = "bots.texugo@gmail.com";
-        password.text = "Bola1234";
+          case 3:
+            showMessageDialog(context: context, message: "Detectamos que seu cadastro não foi concluído", detail: "Etapa atual: Registro e Verificação de Celular");
+            Get.offAndToNamed('/cellphone-registration');
+            break;
+
+          case 4:
+            Get.offAndToNamed('/main');
+            break;
+        }
+
+        return;
       }
 
-      UserCredential userCredential = await auth.signInWithEmailAndPassword(
-          email: email.text.trim(),
-          password: password.text,
-      );
-      if (userCredential.user != null) {
-        Get.offAndToNamed('/main');
-      }
-    } on FirebaseAuthException catch(e) {
-      if(e.code == "wrong-password") {
-        print("Senha incorreta.");
-      } else if(e.code == "user-not-found") {
-        print("Usuário não cadastrado ou email incorreto.");
-      }
-    } catch (e) {
-      print(e.toString());
+      FirebaseFirestore.instance.collection('usuarios').doc(user.uid).set({
+        "id": user.uid,
+        "etapa_cadastro": 2,
+      });
+      Get.offAndToNamed('/extra-data');
+    } else {
+      showMessageDialog(context: context, message: "Erro desconhecido", detail: "Por favor, tente novamente! Se o problema persistir, entre em contato com o suporte.");
+      Get.toNamed('/login');
     }
   }
 
+  @override
   void dispose() {
-    myController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
     super.dispose();
-  }
-
-  bool _obscure = true;
-
-  void _togglePassword() {
-    setState(() {
-      _obscure = !_obscure;
-    });
   }
 
   @override
@@ -77,297 +78,125 @@ class _LoginPageState extends State<LoginPage> {
     return Layout.render(
       content: Container(
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              SizedBox(
-                height: displayHeight / 10,
-              ),
-              Container(
-                height: displayHeight / 3,
-                child: Image(
-                  image: AssetImage('assets/img/deliveryRegional.png'),
-                  fit: BoxFit.contain,
-                  height: displayHeight / 6,
-                  width: displayWidth / 2,
+          child: SizedBox(
+            height: displayHeight,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                SizedBox(
+                  height: displayHeight / 10,
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(
-                    horizontal: displayWidth / 10
-                ),
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      spreadRadius: 1,
-                      blurRadius: 10,
-                      offset: Offset(0, 7),
-                    ),
-                  ],
-                ),
-                child: TextFormField(
-                  controller: email,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: const BorderRadius.all(
-                        const Radius.circular(20.0),
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: const BorderRadius.all(
-                        const Radius.circular(20.0),
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: const BorderRadius.all(
-                        const Radius.circular(20.0),
-                      ),
-                    ),
-                    filled: true,
-                    prefixIcon: Icon(
-                      Icons.person,
-                      color: Colors.black,
-                    ),
-                    labelText: "E-mail",
-                    labelStyle: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 15,
-                    ),
-                  ),
-                  style: TextStyle(fontSize: 14, color: Colors.black),
-                ),
-              ),
-
-              SizedBox(
-                height: displayHeight / 30,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(
-                    horizontal: displayWidth / 10
-                ),
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      spreadRadius: 1,
-                      blurRadius: 10,
-                      offset: Offset(0, 7),
-                    ),
-                  ],
-                ),
-                child: new Column(
-                  children: <Widget>[
-                    new TextFormField(
-                      controller: password,
-                      cursorColor: Colors.black,
-                      keyboardType: TextInputType.text,
-                      obscureText: _obscure,
-                      decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(20.0),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(20.0),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(20.0),
-                          ),
-                        ),
-                        filled: true,
-                        prefixIcon: Icon(
-                          Icons.lock,
-                          color: Colors.black,
-                        ),
-                        suffixIcon: GestureDetector(
-                          onTap: _togglePassword,
-                          child: Icon(
-                            _obscure ? Icons.visibility : Icons.visibility_off,
-                            color: Colors.black,
-                          ),
-                        ),
-                        labelText: "Senha",
-                        focusColor: Colors.white,
-                        labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15,
-                        ),
-                      ),
-                      style: TextStyle(fontSize: 14, color: Colors.black),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                  right: displayWidth / 20,
-                  top: 2,
-                ),
-                height: 40,
-                alignment: Alignment.centerRight,
-                child: FlatButton(
-                  onPressed: () => {
-                    Get.toNamed('/forgot-password')
-                  },
-                  child: Text(
-                    "Esqueci minha senha",
-                    textAlign: TextAlign.right,
-                    style: TextStyle(color: Colors.red),
+                // LOGO
+                Container(
+                  height: displayHeight / 3,
+                  child: Image(
+                    image: AssetImage('assets/img/deliveryRegional.png'),
+                    fit: BoxFit.contain,
+                    height: displayHeight / 6,
+                    width: displayWidth / 2,
                   ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                  left: displayWidth / 10,
-                  right: displayWidth / 10,
-                  bottom: displayWidth / 12,
-                ),
-                height: displayHeight / 18,
-                child: RaisedButton(
-                  onPressed: (){
-                    emailLogin();
-                  },
-                  child: Text('ENTRAR', style: TextStyle(color: Colors.white, fontSize: 20),),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                Spacer(),
+                //Login com Google
+                Container(
+                  margin: EdgeInsets.only(
+                    left: displayWidth / 10,
+                    right: displayWidth / 10,
+                    bottom: displayWidth / 12,
                   ),
-                  color: Colors.red,
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    height: 1,
-                    width: displayWidth / 3,
+                  height: 40,
+                  child: RaisedButton(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     color: Colors.white,
-                    margin: EdgeInsets.only(
-                      bottom: displayWidth / 18,
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      "OU",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                      ),
-                    ),
-                    margin: EdgeInsets.only(
-                      left: 5,
-                      right: 5,
-                      bottom: displayWidth / 18,
-                    ),
-                  ),
-                  Container(
-                    height: 1,
-                    width: displayWidth / 3,
-                    color: Colors.white,
-                    margin: EdgeInsets.only(
-                      bottom: displayWidth / 18,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    alignment: Alignment.topCenter,
-                    height: 50,
-                    width: 50,
-                    // margin: EdgeInsets.symmetric(
-                    //   horizontal: displayWidth / 35,
-                    // ),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/img/google.png'),
-                        fit: BoxFit.cover,
-                      ),
-                      //color: Colors.red,
-                    ),
-                    child: FlatButton(
-                      onPressed: (){
-                        googleLogin().then((result) {
-                          if (result != null) {
-                            Get.offAndToNamed('/main');
-                          }
-                        });
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    width: displayWidth * 0.05,
-                  ),
-                  Container(
-                    alignment: Alignment.topCenter,
-                    height: 50,
-                    width: 50,
-                    // margin: EdgeInsets.symmetric(
-                    //   horizontal: displayWidth / 35,
-                    // ),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/img/iconface.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: FlatButton(
-                      onPressed: (){
-
-                      },
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-  //                  margin: EdgeInsets.only(
-  //                    top: displayHeight / 40,
-  //                  ),
-                    alignment: Alignment.topCenter,
-                    child: RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "Ainda não tem conta? ",
-                            style: TextStyle(color: Colors.black, fontSize: 17),
+                    onPressed: googleLogin,
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 18.0,
+                          width: 18.0,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          TextSpan(
-                            text: "Cadastre-se",
-                            style: TextStyle(color: Colors.red, fontSize: 17),
-                            recognizer: TapGestureRecognizer()..onTap = () {
-                              Get.toNamed('/signup');
-                            },
+                          child: Center(
+                            child: Image(
+                              image: AssetImage('assets/button/logo-google.png'),
+                              height: 18.0,
+                              width: 18.0,
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(width: 24),
+                        Text(
+                          'Entrar com o Google',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontFamily: "Roboto-Medium",
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black.withOpacity(0.54),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(
-                      height: displayHeight / 9
+                ),
+                // Login com Email
+                Container(
+                  margin: EdgeInsets.only(
+                    left: displayWidth / 10,
+                    right: displayWidth / 10,
+                    bottom: 12,
                   ),
-                ],
-              )
-            ],
+                  height: 40,
+                  child: RaisedButton(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    color: Colors.red,
+                    onPressed: () {
+                      Get.toNamed('/email-login-signup');
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 18.0,
+                          width: 18.0,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.email,
+                              color: Colors.white,
+                              size: 18.0,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 24),
+                        Text(
+                          'Entrar com Email',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontFamily: "Roboto-Medium",
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: displayHeight / 10,
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -24,6 +24,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   // Função para filtrar restaurantes por categoria
   filterRests(String categorySlug) async {
     var result = await firestore
@@ -31,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         .where("slug", isEqualTo: categorySlug)
         .limit(1)
         .get();
-    String categoryID =  result.docs.first.id;
+    String categoryID = result.docs.first.id;
 
     result = await firestore
         .collection('restaurantes-categorias')
@@ -67,48 +72,48 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SearchWidget(),
-          // RaisedButton(
-          //   child: Text(
-          //     "Usuário Autenticado?",
-          //   ),
-          //   onPressed: () async {
-          //     var user = FirebaseAuth.instance.currentUser;
-          //     user.reload();
-          //     user.emailVerified ? print("Email autenticado") : print("Email não autenticado");
-          //     print(user.email + " " + user.emailVerified.toString());
-          //   },
-          // ),
-          // RaisedButton(
-          //   child: Text(
-          //     "Enviar Email",
-          //   ),
-          //   onPressed: () async {
-          //     var user = FirebaseAuth.instance.currentUser;
-          //     await user.sendEmailVerification();
-          //     print("Email enviado!");
-          //   },
-          // ),
-          // RaisedButton(
-          //   child: Text(
-          //     "Teste Usuário",
-          //   ),
-          //   onPressed: () async {
-          //     var user = FirebaseAuth.instance.currentUser;
-          //     print(user.toString());
-          //   },
-          // ),
-          // RaisedButton(
-          //   child: Text(
-          //     "Atualiza Usuário",
-          //   ),
-          //   onPressed: () async {
-          //     var user = FirebaseAuth.instance.currentUser;
-          //     user.updateProfile(
-          //         displayName: "Victor Hugo",
-          //         photoURL: "https://randomuser.me/api/portraits/men/99.jpg"
-          //     );
-          //   },
-          // ),
+          RaisedButton(
+            child: Text(
+              "Usuário Autenticado?",
+            ),
+            onPressed: () async {
+              var user = FirebaseAuth.instance.currentUser;
+              user.reload();
+              user.emailVerified ? print("Email autenticado") : print("Email não autenticado");
+              print(user.email + " " + user.emailVerified.toString());
+            },
+          ),
+          RaisedButton(
+            child: Text(
+              "Enviar Email",
+            ),
+            onPressed: () async {
+              var user = FirebaseAuth.instance.currentUser;
+              await user.sendEmailVerification();
+              print("Email enviado!");
+            },
+          ),
+          RaisedButton(
+            child: Text(
+              "Teste Usuário",
+            ),
+            onPressed: () async {
+              var user = FirebaseAuth.instance.currentUser;
+              print(user.toString());
+            },
+          ),
+          RaisedButton(
+            child: Text(
+              "Atualiza Usuário",
+            ),
+            onPressed: () async {
+              var user = FirebaseAuth.instance.currentUser;
+              user.updateProfile(
+                  displayName: "Victor Hugo",
+                  photoURL: "https://randomuser.me/api/portraits/men/99.jpg"
+              );
+            },
+          ),
           RaisedButton(
             child: Text(
               "Chat",

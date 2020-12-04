@@ -60,7 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 Container(
                   child: Text(
-                    FirebaseAuth.instance.currentUser.displayName.toUpperCase(),
+                    FirebaseAuth.instance.currentUser.displayName != null ? FirebaseAuth.instance.currentUser.displayName.toUpperCase() : "",
                     style: TextStyle(
                         fontSize: 25,
                         color: Colors.black,

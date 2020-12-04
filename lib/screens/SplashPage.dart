@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/globals.dart';
@@ -16,12 +17,30 @@ class SplashPage extends StatelessWidget {
 
   openApp() async {
     var user = FirebaseAuth.instance.currentUser;
-
     if(user != null) {
-      Get.offNamed('/main');
-    } else {
-      Get.offNamed('/login');
+      var result = await FirebaseFirestore.instance.collection('usuarios').doc(user.uid).get();
+      if (result != null && result.data() != null) {
+        int signUpStep = result.data()["etapa_cadastro"];
+        switch (signUpStep) {
+          case 4:
+            Get.offAndToNamed('/main');
+            break;
+
+          default:
+            Get.offAndToNamed('/login');
+            break;
+        }
+
+        return;
+      }
+
+      FirebaseFirestore.instance.collection('usuarios').doc(user.uid).set({
+        "id": user.uid,
+        "etapa_cadastro": 1,
+      });
     }
+
+    Get.offAndToNamed('/login');
   }
 
   @override

@@ -1,18 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login/screens/HomePage.dart';
+import 'package:flutter_login/screens/CellphoneRegistrationPage.dart';
+import 'package:flutter_login/screens/CellphoneVerificationPage.dart';
+import 'package:flutter_login/screens/EmailLoginSignUpPage.dart';
+import 'package:flutter_login/screens/ExtraDataSignUpPage.dart';
 import 'package:flutter_login/screens/MainPage.dart';
 import 'package:flutter_login/screens/PasswordRecoveryPage.dart';
-import 'package:flutter_login/screens/SignUpPage.dart';
 import 'package:flutter_login/screens/SplashPage.dart';
-import 'package:flutter_login/screens/FilterPage.dart';
-import 'package:flutter_login/screens/OrdersPage.dart';
-import 'package:flutter_login/screens/ProfilePage.dart';
+import 'package:flutter_login/screens/EmailVerificationPage.dart';
 import 'package:get/get.dart';
-import 'globals.dart';
-import 'screens/LoginPage.dart';
+import 'package:flutter_login/globals.dart';
+import 'package:flutter_login/screens/LoginPage.dart';
 import 'package:flutter/services.dart';
 
 Future main() async {
@@ -79,34 +78,47 @@ class MyApp extends StatelessWidget {
             ),
             getPages: [
               GetPage(
-                  name: '/',
-                  page: () => SplashPage()
+                name: '/',
+                page: () => SplashPage(),
               ),
               GetPage(
-                  name: '/main',
-                  page: () => MainPage()
+                name: '/main',
+                page: () => MainPage(),
               ),
               GetPage(
-                  name: '/login',
-                  page: () => LoginPage()
+                name: '/login',
+                page: () => LoginPage(),
               ),
               GetPage(
-                  name: '/signup',
-                  page: () => SignUpPage()
+                title: "Inserção Email - Login/Cadastro_1",
+                name: '/email-login-signup',
+                page: () => EmailLoginSignUpPage(),
               ),
               GetPage(
-                  name: '/forgot-password',
-                  page: () => PasswordRecoveryPage()
+                title: "Verificação Email - Cadastro_2",
+                name: '/email-verification',
+                page: () => EmailVerificationPage(),
+              ),
+              GetPage(
+                title: "Dados Extras - Cadastro_3",
+                name: '/extra-data',
+                page: () => ExtraDataSignUpPage(),
+              ),
+              GetPage(
+                title: "Cadastro Celular",
+                name: '/cellphone-registration',
+                page: () => CellphoneRegistrationPage(),
+              ),
+              GetPage(
+                title: "Verificação Celular - Cadastro_4",
+                name: '/cellphone-verification',
+                page: () => CellphoneVerificationPage(),
+              ),
+              GetPage(
+                name: '/forgot-password',
+                page: () => PasswordRecoveryPage(),
               )
             ],
-            // home: PageView(
-            //   controller: pageController,
-            //   children: <Widget>[
-            //     Scaffold(
-            //       body: SplashPage(),
-            //     ),
-            //   ],
-            // ),
           );
         }
 
