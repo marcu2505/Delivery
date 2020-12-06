@@ -6,7 +6,7 @@ import 'package:flutter_login/widgets/Indicate.dart';
 import 'package:flutter_login/globals.dart';
 import 'package:flutter_login/widgets/Contact.dart';
 import 'package:flutter_login/widgets/Suggest.dart';
-import 'file:///C:/AndroidStudio/flutter_login/lib/screens/QRCodePage.dart';
+import 'package:flutter_login/widgets/QRCodePage.dart';
 import 'package:flutter_login/widgets/MyAdress.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';

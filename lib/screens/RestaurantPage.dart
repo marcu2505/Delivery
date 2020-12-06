@@ -4,11 +4,15 @@ import 'package:flutter_login/widgets/RestaurantAll.dart';
 import 'package:flutter_login/widgets/TopRestaurant.dart';
 
 class RestaurantPage extends StatefulWidget {
+  final String id;
+  RestaurantPage({@required this.id});
   @override
-  _RestaurantPageState createState() => _RestaurantPageState();
+  _RestaurantPageState createState() => _RestaurantPageState(id: this.id);
 }
 
 class _RestaurantPageState extends State<RestaurantPage> {
+  final String id;
+  _RestaurantPageState({@required this.id});
   @override
   Widget build(BuildContext context) {
     return Layout.render(
@@ -18,8 +22,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
             SizedBox(
               height: MediaQuery.of(context).viewPadding.top,
             ),
-            TopRestaurant(),
-            RestaurantAll(),
+            TopRestaurant(id: this.id),
+            RestaurantAll(id: this.id),
           ],
         ),
       ),

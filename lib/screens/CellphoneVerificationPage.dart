@@ -40,7 +40,7 @@ class _CellphoneVerificationPageState extends State<CellphoneVerificationPage> {
         "telefone": null,
         "etapa_cadastro": 4,
       });
-      Get.offAndToNamed('/main');
+      Get.offAllNamed('/main');
       return;
     }
 

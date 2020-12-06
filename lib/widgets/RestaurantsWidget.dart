@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
 import 'package:flutter_login/globals.dart';
 import 'package:flutter_login/screens/RestaurantPage.dart';
+import 'package:get/get.dart';
 
 class RestaurantsWidget extends StatefulWidget {
   @override
@@ -60,15 +60,16 @@ class RestaurantsTitle extends StatelessWidget {
 }
 
 class RestaurantTile extends StatelessWidget {
+  final String id;
   final String name;
   final String imageUrl;
   final String rating;
   final String numberOfRating;
   final String price;
-  final String slug;
   final String address;
   final String category;
   final double deliveryFee;
+
 
   RestaurantTile(
       {Key key,
@@ -77,7 +78,7 @@ class RestaurantTile extends StatelessWidget {
         @required this.rating,
         @required this.numberOfRating,
         @required this.price,
-        @required this.slug,
+        @required this.id,
         @required this.address,
         @required this.category,
         @required this.deliveryFee})
@@ -87,7 +88,7 @@ class RestaurantTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, ScaleRoute(page: RestaurantPage()));
+        Get.to(RestaurantPage(id: this.id));
       },
       child: Column(
         children: <Widget>[
@@ -273,7 +274,7 @@ class RestaurantsList extends StatelessWidget {
               rating: '4.9',
               numberOfRating: '200',
               price: '\$\$\$',
-              slug: "fried_egg",
+              id: restaurant.id,
               deliveryFee: restaurant["taxa_entrega"],
             );
           }).toList(),

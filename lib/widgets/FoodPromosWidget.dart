@@ -1,8 +1,9 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
 import 'package:flutter_login/globals.dart';
 import 'package:flutter_login/screens/FoodDetailsPage.dart';
+import 'package:get/get.dart';
 
 class FoodPromosWidget extends StatefulWidget {
   @override
@@ -10,6 +11,8 @@ class FoodPromosWidget extends StatefulWidget {
 }
 
 class _FoodPromosWidgetState extends State<FoodPromosWidget> {
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +22,7 @@ class _FoodPromosWidgetState extends State<FoodPromosWidget> {
         children: <Widget>[
           FoodPromosTitle(),
           Expanded(
-            child: FoodPromosItems(),
+            child: FoodPromosList(),
           )
         ],
       ),
@@ -62,31 +65,76 @@ class FoodPromosTitle extends StatelessWidget {
   }
 }
 
+class FoodPromosList extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return new StreamBuilder(
+      stream: FirebaseFirestore.instance.collection('promocoes').where("type", isEqualTo: "food").snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if(!snapshot.hasData) return new Text("Carregando dados...");
+        return new ListView(
+          padding: EdgeInsets.zero,
+          scrollDirection: Axis.horizontal,
+          children: snapshot.data.docs.map((promocoes) {
+            return new FoodPromosTile(
+              productId: promocoes.data()["produto_id"],
+              categoryId: promocoes.data()["categoria_id"],
+              restaurantId: promocoes.data()["restaurante_id"],
+              description: promocoes.data()["descricao"],
+              imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+              name: promocoes.data()["nome"],
+              price_0: promocoes.data()["preco_0"] + .0,
+              price_1: ((promocoes.data()["preco_0"] + .0) * (100.0 - (promocoes.data()["desconto"] + .0)) / 100.0),
+              discount: promocoes.data()["desconto"] + .0,
+            );
+          }).toList(),
+        );
+      },
+    );
+
+  }
+}
+
 class FoodPromosTile extends StatelessWidget {
-  String name;
-  String imageUrl;
-  String image;
-  String price_0;
-  String price_1;
-  String description;
-  String slug;
+  final String name;
+  final String imageUrl;
+  final String description;
+  final String categoryId;
+  final String productId;
+  final String restaurantId;
+  final double price_0;
+  final double price_1;
+  final double discount;
 
   FoodPromosTile(
       {Key key,
       @required this.name,
       @required this.imageUrl,
-      @required this.image,
       @required this.price_0,
       @required this.price_1,
       @required this.description,
-      @required this.slug})
+      @required this.restaurantId,
+      @required this.categoryId,
+      @required this.productId,
+      @required this.discount,
+      })
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, ScaleRoute(page: FoodDetailsPage()));
+        Get.to(
+          FoodDetailsPage(
+            restaurantId: this.restaurantId,
+            imageUrl: this.imageUrl,
+            categoryId: this.categoryId,
+            productId: this.productId,
+            discount: this.discount,
+            price: this.price_1,
+          )
+        );
       },
       child: Column(
         children: <Widget>[
@@ -129,26 +177,6 @@ class FoodPromosTile extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            // ClipRRect(
-                            //   borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                            //   child: Align(
-                            //     alignment: FractionalOffset.bottomLeft,
-                            //     child: Container(
-                            //       // child: Image.network(
-                            //       //   imageUrl,
-                            //       //   fit: BoxFit.cover,
-                            //       //   width: displayWidth * 0.4,
-                            //       //   height: 80,
-                            //       // ),
-                            //       width: 32, //displayWidth * 0.1,
-                            //       height: 32, //displayHeight * 0.04,
-                            //       decoration: BoxDecoration(
-                            //         color: Colors.black,
-                            //         borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // )
                           ],
                         ),
                       ),
@@ -186,7 +214,7 @@ class FoodPromosTile extends StatelessWidget {
                               alignment: Alignment.center,
                                child: Center(
                                   child: Text(
-                                    price_0,
+                                    price_0.toStringAsFixed(2),
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w100,
@@ -215,7 +243,7 @@ class FoodPromosTile extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(
-                                price_1,
+                                price_1.toStringAsFixed(2),
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w100,
@@ -275,88 +303,53 @@ class FoodPromosTile extends StatelessWidget {
   }
 }
 
-class FoodPromosItems extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.zero,
-      scrollDirection: Axis.horizontal,
-      children: <Widget>[
-        FoodPromosTile(
-            name: "Fried Egg",
-            imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            price_0: '20.00',
-            price_1: '10.00',
-            description: "Pão, bacon, tomate, ovo",
-            slug: "fried_egg"),
-        FoodPromosTile(
-            name: "Mixed Vegetable",
-            imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            price_0: '20.00',
-            price_1: '10.00',
-            description: "Pão, bacon, tomate, ovo",
-            slug: ""),
-        FoodPromosTile(
-            name: "Salad With Chicken",
-            imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            price_0: '20.00',
-            price_1: '10.00',
-            description: "Pão, bacon, tomate, ovo",
-            slug: ""),
-        FoodPromosTile(
-            name: "Mixed Salad",
-            imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            price_0: '20.00',
-            price_1: '10.00',
-            description: "Pão, bacon, tomate, ovo",
-            slug: ""),
-        FoodPromosTile(
-            name: "Red meat,Salad",
-            imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            price_0: '20.00',
-            price_1: '10.00',
-            description: "Pão, bacon, tomate, ovo",
-            slug: ""),
-        FoodPromosTile(
-            name: "Mixed Salad",
-            imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            price_0: '20.00',
-            price_1: '10.00',
-            description: "Pão, bacon, tomate, ovo",
-            slug: ""),
-        FoodPromosTile(
-            name: "Potato,Meat fry",
-            imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            price_0: '20.00',
-            price_1: '10.00',
-            description: "Pão, bacon, tomate, ovo",
-            slug: ""),
-        FoodPromosTile(
-            name: "Fried Egg",
-            imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            price_0: '20.00',
-            price_1: '10.00',
-            description: "Pão, bacon, tomate, ovo",
-            slug: "fried_egg"),
-        FoodPromosTile(
-            name: "Red meat,Salad",
-            imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            image: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-            price_0: '20.00',
-            price_1: '10.00',
-            description: "Pão, bacon, tomate, ovo",
-            slug: ""),
-      ],
-    );
-  }
-}
+// class FoodPromosList extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return ListView(
+//       padding: EdgeInsets.zero,
+//       scrollDirection: Axis.horizontal,
+//       children: <Widget>[
+//         FoodPromosTile(
+//           name: "Fried Egg",
+//           imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+//           price_0: 20.00,
+//           price_1: 10.00,
+//           description: "Pão, bacon, tomate, ovo",
+//           restaurantId: "Oi",
+//           categoryId: "uiu",
+//           productId: "livia",
+//         ),
+//         FoodPromosTile(
+//             name: "Fried Egg",
+//             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+//             price_0: 20.00,
+//             price_1: 10.00,
+//             description: "Pão, bacon, tomate, ovo",
+//             restaurantId: "Oi",
+//             categoryId: "uiu",
+//             productId: "livia"),
+//         FoodPromosTile(
+//             name: "Fried Egg",
+//             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+//             price_0: 20.00,
+//             price_1: 10.00,
+//             description: "Pão, bacon, tomate, ovo",
+//             restaurantId: "Oi",
+//             categoryId: "uiu",
+//             productId: "livia"),
+//         FoodPromosTile(
+//             name: "Fried Egg",
+//             imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
+//             price_0: 20.00,
+//             price_1: 10.00,
+//             description: "Pão, bacon, tomate, ovo",
+//             restaurantId: "Oi",
+//             categoryId: "uiu",
+//             productId: "livia"),
+//       ],
+//     );
+//   }
+// }
 
 

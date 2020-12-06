@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_login/globals.dart';
 import 'package:flutter_login/screens/FilterPage.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_login/screens/OrdersPage.dart';
 import 'package:flutter_login/screens/ProfilePage.dart';
 import 'package:flutter_login/ui/Layout.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 
 class MainPage extends StatelessWidget {
   final NavController navController = Get.put(NavController());
