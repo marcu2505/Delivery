@@ -60,15 +60,15 @@ class RestaurantsTitle extends StatelessWidget {
 }
 
 class RestaurantTile extends StatelessWidget {
-  String name;
-  String imageUrl;
-  String rating;
-  String numberOfRating;
-  String price;
-  String slug;
-  String address;
-  String category;
-  double deliveryFee;
+  final String name;
+  final String imageUrl;
+  final String rating;
+  final String numberOfRating;
+  final String price;
+  final String slug;
+  final String address;
+  final String category;
+  final double deliveryFee;
 
   RestaurantTile(
       {Key key,
@@ -266,15 +266,15 @@ class RestaurantsList extends StatelessWidget {
           physics: ClampingScrollPhysics(),
           children: snapshot.data.docs.map((restaurant) {
             return new RestaurantTile(
-              name: restaurant["name"],
-              address: restaurant["address"],
-              imageUrl: restaurant["photo"],
-              category: restaurant["mainCategory"],
+              name: restaurant["nome"],
+              address: restaurant["endereco"],
+              imageUrl: restaurant["imagem"],
+              category: restaurant["categoria_principal"],
               rating: '4.9',
               numberOfRating: '200',
               price: '\$\$\$',
               slug: "fried_egg",
-              deliveryFee: 0.00,
+              deliveryFee: restaurant["taxa_entrega"],
             );
           }).toList(),
         );

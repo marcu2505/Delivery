@@ -192,9 +192,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: GestureDetector(
-                        onTap: () {
-                          Get.back();
-                        },
+                        onTap: Get.back,
                         child: Icon(
                           Icons.arrow_back_ios,
                           size: 40,

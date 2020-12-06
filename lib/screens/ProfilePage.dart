@@ -1,14 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
-import 'package:flutter_login/widgets/Coupon.dart';
-import 'package:flutter_login/ui/Layout.dart';
+import 'package:flutter_login/screens/CouponsPage.dart';
 import 'package:flutter_login/widgets/Indicate.dart';
 import 'package:flutter_login/globals.dart';
-import 'package:flutter_login/widgets/Indicate.dart';
 import 'package:flutter_login/widgets/Contact.dart';
 import 'package:flutter_login/widgets/Suggest.dart';
-import 'package:flutter_login/widgets/ScanQrCode.dart';
+import 'file:///C:/AndroidStudio/flutter_login/lib/screens/QRCodePage.dart';
 import 'package:flutter_login/widgets/MyAdress.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -269,8 +267,8 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           // Leitor QRCode
           GestureDetector(
-            onTap: (){
-              Navigator.push(context, ScaleRoute(page: ScanQrCode()));
+            onTap: () {
+              Get.to(QRCodePage());
             },
             child: Container(
               child: Row(
@@ -333,7 +331,7 @@ class _ProfilePageState extends State<ProfilePage> {
           //Cupons de desconto
           GestureDetector(
             onTap: (){
-              Navigator.push(context, ScaleRoute(page: Coupon()));
+              Get.to(CouponsPage(clickable: false));
             },
             child: Container(
               child: Row(

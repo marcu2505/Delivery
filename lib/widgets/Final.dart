@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
 import 'package:flutter_login/globals.dart';
-import 'package:flutter_login/widgets/Coupon.dart';
+import 'package:flutter_login/screens/CouponsPage.dart';
+import 'package:flutter_login/widgets/CouponsWidget.dart';
 import 'package:flutter_login/widgets/Address.dart';
+import 'package:get/get.dart';
 
 
 class Final extends StatefulWidget {
@@ -591,7 +593,7 @@ class _FinalState extends State<Final> {
             ),
             GestureDetector(
               onTap: (){
-                Navigator.push(context, ScaleRoute(page: Coupon()));
+                Get.to(CouponsPage(clickable: true));
               },
               child: Container(
                 child: Center(

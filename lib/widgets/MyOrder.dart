@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
 import 'package:flutter_login/globals.dart';
 import 'package:flutter_login/ui/Layout.dart';
-import 'package:flutter_login/widgets/Coupon.dart';
+import 'package:flutter_login/widgets/CouponsWidget.dart';
 import 'Final.dart';
 
 class MyOrder extends StatefulWidget {

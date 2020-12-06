@@ -2,11 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
-import 'package:flutter_login/ui/Layout.dart';
-import 'package:flutter_login/screens/FilterPage.dart';
-import 'package:flutter_login/screens/OrdersPage.dart';
-import 'package:flutter_login/screens/ProfilePage.dart';
-import 'package:flutter_login/widgets/GooglePay.dart';
 import 'package:flutter_login/widgets/RestaurantsWidget.dart';
 import 'package:flutter_login/widgets/FoodPromosWidget.dart';
 import 'package:flutter_login/widgets/SearchWidget.dart';
@@ -14,7 +9,6 @@ import 'package:flutter_login/widgets/CategoriesWidget.dart';
 import 'package:flutter_login/widgets/Top.dart';
 import 'package:flutter_login/widgets/BannerPromosWidget.dart';
 import 'package:flutter_login/globals.dart';
-import 'package:flutter_login/widgets/MyOrder.dart';
 import 'package:flutter_login/widgets/Chat.dart';
 
 class HomePage extends StatefulWidget {
@@ -63,73 +57,73 @@ class _HomePageState extends State<HomePage> {
             height: displayHeight * 0.01,
           ),
           Top(),
-          FlatButton(
-            onPressed: () => {
-              filterRests("pizza")
-            },
-            child: Text(
-              "Filter Rests",
-            ),
-          ),
           SearchWidget(),
-          RaisedButton(
-            child: Text(
-              "Usuário Autenticado?",
-            ),
-            onPressed: () async {
-              var user = FirebaseAuth.instance.currentUser;
-              user.reload();
-              user.emailVerified ? print("Email autenticado") : print("Email não autenticado");
-              print(user.email + " " + user.emailVerified.toString());
-            },
-          ),
-          RaisedButton(
-            child: Text(
-              "Enviar Email",
-            ),
-            onPressed: () async {
-              var user = FirebaseAuth.instance.currentUser;
-              await user.sendEmailVerification();
-              print("Email enviado!");
-            },
-          ),
-          RaisedButton(
-            child: Text(
-              "Teste Usuário",
-            ),
-            onPressed: () async {
-              var user = FirebaseAuth.instance.currentUser;
-              print(user.toString());
-            },
-          ),
-          RaisedButton(
-            child: Text(
-              "Atualiza Usuário",
-            ),
-            onPressed: () async {
-              var user = FirebaseAuth.instance.currentUser;
-              user.updateProfile(
-                  displayName: "Victor Hugo",
-                  photoURL: "https://randomuser.me/api/portraits/men/99.jpg"
-              );
-            },
-          ),
-          RaisedButton(
-            child: Text(
-              "Chat",
-            ),
-            onPressed: (){
-              Navigator.push(context, ScaleRoute(page: Chat()));
-            },
-          ),
-          RaisedButton(
-            child: Text(
-              "Google pay",
-            ),
-            onPressed: (){
-             // Navigator.push(context, ScaleRoute(page: GooglePay()));
-            },
-          ),
+          // RaisedButton(
+          //   onPressed: () => {
+          //     filterRests("pizza")
+          //   },
+          //   child: Text(
+          //     "Filter Rests",
+          //   ),
+          // ),
+          // RaisedButton(
+          //   child: Text(
+          //     "Usuário Autenticado?",
+          //   ),
+          //   onPressed: () async {
+          //     var user = FirebaseAuth.instance.currentUser;
+          //     user.reload();
+          //     user.emailVerified ? print("Email autenticado") : print("Email não autenticado");
+          //     print(user.email + " " + user.emailVerified.toString());
+          //   },
+          // ),
+          // RaisedButton(
+          //   child: Text(
+          //     "Enviar Email",
+          //   ),
+          //   onPressed: () async {
+          //     var user = FirebaseAuth.instance.currentUser;
+          //     await user.sendEmailVerification();
+          //     print("Email enviado!");
+          //   },
+          // ),
+          // RaisedButton(
+          //   child: Text(
+          //     "Teste Usuário",
+          //   ),
+          //   onPressed: () async {
+          //     var user = FirebaseAuth.instance.currentUser;
+          //     print(user.toString());
+          //   },
+          // ),
+          // RaisedButton(
+          //   child: Text(
+          //     "Atualiza Usuário",
+          //   ),
+          //   onPressed: () async {
+          //     var user = FirebaseAuth.instance.currentUser;
+          //     user.updateProfile(
+          //         displayName: "Victor Hugo",
+          //         photoURL: "https://randomuser.me/api/portraits/men/99.jpg"
+          //     );
+          //   },
+          // ),
+          // RaisedButton(
+          //   child: Text(
+          //     "Chat",
+          //   ),
+          //   onPressed: (){
+          //     Navigator.push(context, ScaleRoute(page: Chat()));
+          //   },
+          // ),
+          // RaisedButton(
+          //   child: Text(
+          //     "Notificação",
+          //   ),
+          //   onPressed: (){
+          //     //Navigator.push(context, ScaleRoute(page: MessagingWidget("")));
+          //   },
+          // ),
           BannerPromosWidget(),
           CategoriesWidget(),
           FoodPromosWidget(),

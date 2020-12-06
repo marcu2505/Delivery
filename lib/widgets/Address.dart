@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_login/globals.dart';
+import 'package:flutter_login/ui/Layout.dart';
+import 'package:get/get.dart';
 
 class Address extends StatefulWidget {
   @override
@@ -21,9 +23,8 @@ class _AddressState extends State<Address> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.yellow,
-      body: SingleChildScrollView(
+    return Layout.render(
+      content: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             SizedBox(
@@ -318,7 +319,6 @@ class _AddressState extends State<Address> {
             //Enviar
             GestureDetector(
               onTap: () async {
-                print(FirebaseAuth.instance.currentUser.uid);
                 await FirebaseFirestore.instance.collection('usuarios').doc(FirebaseAuth.instance.currentUser.uid).collection('enderecos').add(
                   {
                     'endereco': adress.text,
@@ -327,6 +327,7 @@ class _AddressState extends State<Address> {
                     'nome': name.text,
                   }
                 );
+                Get.back();
               },
               child: Container(
                 child: Row(
