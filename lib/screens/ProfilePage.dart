@@ -6,7 +6,6 @@ import 'package:flutter_login/widgets/Indicate.dart';
 import 'package:flutter_login/globals.dart';
 import 'package:flutter_login/widgets/Contact.dart';
 import 'package:flutter_login/widgets/Suggest.dart';
-import 'package:flutter_login/widgets/QRCodePage.dart';
 import 'package:flutter_login/widgets/MyAdress.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -268,7 +267,7 @@ class _ProfilePageState extends State<ProfilePage> {
           // Leitor QRCode
           GestureDetector(
             onTap: () {
-              Get.to(QRCodePage());
+              // Get.to(QRCodePage());
             },
             child: Container(
               child: Row(

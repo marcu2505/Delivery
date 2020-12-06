@@ -247,7 +247,33 @@ class _DetailsState extends State<Details> {
 
                 if(fileMap.containsKey("restaurante")) {
                   if(restaurantId != fileMap["restaurante"]) {
-                    showMessageDialog(context: context, message: "Não é possível adicionar produtos de diferentes estabelecimentos");
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext ctx){
+                          return AlertDialog(
+                            title: Text("Não é possível adicionar produtos de diferentes estabelecimentos"),
+                            actions: <Widget>[
+                              RaisedButton(
+                                color: Colors.yellow,
+                                child: Text("Cancelar"),
+                                onPressed: (){
+                                  Navigator.of(ctx).pop();
+                                  Get.back();
+                                },
+                              ),
+                              RaisedButton(
+                                color: Colors.yellow,
+                                child: Text("Ir para o carrinho"),
+                                onPressed: (){
+                                  Navigator.of(ctx).pop();
+                                  Get.off(MyOrder());
+                                },
+                              ),
+                            ],
+                          );
+                        }
+                    );
                     return;
                   }
                 }
