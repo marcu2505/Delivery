@@ -133,6 +133,7 @@ class FoodPromosTile extends StatelessWidget {
             productId: this.productId,
             discount: this.discount,
             price: this.price_1,
+            name: this.name,
           )
         );
       },

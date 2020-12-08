@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_login/dialog.dart';
 import 'package:flutter_login/globals.dart';
 import 'package:flutter_login/widgets/MyOrder.dart';
 import 'package:get/get.dart';
@@ -13,8 +12,12 @@ class Details extends StatefulWidget {
   final String userId;
   final String restaurantId;
   final String categoryId;
+  final String name;
+  final String observation;
   final double discount;
   final double price;
+  final int quantity;
+  final bool onCart;
 
   @override
 
@@ -25,6 +28,10 @@ class Details extends StatefulWidget {
     discount: this.discount,
     userId: this.userId,
     price: this.price,
+    name: this.name,
+    observation: this.observation,
+    onCart: this.onCart,
+    quantity: this.quantity,
   );
   Details({
     @required this.productId,
@@ -33,6 +40,10 @@ class Details extends StatefulWidget {
     @required this.price,
     @required this.discount,
     @required this.userId,
+    @required this.name,
+    this.quantity = 1,
+    this.observation,
+    this.onCart,
   });
 }
 
@@ -42,8 +53,12 @@ class _DetailsState extends State<Details> {
   final String userId;
   final String restaurantId;
   final String categoryId;
+  final String name;
+  final String observation;
   final double discount;
   final double price;
+  int quantity;
+  final bool onCart;
 
   _DetailsState({
     @required this.productId,
@@ -52,13 +67,18 @@ class _DetailsState extends State<Details> {
     @required this.price,
     @required this.discount,
     @required this.userId,
+    @required this.name,
+    this.quantity = 1,
+    this.observation,
+    this.onCart,
   });
 
-  int produtCount = 1;
+  TextEditingController observationController = new TextEditingController();
 
   @override
-
   Widget build(BuildContext context) {
+    print(this.quantity);
+    observationController.text = this.observation;
     return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -105,6 +125,7 @@ class _DetailsState extends State<Details> {
                     child: Container(
                       height: displayHeight * 0.10,
                       child:TextField(
+                        controller: observationController,
                         textAlignVertical: TextAlignVertical.center,
                         keyboardType: TextInputType.multiline,
                         minLines: 1,
@@ -166,9 +187,9 @@ class _DetailsState extends State<Details> {
                   children: <Widget>[
                     GestureDetector(
                       onTap: (){
-                        if(produtCount > 1){
+                        if(this.quantity > 1){
                           setState(() {
-                            produtCount--;
+                            this.quantity--;
                           });
                         }
                       },
@@ -192,7 +213,7 @@ class _DetailsState extends State<Details> {
                     ),
                     Container(
                       child: Text(
-                        produtCount.toString(),
+                        this.quantity.toString(),
                         style: TextStyle(
                           fontSize: 35,
                           fontFamily: 'BalooBhai',
@@ -207,9 +228,10 @@ class _DetailsState extends State<Details> {
                     ),
                     GestureDetector(
                       onTap: (){
-                        if (produtCount < 99) {
+                        print(this.quantity);
+                        if (this.quantity < 99) {
                           setState(() {
-                            produtCount++;
+                            this.quantity++;
                           });
                         }
                       },
@@ -267,7 +289,7 @@ class _DetailsState extends State<Details> {
                                 child: Text("Ir para o carrinho"),
                                 onPressed: (){
                                   Navigator.of(ctx).pop();
-                                  Get.off(MyOrder());
+                                  Get.off(MyOrder(restaurantId: this.restaurantId));
                                 },
                               ),
                             ],
@@ -280,7 +302,8 @@ class _DetailsState extends State<Details> {
 
                 if(fileMap.containsKey("produtos")) {
                   Map<String, dynamic> productMap = fileMap["produtos"];
-                  if(productMap.containsKey("$productId")) {
+                  print(onCart);
+                  if(productMap.containsKey("$productId") && (onCart != true)){
                     showDialog(
                       context: context,
                       barrierDismissible: false,
@@ -301,8 +324,8 @@ class _DetailsState extends State<Details> {
                               color: Colors.yellow,
                               child: Text("Ir para o carrinho"),
                               onPressed: (){
-                                Navigator.of(ctx).pop();
-                                Get.off(MyOrder());
+                                // Navigator.of(ctx).pop();
+                                Get.off(MyOrder(restaurantId: this.restaurantId));
                               },
                             ),
                           ],
@@ -322,13 +345,18 @@ class _DetailsState extends State<Details> {
 
                 Map<String, dynamic> productMap = productsMap["$productId"];
                 productMap.putIfAbsent("produto", () => productId);
-                productMap["quantidade"] = produtCount;
+                productMap["quantidade"] = this.quantity;
                 productMap.putIfAbsent("desconto", () => discount);
                 productMap.putIfAbsent("categoria", () => categoryId);
                 productMap.putIfAbsent("preco", () => price);
+                productMap.putIfAbsent("nome", () => name);
+                productMap["observacao"] = observationController.text;
+
 
                 var json = jsonEncode(fileMap);
                 file.writeAsString(json);
+
+                Get.off(MyOrder(restaurantId: this.restaurantId));
               },
               child: Container(
                 child: Center(

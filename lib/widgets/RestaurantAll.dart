@@ -169,7 +169,7 @@ class ProductTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(FoodDetailsPage(productId: this.productId, imageUrl: imageUrl, categoryId: categoryId, restaurantId: this.restaurantId, price: this.price, discount: this.discount));
+        Get.to(FoodDetailsPage(productId: this.productId, imageUrl: imageUrl, categoryId: categoryId, restaurantId: this.restaurantId, price: this.price, discount: this.discount, name: this.name,));
       },
       child: Column(
         children: <Widget>[
