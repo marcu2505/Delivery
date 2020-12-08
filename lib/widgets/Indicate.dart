@@ -24,7 +24,7 @@ class _IndicateState extends State<Indicate> {
             //Indique e acumule
             Container(
               child: Text(
-                "Indique e acumule".toUpperCase(),
+                "INDIQUE E ACUMULE",
                 style: TextStyle(
                   fontSize: 23,
                   color: Colors.white,
@@ -48,7 +48,7 @@ class _IndicateState extends State<Indicate> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "Indique o Delivery Regional e ".toUpperCase(),
+                    "INDIQUE O DELIVERY REGIONAL E ",
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.black,
@@ -58,7 +58,7 @@ class _IndicateState extends State<Indicate> {
                     //textAlign: TextAlign.center,
                   ),
                   Text(
-                    "GANHE R\$ 5,00".toUpperCase(),
+                    "GANHE R\$ 5,00",
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.red,
@@ -126,7 +126,7 @@ class _IndicateState extends State<Indicate> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "Ver termos e condições".toUpperCase(),
+                    "VER TERMOS E CONDIÇÕES",
                     style: TextStyle(
                       fontSize: 17,
                       color: Colors.black,
@@ -160,7 +160,7 @@ class _IndicateState extends State<Indicate> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "PS: INDIQUE VARIOS AMIGOS E ACUMULE MUITOS CUPONS ".toUpperCase(),
+                    "PS: INDIQUE VARIOS AMIGOS E ACUMULE MUITOS CUPONS",
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.white,
@@ -194,7 +194,7 @@ class _IndicateState extends State<Indicate> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "RITAFACADA-190".toUpperCase(),
+                    "RITAFACADA-190",
                     style: TextStyle(
                       fontSize: 26,
                       color: Colors.black,
@@ -228,7 +228,7 @@ class _IndicateState extends State<Indicate> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "VOCÊ JÁ GANHOU R\$ 0.00 INDICANDO O DELIVERY REGIONAL".toUpperCase(),
+                    "VOCÊ JÁ GANHOU R\$ 0.00 INDICANDO O DELIVERY REGIONAL",
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.black,
@@ -262,7 +262,7 @@ class _IndicateState extends State<Indicate> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "Compartilhar".toUpperCase(),
+                    "COMPARTILHAR",
                     style: TextStyle(
                       fontSize: 22,
                       color: Colors.white,

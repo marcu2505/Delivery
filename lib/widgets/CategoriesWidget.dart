@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_login/screens/CategoryFilterPage.dart';
+import 'package:get/get.dart';
 
 class CategoriesWidget extends StatefulWidget {
   @override
@@ -58,21 +60,21 @@ class CategoriesTitle extends StatelessWidget {
 }
 
 class CategoryTile extends StatelessWidget {
-  String name;
-  String icon;
-  String slug;
+  final String name;
+  final String icon;
+  final String slug;
 
-  CategoryTile(
-      {Key key,
-      @required this.name,
-      @required this.icon,
-      @required this.slug})
-      : super(key: key);
+  CategoryTile({
+    Key key,
+    @required this.name,
+    @required this.icon,
+    @required this.slug,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => Get.to(CategoryFilterPage(category: this.slug, categoryName: this.name)),
       child: Column(
         children: <Widget>[
           Container(

@@ -24,7 +24,7 @@ class _SuggestState extends State<Suggest> {
             //Fale conosco
             Container(
               child: Text(
-                "Sugerir estabelecimento".toUpperCase(),
+                "SUGERIR ESTABELECIMENTO",
                 style: TextStyle(
                   fontSize: 23,
                   color: Colors.white,
@@ -48,7 +48,7 @@ class _SuggestState extends State<Suggest> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Não encontrou o que você queria?".toUpperCase(),
+                    "NÃO ENCONTROU O QUE VOCÊ QUERIA?",
                     style: TextStyle(
                       fontSize: 19,
                       color: Colors.black,
@@ -82,7 +82,7 @@ class _SuggestState extends State<Suggest> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Deixe aqui a sua sugestão para que possamos entrar\nem contato com o estabelecimento".toUpperCase(),
+                    "DEIXE AQUI A SUA SUGESTÃO PARA QUE POSSAMOS ENTRAR\nEM CONTATO COM O ESTABELECIMENTO",
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.black,
@@ -163,7 +163,7 @@ class _SuggestState extends State<Suggest> {
                           ),
                           fillColor: Colors.white,
                           hintStyle: new TextStyle(color: Colors.grey, fontSize: 18.0, fontFamily: 'BalooBhai',),
-                          hintText: "Nome do estabelecimento".toUpperCase(),
+                          hintText: "NOME DO ESTABELECIMENTO",
                         ),
                       ),
                     ),
@@ -228,7 +228,7 @@ class _SuggestState extends State<Suggest> {
                           ),
                           fillColor: Colors.white,
                           hintStyle: new TextStyle(color: Colors.grey, fontSize: 18.0, fontFamily: 'BalooBhai',),
-                          hintText: "Endereço".toUpperCase(),
+                          hintText: "ENDEREÇO",
                         ),
                       ),
                     ),
@@ -293,7 +293,7 @@ class _SuggestState extends State<Suggest> {
                           ),
                           fillColor: Colors.white,
                           hintStyle: new TextStyle(color: Colors.grey, fontSize: 18.0, fontFamily: 'BalooBhai',),
-                          hintText: "ponto de referência".toUpperCase(),
+                          hintText: "PONTO DE REFERÊNCIA",
                         ),
                       ),
                     ),
@@ -358,7 +358,7 @@ class _SuggestState extends State<Suggest> {
                           ),
                           fillColor: Colors.white,
                           hintStyle: new TextStyle(color: Colors.grey, fontSize: 18.0, fontFamily: 'BalooBhai',),
-                          hintText: "Telefone do estabelecimento".toUpperCase(),
+                          hintText: "TELEFONE DO ESTABELECIMENTO",
                         ),
                       ),
                     ),
@@ -372,7 +372,7 @@ class _SuggestState extends State<Suggest> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "Enviar sugestão".toUpperCase(),
+                    "ENVIAR SUGESTÃO",
                     style: TextStyle(
                       fontSize: 22,
                       color: Colors.white,

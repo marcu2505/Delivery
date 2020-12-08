@@ -56,7 +56,7 @@ class _FinalState extends State<Final> {
             Container(
               child: Center(
                   child: Text(
-                    "Onde entregar".toUpperCase(),
+                    "ONDE ENTREGAR",
                     style: TextStyle(
                       fontSize: 18,
                       fontFamily: 'BalooBhai',
@@ -169,7 +169,7 @@ class _FinalState extends State<Final> {
             Container(
               child: Center(
                   child: Text(
-                    "Pagamento".toUpperCase(),
+                    "PAGAMENTO",
                     style: TextStyle(
                       fontSize: 18,
                       fontFamily: 'BalooBhai',
@@ -205,7 +205,7 @@ class _FinalState extends State<Final> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "dinheiro".toUpperCase(),
+                          "DINHEIRO",
                           style: TextStyle(
                               fontSize: 22,
                               color: Colors.black,
@@ -246,7 +246,7 @@ class _FinalState extends State<Final> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "cartão".toUpperCase(),
+                          "CARTÃO",
                           style: TextStyle(
                               fontSize: 22,
                               color: Colors.black,
@@ -287,7 +287,7 @@ class _FinalState extends State<Final> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "online".toUpperCase(),
+                          "ONLINE",
                           style: TextStyle(
                               fontSize: 22,
                               color: Colors.black,
@@ -317,7 +317,7 @@ class _FinalState extends State<Final> {
             Container(
               child: Center(
                   child: Text(
-                    "Resumo".toUpperCase(),
+                    "RESUMO",
                     style: TextStyle(
                       fontSize: 18,
                       fontFamily: 'BalooBhai',
@@ -478,7 +478,7 @@ class _FinalState extends State<Final> {
                 children: <Widget>[
                   Container(
                     child: Text(
-                      "subtotal: 60.70".toUpperCase(),
+                      "SUBTOTAL: 60.70",
                       style: TextStyle(
                           fontSize: 14,
                           color: Colors.white,
@@ -503,7 +503,7 @@ class _FinalState extends State<Final> {
                   ),
                   Container(
                     child: Text(
-                      "taxa de entrega: 60.70".toUpperCase(),
+                      "TAXA DE ENTREGA: 60.70",
                       style: TextStyle(
                           fontSize: 14,
                           color: Colors.white,
@@ -531,7 +531,7 @@ class _FinalState extends State<Final> {
                     children: [
                       Container(
                         child: Text(
-                          "desconto: 60.70".toUpperCase(),
+                          "DESCONTO: 60.70",
                           style: TextStyle(
                               fontSize: 14,
                               color: Colors.white,
@@ -556,7 +556,7 @@ class _FinalState extends State<Final> {
                       ),
                       Container(
                         child: Text(
-                          "total: 60.70".toUpperCase(),
+                          "TOTAL: 60.70",
                           style: TextStyle(
                               fontSize: 17,
                               color: Colors.white,
@@ -598,7 +598,7 @@ class _FinalState extends State<Final> {
               child: Container(
                 child: Center(
                     child: Text(
-                      "Fazer Pedido".toUpperCase(),
+                      "FAZER PEDIDO",
                       style: TextStyle(
                         fontSize: 25,
                         fontFamily: 'BalooBhai',

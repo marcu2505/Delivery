@@ -26,7 +26,7 @@ class _OrdersPageState extends State<OrdersPage> {
                 Expanded(
                   child: Container(
                     child: Text(
-                      "Antigos".toUpperCase(),
+                      "ANTIGOS",
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.black,
@@ -45,7 +45,7 @@ class _OrdersPageState extends State<OrdersPage> {
                 Expanded(
                   child: Container(
                     child: Text(
-                      "Em andamento".toUpperCase(),
+                      "EM ANDAMENTO",
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.black,
@@ -162,7 +162,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                     ),
                                     Container(
                                       child: Text(
-                                        "ver".toUpperCase(),
+                                        "VER",
                                         style: TextStyle(
                                             fontSize: 12,
                                             color: Colors.white,

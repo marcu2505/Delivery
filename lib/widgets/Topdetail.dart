@@ -56,115 +56,100 @@ class TopTile extends StatelessWidget{
               decoration: BoxDecoration(
                 color: Colors.yellow,
               ),
-              child: Card(
-                //semanticContainer: true,
-                color: Colors.yellow,
-                //clipBehavior: Clip.antiAliasWithSaveLayer,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                //elevation: 1,
-                margin: EdgeInsets.only(
+              child: Padding(
+                padding: EdgeInsets.only(
                   left: 5,
-                  right: 5,
-                  top: 0,
-                  bottom: 0,
+                  bottom: 8,
+                  right: 8,
                 ),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: 5,
-                    bottom: 8,
-                    right: 8,
-                  ),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Container(
+                                child: Text(name.toUpperCase(),
+                                  style: TextStyle(
+                                    fontSize: 35,
+                                    fontFamily: 'BalooBhai',
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            child: Row(
+                              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
                                 Container(
-                                  child: Text(name.toUpperCase(),
-                                    style: TextStyle(
-                                      fontSize: 35,
-                                      fontFamily: 'BalooBhai',
-                                    ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(description.toUpperCase(),
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontFamily: 'BalooBhai',
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  padding: EdgeInsets.only(
+                                    //left: 5,
+                                    right: 5,
+                                  ),
+                                  margin: EdgeInsets.only(
+                                    right: 5,
+                                    //bottom: 10,
                                   ),
                                 ),
                               ],
                             ),
-                            Container(
-                              child: Row(
-                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(description.toUpperCase(),
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontFamily: 'BalooBhai',
-                                            color: Colors.grey,
-                                          ),
+                          ),
+                          Container(
+                            child: Row(
+                              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("R\$ " + price.toStringAsFixed(2),
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontFamily: 'BalooBhai',
+                                          color: Colors.white,
                                         ),
-                                      ],
-                                    ),
-                                    padding: EdgeInsets.only(
-                                      //left: 5,
-                                      right: 5,
-                                    ),
-                                    margin: EdgeInsets.only(
-                                      right: 5,
-                                      //bottom: 10,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              child: Row(
-                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("R\$ " + price.toStringAsFixed(2),
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontFamily: 'BalooBhai',
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10),
                                       ),
-                                    ),
-                                    padding: EdgeInsets.only(
-                                      left: 5,
-                                      right: 5,
-                                    ),
-                                    margin: EdgeInsets.only(
-                                      right: 5,
-                                      bottom: 10,
+                                    ],
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
                                     ),
                                   ),
-                                ],
-                              ),
+                                  padding: EdgeInsets.only(
+                                    left: 5,
+                                    right: 5,
+                                  ),
+                                  margin: EdgeInsets.only(
+                                    right: 5,
+                                    bottom: 10,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),

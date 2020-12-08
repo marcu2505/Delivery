@@ -16,9 +16,6 @@ class _FilterPageState extends State<FilterPage> {
           SizedBox(
             height: MediaQuery.of(context).viewPadding.top,
           ),
-          SizedBox(
-            height: displayHeight * 0.04,
-          ),
           Center(
             child: Container(
               child: Text(

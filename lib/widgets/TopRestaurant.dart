@@ -163,7 +163,6 @@ class TopTile extends StatelessWidget{
                                         SizedBox(
                                           width: displayWidth * 0.01,
                                         ),
-                                        //TODO: pegar do banco
                                         Text("$minDeliveryTime - $maxDeliveryTime Min",
                                           style: TextStyle(
                                             fontSize: 14,
@@ -250,9 +249,12 @@ class TopTile extends StatelessWidget{
         Align(
           alignment: Alignment.bottomLeft,
           child: Container(
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.cover,
+              ),
             ),
             margin: EdgeInsets.only(
               top: displayHeight * 0.185,
@@ -290,8 +292,8 @@ class Top extends StatelessWidget {
           name: snapshot.data.data()["nome"],
           cover: snapshot.data.data()["capa"],
           deliveryFee: snapshot.data.data()["taxa_entrega"] + .0,
-          maxDeliveryTime: snapshot.data.data()["tempo"]["minimo"],
-          minDeliveryTime: snapshot.data.data()["tempo"]["maximo"],
+          minDeliveryTime: snapshot.data.data()["tempo"]["minimo"],
+          maxDeliveryTime: snapshot.data.data()["tempo"]["maximo"],
           minOrder: snapshot.data.data()["minimo"] + .0,
           price: "\$\$",
           numberOfRating: "31",

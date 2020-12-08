@@ -40,7 +40,7 @@ class _MyOrderState extends State<MyOrder> {
                           Icons.trip_origin
                         ),
                         Text(
-                          "Entregar aqui".toUpperCase(),
+                          "ENTREGAR AQUI",
                           style: TextStyle(
                             fontSize: 16,
                             fontFamily: 'BalooBhai',
@@ -76,7 +76,7 @@ class _MyOrderState extends State<MyOrder> {
                           Icons.lens
                         ),
                         Text(
-                          "Retirar na loja".toUpperCase(),
+                          "RETIRAR NA LOJA",
                           style: TextStyle(
                             fontSize: 16,
                             fontFamily: 'BalooBhai',
@@ -413,7 +413,7 @@ class _MyOrderState extends State<MyOrder> {
                 children: <Widget>[
                   Container(
                     child: Text(
-                      "subtotal: 60.70".toUpperCase(),
+                      "SUBTOTAL: 60.70",
                       style: TextStyle(
                           fontSize: 14,
                           color: Colors.white,
@@ -438,7 +438,7 @@ class _MyOrderState extends State<MyOrder> {
                   ),
                   Container(
                     child: Text(
-                      "taxa de entrega: 60.70".toUpperCase(),
+                      "TAXA DE ENTREGA: 60.70",
                       style: TextStyle(
                           fontSize: 14,
                           color: Colors.white,
@@ -466,7 +466,7 @@ class _MyOrderState extends State<MyOrder> {
                     children: [
                       Container(
                         child: Text(
-                          "desconto: 60.70".toUpperCase(),
+                          "DESCONTO: 60.70",
                           style: TextStyle(
                               fontSize: 14,
                               color: Colors.white,
@@ -491,7 +491,7 @@ class _MyOrderState extends State<MyOrder> {
                       ),
                       Container(
                         child: Text(
-                          "total: 60.70".toUpperCase(),
+                          "TOTAL: 60.70",
                           style: TextStyle(
                               fontSize: 17,
                               color: Colors.white,

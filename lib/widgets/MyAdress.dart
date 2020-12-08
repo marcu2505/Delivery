@@ -180,7 +180,7 @@ class _MyAdressState extends State<MyAdress> {
             //onde entregar
             Container(
               child: Text(
-                "Meus endereços".toUpperCase(),
+                "MEUS ENDEREÇOS",
                 style: TextStyle(
                   fontSize: 23,
                   color: Colors.white,
@@ -206,7 +206,7 @@ class _MyAdressState extends State<MyAdress> {
               child: Container(
                 child: Center(
                     child: Text(
-                      "novo endereço".toUpperCase(),
+                      "NOVO ENDEREÇO",
                       style: TextStyle(
                         fontSize: 25,
                         fontFamily: 'BalooBhai',

@@ -124,7 +124,7 @@ class _CouponsPageState extends State<CouponsPage> {
                           setState(() => activeCoupons = true);
                         },
                         child: Text(
-                          "Ativos".toUpperCase(),
+                          "ATIVOS",
                           style: TextStyle(
                               fontSize: 20,
                               color: Colors.white,
@@ -147,7 +147,7 @@ class _CouponsPageState extends State<CouponsPage> {
                           setState(() => activeCoupons = false);
                         },
                         child: Text(
-                          "Inativos".toUpperCase(),
+                          "INATIVOS",
                           style: TextStyle(
                               fontSize: 20,
                               color: Colors.white,

@@ -44,7 +44,7 @@ class FoodPromosTitle extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2),
             child: Text(
-              "Promoções".toUpperCase(),
+              "PROMOÇÕES",
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,

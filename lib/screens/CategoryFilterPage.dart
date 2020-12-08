@@ -1,30 +1,75 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login/animation/ScaleRoute.dart';
-import 'package:flutter_login/globals.dart';
 import 'package:flutter_login/screens/RestaurantPage.dart';
+import 'package:flutter_login/ui/Layout.dart';
+import 'package:flutter_login/widgets/RestaurantsWidget.dart';
+import 'package:flutter_login/globals.dart';
 import 'package:get/get.dart';
 
-class RestaurantsWidget extends StatefulWidget {
+class CategoryFilterPage extends StatefulWidget {
+  final String category;
+  final String categoryName;
+  CategoryFilterPage({@required this.category, @required this.categoryName});
+
   @override
-  _RestaurantsWidgetState createState() => _RestaurantsWidgetState();
+  _CategoryFilterPageState createState() => _CategoryFilterPageState(category: this.category, categoryName: this.categoryName);
 }
 
-class _RestaurantsWidgetState extends State<RestaurantsWidget> {
+class _CategoryFilterPageState extends State<CategoryFilterPage> {
+  final String category;
+  final String categoryName;
+  _CategoryFilterPageState({@required this.category, @required this.categoryName});
+
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  // Função para filtrar restaurantes por categoria
+  filterRests(String category) async {
+    var result = await firestore.collection('categorias').doc(category).collection('restaurantes').get();
+    List<String> restaurantIds = result.docs.map((restaurant) => restaurant.id).toList();
+    print(restaurantIds);
+
+    // result = await firestore
+    //     .collection('restaurantes-categorias')
+    //     .where("category", isEqualTo: categoryID)
+    //     .get();
+    //
+    // result.docs.forEach((doc) {
+    //   print(doc.id);  // ID da relação
+    //   firestore.collection('restaurantes').doc(doc["restaurant"]).get().then((value) => {
+    //     print(value["name"])
+    //   });
+    // }); // Restaurantes
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          RestaurantsTitle(),
-          RestaurantsList(),
-        ],
+    return Layout.render(
+      content: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: MediaQuery.of(context).viewPadding.top,
+            ),
+            CategoryFilterTitle(category: this.category, categoryName: this.categoryName),
+            CategoryFilterList(category: this.category),
+          ],
+        ),
       ),
     );
   }
 }
 
-class RestaurantsTitle extends StatelessWidget {
+class CategoryFilterTitle extends StatelessWidget {
+  final String category;
+  final String categoryName;
+  const CategoryFilterTitle({@required this.category, @required this.categoryName});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,12 +83,12 @@ class RestaurantsTitle extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(left: 5, right: 5, top: 0, bottom: 0),
             child: Text(
-              "ESTABELECIMENTOS",
+              "CATEGORIA: ${this.categoryName.toUpperCase()}",
               style: TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontFamily: 'BalooBhai',
-                fontWeight: FontWeight.w300
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontFamily: 'BalooBhai',
+                  fontWeight: FontWeight.w300
               ),
             ),
             decoration: BoxDecoration(
@@ -59,7 +104,7 @@ class RestaurantsTitle extends StatelessWidget {
   }
 }
 
-class RestaurantTile extends StatelessWidget {
+class CategoryFilterTile extends StatelessWidget {
   final String id;
   final String name;
   final String imageUrl;
@@ -71,7 +116,7 @@ class RestaurantTile extends StatelessWidget {
   final double deliveryFee;
 
 
-  RestaurantTile(
+  CategoryFilterTile(
       {Key key,
         @required this.name,
         @required this.imageUrl,
@@ -254,143 +299,66 @@ class RestaurantTile extends StatelessWidget {
   }
 }
 
-class RestaurantsList extends StatelessWidget {
+class Restaurant {
+  final DocumentSnapshot document;
+  final String imageURL;
+  Restaurant({@required this.document, @required this.imageURL});
+}
+
+class CategoryFilterList extends StatelessWidget {
+  final String category;
+  CategoryFilterList({@required this.category});
+
+  Stream<List<Restaurant>> getCategoryRestaurant(String category) async* {
+    yield* FirebaseFirestore.instance
+        .collection('categorias')
+        .doc(category)
+        .collection('restaurantes')
+        .snapshots()
+        .asyncMap((snapshot) async {
+          final list = snapshot.docs.map((restaurantDoc) async {
+            var document = await FirebaseFirestore.instance.collection('restaurantes').doc(restaurantDoc.id).get();
+            var imageURL = await FirebaseStorage.instance.ref().child('restaurantes/').child('${restaurantDoc.id}/').child('image.jpg').getDownloadURL();
+            return Restaurant(document: document, imageURL: imageURL);
+          }).toList();
+          return await Future.wait(list);
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return new StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('restaurantes').snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if(!snapshot.hasData) return new Text("Carregando estabelecimentos...");
-        return new ListView(
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          physics: ClampingScrollPhysics(),
-          children: snapshot.data.docs.map((restaurant) {
-            return new RestaurantTile(
-              name: restaurant["nome"],
-              address: restaurant["endereco"],
-              imageUrl: restaurant["imagem"],
-              category: restaurant["categoria_principal"],
-              rating: '4.9',
-              numberOfRating: '200',
-              price: '\$\$\$',
-              id: restaurant.id,
-              deliveryFee: restaurant["taxa_entrega"],
+    return new StreamBuilder<List<Restaurant>>(
+      stream: getCategoryRestaurant(this.category),
+      builder: (BuildContext context, AsyncSnapshot<List<Restaurant>> snapshot) {
+        if(snapshot.hasError) {
+          // TODO: checar possibilidade de logar erro
+          Get.back();
+          return new Container();
+        }
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return Text("Carregando...");
+          default:
+            return new ListView(
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              children: snapshot.data.map((restaurant) {
+                return new RestaurantTile(
+                  name: restaurant.document["nome"],
+                  address: restaurant.document["endereco"],
+                  imageUrl: restaurant.imageURL,
+                  category: restaurant.document["categoria_principal"],
+                  rating: '4.9',
+                  numberOfRating: '200',
+                  price: '\$\$\$',
+                  id: restaurant.document.id,
+                  deliveryFee: restaurant.document["taxa_entrega"],
+                );
+              }).toList(),
             );
-          }).toList(),
-        );
+        }
       },
     );
   }
 }
-
-// RestaurantTile(
-//   name: "Quinta avenida",
-//   imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-//   rating: '4.9',
-//   numberOfRating: '200',
-//   price: '\$\$\$',
-//   slug: "fried_egg",
-//   category: "Marmitex",
-//   address: "Rua Vaz de Melo, 102",
-//   deliveryFee: 0.00),
-// RestaurantTile(
-//   name: "Nova Opção",
-//   imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-//   rating: "4.9",
-//   numberOfRating: "100",
-//   price: '\$\$',
-//   slug: "",
-//   category: "Almoço",
-//   address: "Rua Helena Silva, 22",
-//   deliveryFee: 0.00),
-// RestaurantTile(
-//   name: "Edd's burguer",
-//   imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-//   rating: "4.0",
-//   numberOfRating: "50",
-//   price: '\$\$\$',
-//   slug: "",
-//   category: "Hamburguer",
-//   address: "Avenida Braga Viana, 1092",
-//   deliveryFee: 0.00),
-// RestaurantTile(
-//   name: "Açaí da praça",
-//   imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-//   rating: "4.00",
-//   numberOfRating: "100",
-//   price: '\$',
-//   slug: "",
-//   category: "Açaí",
-//   address: "Rua Iolanda Barbosa, 879",
-//   deliveryFee: 0.00),
-// RestaurantTile(
-//   name: "Subway",
-//   imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-//   rating: "4.6",
-//   numberOfRating: "150",
-//   price: '\$\$',
-//   slug: "",
-//   category: "Sanduíche",
-//   address: "Avenida Vine Nigo",
-//   deliveryFee: 0.00),
-// RestaurantTile(
-//   name: "Burger King",
-//   imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-//   rating: "4.00",
-//   numberOfRating: "100",
-//   price: '\$\$\$',
-//   slug: "",
-//   category: "Hamburguer",
-//   address: "Rua New York, 666",
-//   deliveryFee: 0.00),
-// RestaurantTile(
-//   name: "Pais e Filhos",
-//   imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-//   rating: "4.2",
-//   numberOfRating: "70",
-//   price: '\$',
-//   slug: "",
-//   category: "Sorveteria",
-//   address: "Avenida Paraguai, 54",
-//   deliveryFee: 0.00),
-// RestaurantTile(
-//   name: "Spolleto",
-//   imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-//   rating: '4.9',
-//   numberOfRating: '200',
-//   price: '\$',
-//   slug: "",
-//   category: "Italiana",
-//   address: "Rua Visconde Jonas, 671",
-//   deliveryFee: 0.00),
-// RestaurantTile(
-//   name: "Refrescar",
-//   imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-//   rating: "4.6",
-//   numberOfRating: "150",
-//   price: '\$\$',
-//   slug: "",
-//   category: "Bebidas",
-//   address: "Rua Bruna Gaules, 681",
-//   deliveryFee: 4.99),
-// RestaurantTile(
-//   name: "Natureba",
-//   imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-//   rating: "4.6",
-//   numberOfRating: "150",
-//   price: '\$\$\$',
-//   slug: "",
-//   category: "Almoço",
-//   address: "Rua Bosco Vini, 98",
-//   deliveryFee: 4.99),
-// RestaurantTile(
-//   name: "Aviões da grelha",
-//   imageUrl: "https://fresh.co.nz/wp-content/uploads/2020/03/Fried-Eggs-5-Ways_LR-e1583270528321.jpg",
-//   rating: "4.6",
-//   numberOfRating: "150",
-//   price: '\$\$',
-//   slug: "",
-//   category: "Carne",
-//   address: "Rua Eni Moura, 128",
-//   deliveryFee: 4.99)

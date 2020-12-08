@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
 import 'package:flutter_login/widgets/RestaurantsWidget.dart';
@@ -24,25 +25,28 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Função para filtrar restaurantes por categoria
-  filterRests(String categorySlug) async {
-    var result = await firestore
-        .collection('categorias')
-        .where("slug", isEqualTo: categorySlug)
-        .limit(1)
-        .get();
-    String categoryID = result.docs.first.id;
+  filterRests(String category) async {
+    var result = await firestore.collection('categorias').doc(category).collection('restaurantes').get();
+    List<String> restaurantIds = result.docs.map((restaurant) => restaurant.id).toList();
+    print(restaurantIds);
 
-    result = await firestore
-        .collection('restaurantes-categorias')
-        .where("category", isEqualTo: categoryID)
-        .get();
+    // result = await firestore
+    //     .collection('restaurantes-categorias')
+    //     .where("category", isEqualTo: categoryID)
+    //     .get();
+    //
+    // result.docs.forEach((doc) {
+    //   print(doc.id);  // ID da relação
+    //   firestore.collection('restaurantes').doc(doc["restaurant"]).get().then((value) => {
+    //     print(value["name"])
+    //   });
+    // }); // Restaurantes
+  }
 
-    result.docs.forEach((doc) {
-      print(doc.id);  // ID da relação
-      firestore.collection('restaurantes').doc(doc["restaurant"]).get().then((value) => {
-        print(value["name"])
-      });
-    }); // Restaurantes
+  void aaa() async {
+    var imageURL = FirebaseStorage.instance.ref().child('restaurantes/').child('4XUd4MIdBZJQOC8hxSYF/').child('image.jpg');
+    print(imageURL);
+    print(await imageURL.getDownloadURL());
   }
 
   @override
@@ -53,30 +57,14 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: MediaQuery.of(context).viewPadding.top,
           ),
-          SizedBox(
-            height: displayHeight * 0.01,
-          ),
           Top(),
           SearchWidget(),
-          // RaisedButton(
-          //   onPressed: () => {
-          //     filterRests("pizza")
-          //   },
-          //   child: Text(
-          //     "Filter Rests",
-          //   ),
-          // ),
-          // RaisedButton(
-          //   child: Text(
-          //     "Usuário Autenticado?",
-          //   ),
-          //   onPressed: () async {
-          //     var user = FirebaseAuth.instance.currentUser;
-          //     user.reload();
-          //     user.emailVerified ? print("Email autenticado") : print("Email não autenticado");
-          //     print(user.email + " " + user.emailVerified.toString());
-          //   },
-          // ),
+          RaisedButton(
+            child: Text(
+              "AAA",
+            ),
+            onPressed: aaa,
+          ),
           // RaisedButton(
           //   child: Text(
           //     "Enviar Email",
