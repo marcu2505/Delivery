@@ -11,7 +11,6 @@ class CategoryFilterPage extends StatefulWidget {
   final String category;
   final String categoryName;
   CategoryFilterPage({@required this.category, @required this.categoryName});
-
   @override
   _CategoryFilterPageState createState() => _CategoryFilterPageState(category: this.category, categoryName: this.categoryName);
 }
