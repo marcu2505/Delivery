@@ -1,43 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login/entity/restaurant.dart';
 import 'package:flutter_login/globals.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TopRestaurant extends StatefulWidget {
-  final String id;
-  TopRestaurant({@required this.id});
+  final Restaurant restaurant;
+  TopRestaurant({@required this.restaurant});
+
   @override
-  _TopRestaurantState createState() => _TopRestaurantState(id: this.id);
+  _TopRestaurantState createState() =>
+      _TopRestaurantState(restaurant: this.restaurant);
 }
 
-class TopTile extends StatelessWidget{
+class _TopRestaurantState extends State<TopRestaurant> {
+  final Restaurant restaurant;
+  _TopRestaurantState({@required this.restaurant});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TopTile(
+          name: this.restaurant.name,
+          imageURL: this.restaurant.imageURL,
+          rating: 4.7,
+          numberOfRating: 200,
+          price: "\$\$\$",
+          address: this.restaurant.address,
+          category: this.restaurant.mainCategory,
+          coverURL: this.restaurant.coverURL,
+          minDeliveryTime: this.restaurant.minDeliveryTime,
+          maxDeliveryTime: this.restaurant.maxDeliveryTime,
+          minOrderPrice: this.restaurant.minOrderPrice,
+          deliveryFee: this.restaurant.deliveryFee,
+        )
+      ],
+    );
+  }
+}
+
+class TopTile extends StatelessWidget {
   final String name;
-  final String imageUrl;
-  final String rating;
-  final String numberOfRating;
+  final String imageURL;
   final String price;
   final String address;
   final String category;
-  final String cover;
+  final String coverURL;
+  final double rating;
   final double deliveryFee;
+  final int numberOfRating;
   final int minDeliveryTime;
   final int maxDeliveryTime;
-  final double minOrder;
+  final double minOrderPrice;
 
-  TopTile(
-      {Key key,
-        @required this.name,
-        @required this.imageUrl,
-        @required this.rating,
-        @required this.numberOfRating,
-        @required this.price,
-        @required this.address,
-        @required this.category,
-        @required this.cover,
-        @required this.minDeliveryTime,
-        @required this.maxDeliveryTime,
-        @required this.minOrder,
-        @required this.deliveryFee})
-      : super(key: key);
+  TopTile({
+    @required this.name,
+    @required this.imageURL,
+    @required this.rating,
+    @required this.numberOfRating,
+    @required this.price,
+    @required this.address,
+    @required this.category,
+    @required this.coverURL,
+    @required this.minDeliveryTime,
+    @required this.maxDeliveryTime,
+    @required this.minOrderPrice,
+    @required this.deliveryFee,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +75,7 @@ class TopTile extends StatelessWidget{
           height: displayHeight * 0.25,
           width: displayWidth,
           child: Image.network(
-            cover,
+            this.coverURL,
             height: displayHeight * 0.25,
             width: displayWidth,
             fit: BoxFit.cover,
@@ -67,7 +95,8 @@ class TopTile extends StatelessWidget{
                   width: 20,
                   height: 20,
                 ),
-                Text("4.9",
+                Text(
+                  this.rating.toStringAsPrecision(1),
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: 'BalooBhai',
@@ -121,7 +150,8 @@ class TopTile extends StatelessWidget{
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Container(
-                                child: Text(name.toUpperCase(),
+                                child: Text(
+                                  this.name.toUpperCase(),
                                   style: TextStyle(
                                     fontSize: 22.3,
                                     fontFamily: 'BalooBhai',
@@ -131,15 +161,15 @@ class TopTile extends StatelessWidget{
                             ],
                           ),
                           SizedBox(
-                            //height: displayHeight * 0.008,
-                          ),
+                              //height: displayHeight * 0.008,
+                              ),
                           Container(
                             child: Row(
-                              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Icon(
                                         Icons.access_time,
@@ -149,7 +179,8 @@ class TopTile extends StatelessWidget{
                                       SizedBox(
                                         width: displayWidth * 0.01,
                                       ),
-                                      Text("$minDeliveryTime - $maxDeliveryTime Min",
+                                      Text(
+                                        "${this.minDeliveryTime} - ${this.maxDeliveryTime} Min",
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontFamily: 'BalooBhai',
@@ -175,7 +206,8 @@ class TopTile extends StatelessWidget{
                                 ),
                                 Container(
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Icon(
                                         Icons.attach_money,
@@ -185,7 +217,8 @@ class TopTile extends StatelessWidget{
                                       SizedBox(
                                         width: displayWidth * 0.01,
                                       ),
-                                      Text("Pedido mínimo: R\$" + minOrder.toStringAsFixed(2),
+                                      Text(
+                                        "Pedido mínimo: R\$${this.minOrderPrice.toStringAsFixed(2)}",
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontFamily: 'BalooBhai',
@@ -237,7 +270,7 @@ class TopTile extends StatelessWidget{
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
               child: Image.network(
-                imageUrl,
+                this.imageURL,
                 fit: BoxFit.cover,
               ),
             ),
@@ -255,49 +288,6 @@ class TopTile extends StatelessWidget{
             ),
           ),
         ),
-      ],
-    );
-  }
-}
-
-class Top extends StatelessWidget {
-  final String id;
-  Top({@required this.id});
-
-  @override
-  Widget build(BuildContext context) {
-    return new StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('restaurantes').doc(this.id).snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        if(!snapshot.hasData) return new Text("Carregando dados...");
-        return new TopTile(
-          address: snapshot.data.data()["endereco"],
-          category: snapshot.data.data()["categoria_principal"],
-          imageUrl: snapshot.data.data()["imagem"],
-          name: snapshot.data.data()["nome"],
-          cover: snapshot.data.data()["capa"],
-          deliveryFee: snapshot.data.data()["taxa_entrega"] + .0,
-          minDeliveryTime: snapshot.data.data()["tempo"]["minimo"],
-          maxDeliveryTime: snapshot.data.data()["tempo"]["maximo"],
-          minOrder: snapshot.data.data()["minimo"] + .0,
-          price: "\$\$",
-          numberOfRating: "31",
-          rating: "4.1",
-        );
-      },
-    );
-
-  }
-}
-
-class _TopRestaurantState extends State<TopRestaurant> {
-  final String id;
-  _TopRestaurantState({@required this.id});
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Top(id: this.id)
       ],
     );
   }

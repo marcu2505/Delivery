@@ -1,19 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
 import 'package:flutter_login/globals.dart';
 import 'package:flutter_login/screens/FoodDetailsPage.dart';
-import 'package:flutter_login/screens/RestaurantPage.dart';
 import 'package:flutter_login/ui/Layout.dart';
-import 'package:flutter_login/widgets/CouponsWidget.dart';
-import 'package:flutter_login/widgets/FoodPromosWidget.dart';
+import 'package:flutter_login/widgets/Final.dart';
 import 'package:get/get.dart';
-import 'Final.dart';
 import 'package:path_provider/path_provider.dart';
-
 
 class MyOrder extends StatefulWidget {
   final String restaurantId;
@@ -25,7 +22,7 @@ class MyOrder extends StatefulWidget {
   _MyOrderState createState() => _MyOrderState(restaurantId: this.restaurantId);
 }
 
-class OrderProduct{
+class OrderProduct {
   final String name;
   final String categoryId;
   final String restaurantId;
@@ -44,11 +41,10 @@ class OrderProduct{
     @required this.productId,
     @required this.discount,
     @required this.observation,
-
   });
 }
 
-class OrderList extends StatelessWidget{
+class OrderList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -79,7 +75,7 @@ class OrderList extends StatelessWidget{
           padding: EdgeInsets.zero,
           shrinkWrap: true,
           physics: ClampingScrollPhysics(),
-          children: snapshot.data.map((product){
+          children: snapshot.data.map((product) {
             return OrderTile(
               name: product.name,
               price: product.price,
@@ -95,13 +91,14 @@ class OrderList extends StatelessWidget{
       },
     );
   }
+
   Future<List<OrderProduct>> getValues() async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     String path = appDocDir.path;
 
     Map<String, dynamic> fileMap = {};
     var file = File('$path/cart.json');
-    if(await file.exists()) {
+    if (await file.exists()) {
       fileMap = jsonDecode(await file.readAsString());
     }
 
@@ -124,12 +121,10 @@ class OrderList extends StatelessWidget{
     });
     print(products.length);
     return products;
-
   }
-
 }
 
-class OrderTile extends StatelessWidget{
+class OrderTile extends StatelessWidget {
   final String name;
   final String categoryId;
   final String restaurantId;
@@ -206,14 +201,14 @@ class OrderTile extends StatelessWidget{
                     right: displayWidth * 0.01,
                     left: displayWidth * 0.01,
                   ),
-
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Get.to(FoodDetailsPage(
                       productId: this.productId,
                       categoryId: this.categoryId,
-                      imageUrl: "https://www.alphagel.com.br/wp-content/uploads/2017/09/a%C3%A7a%C3%AD-278x300.png",
+                      imageUrl:
+                          "https://www.alphagel.com.br/wp-content/uploads/2017/09/a%C3%A7a%C3%AD-278x300.png",
                       restaurantId: this.restaurantId,
                       discount: this.discount,
                       price: this.price,
@@ -255,7 +250,6 @@ class OrderTile extends StatelessWidget{
       ),
     );
   }
-
 }
 
 class ProductTile extends StatelessWidget {
@@ -278,7 +272,6 @@ class ProductTile extends StatelessWidget {
     @required this.categoryId,
     @required this.restaurantId,
     @required this.discount,
-
   }) : super(key: key);
 
   @override
@@ -294,15 +287,23 @@ class ProductTile extends StatelessWidget {
     print(this.discount);
     return InkWell(
       onTap: () {
-        Get.to(FoodDetailsPage(productId: this.productId, imageUrl: imageUrl, categoryId: categoryId, restaurantId: this.restaurantId, price: this.price, discount: this.discount, name: this.name,));
+        Get.to(FoodDetailsPage(
+          productId: this.productId,
+          imageUrl: imageUrl,
+          categoryId: categoryId,
+          restaurantId: this.restaurantId,
+          price: this.price,
+          discount: this.discount,
+          name: this.name,
+        ));
       },
       child: Column(
         children: <Widget>[
           Container(
             padding: EdgeInsets.only(left: 5, right: 5, top: 2.5, bottom: 2.5),
             decoration: BoxDecoration(
-              //color: Colors.black,
-            ),
+                //color: Colors.black,
+                ),
             child: Card(
               semanticContainer: true,
               clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -334,16 +335,17 @@ class ProductTile extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Container(
-                                child: Text(name.toUpperCase(),
+                                child: Text(
+                                  name.toUpperCase(),
                                   style: TextStyle(
                                     fontSize: 21,
                                     fontFamily: 'BalooBhai',
                                   ),
                                 ),
-
                               ),
                               Container(
-                                child: Text("R\$ " + price.toStringAsFixed(2),
+                                child: Text(
+                                  "R\$ " + price.toStringAsFixed(2),
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'BalooBhai',
@@ -371,9 +373,10 @@ class ProductTile extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                            //height: displayHeight * 0.008,
-                          ),
-                          Text(description.toUpperCase(),
+                              //height: displayHeight * 0.008,
+                              ),
+                          Text(
+                            description.toUpperCase(),
                             style: TextStyle(
                               fontSize: 14,
                               fontFamily: 'BalooBhai',
@@ -395,7 +398,7 @@ class ProductTile extends StatelessWidget {
   Text getDeliveryFee(double deliveryFee) {
     String text = "FRETE GRÁTIS";
     double textSize = 14.6;
-    if(deliveryFee.round() > 0) {
+    if (deliveryFee.round() > 0) {
       text = "R\$ " + deliveryFee.toStringAsFixed(2);
       textSize = 14.6;
     }
@@ -415,7 +418,10 @@ class ProductList extends StatelessWidget {
   final String categoryId;
   final String restaurantId;
   final String imageUrl;
-  ProductList({@required this.categoryId, @required this.restaurantId, @required this.imageUrl});
+  ProductList(
+      {@required this.categoryId,
+      @required this.restaurantId,
+      @required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -423,9 +429,15 @@ class ProductList extends StatelessWidget {
     print(restaurantId);
     print(imageUrl);
     return new StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('restaurantes').doc(this.restaurantId).collection('categorias').doc(this.categoryId).collection('produtos').snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('restaurantes')
+          .doc(this.restaurantId)
+          .collection('categorias')
+          .doc(this.categoryId)
+          .collection('produtos')
+          .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if(!snapshot.hasData) return new Text("");
+        if (!snapshot.hasData) return new Text("");
         return new ListView(
           padding: EdgeInsets.zero,
           shrinkWrap: true,
@@ -436,7 +448,9 @@ class ProductList extends StatelessWidget {
             return new ProductTile(
               name: product["nome"],
               description: product["descricao"],
-              price: (product["preco"] + .0) * (100.0 - (product["desconto"])) / 100.0,
+              price: (product["preco"] + .0) *
+                  (100.0 - (product["desconto"])) /
+                  100.0,
               productId: product.id,
               categoryId: categoryId,
               imageUrl: imageUrl,
@@ -447,7 +461,6 @@ class ProductList extends StatelessWidget {
         );
       },
     );
-
   }
 // Widget build(BuildContext context) {
 //   return ListView(
@@ -687,9 +700,13 @@ class CategoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('restaurantes').doc(this.id).collection('categorias').snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('restaurantes')
+          .doc(this.id)
+          .collection('categorias')
+          .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if(!snapshot.hasData) return new Text("Carregando dados...");
+        if (!snapshot.hasData) return new Text("Carregando dados...");
         return new ListView(
           padding: EdgeInsets.zero,
           shrinkWrap: true,
@@ -703,22 +720,21 @@ class CategoryList extends StatelessWidget {
         );
       },
     );
-
   }
 }
 
 class LastChanceTile extends StatefulWidget {
   final String restaurantId;
   final String category;
-  LastChanceTile(
-      {Key key,
-        @required this.category,
-        @required this.restaurantId,
-      })
-      : super(key: key);
+  LastChanceTile({
+    Key key,
+    @required this.category,
+    @required this.restaurantId,
+  }) : super(key: key);
 
   @override
-  _LastChanceTileState createState() => _LastChanceTileState(categoryId: this.category, restaurantId: this.restaurantId);
+  _LastChanceTileState createState() => _LastChanceTileState(
+      categoryId: this.category, restaurantId: this.restaurantId);
 }
 
 class _LastChanceTileState extends State<LastChanceTile> {
@@ -755,7 +771,7 @@ class _LastChanceTileState extends State<LastChanceTile> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           GestureDetector(
-            onTap: (){
+            onTap: () {
               setState(() {
                 select = !select;
               });
@@ -772,18 +788,19 @@ class _LastChanceTileState extends State<LastChanceTile> {
                         fontSize: 22,
                         color: Colors.black,
                         fontFamily: 'BalooBhai',
-                        fontWeight: FontWeight.w300
-                    ),
+                        fontWeight: FontWeight.w300),
                   ),
-                  this.select ? Icon(
-                    Icons.keyboard_arrow_right,
-                    color: Colors.black,
-                    size: 35,
-                  ) : Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Colors.black,
-                    size: 35,
-                  ),
+                  this.select
+                      ? Icon(
+                          Icons.keyboard_arrow_right,
+                          color: Colors.black,
+                          size: 35,
+                        )
+                      : Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.black,
+                          size: 35,
+                        ),
                 ],
               ),
               width: displayWidth * 0.74,
@@ -800,21 +817,22 @@ class _LastChanceTileState extends State<LastChanceTile> {
               ),
             ),
           ),
-          !this.select ? ProductList(categoryId: categoryId, restaurantId: restaurantId, imageUrl: "https://static3.depositphotos.com/1003631/209/i/600/depositphotos_2099183-stock-photo-fine-table-setting-in-gourmet.jpg") : Container(),
+          !this.select
+              ? ProductList(
+                  categoryId: categoryId,
+                  restaurantId: restaurantId,
+                  imageUrl:
+                      "https://static3.depositphotos.com/1003631/209/i/600/depositphotos_2099183-stock-photo-fine-table-setting-in-gourmet.jpg")
+              : Container(),
         ],
       ),
     );
   }
-
 }
 
 class _MyOrderState extends State<MyOrder> {
-
   final String restaurantId;
-
-  _MyOrderState({
-    @required this.restaurantId,
-  });
+  _MyOrderState({@required this.restaurantId});
 
   @override
   Widget build(BuildContext context) {
@@ -830,31 +848,27 @@ class _MyOrderState extends State<MyOrder> {
                 children: <Widget>[
                   Container(
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Icon(
-                          Icons.trip_origin
-                        ),
-                        Text(
-                          "ENTREGAR AQUI",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'BalooBhai',
-                            color: Colors.white,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Icon(Icons.trip_origin),
+                          Text(
+                            "ENTREGAR AQUI",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'BalooBhai',
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      ]
-                    ),
+                        ]),
                     width: displayWidth * 0.46,
                     decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        topLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                      )
-                    ),
+                        color: Colors.red,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          topLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        )),
                     margin: EdgeInsets.only(
                       right: displayWidth * 0.01,
                       left: displayWidth * 0.01,
@@ -866,31 +880,27 @@ class _MyOrderState extends State<MyOrder> {
                   ),
                   Container(
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Icon(
-                          Icons.lens
-                        ),
-                        Text(
-                          "RETIRAR NA LOJA",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'BalooBhai',
-                            color: Colors.white,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Icon(Icons.lens),
+                          Text(
+                            "RETIRAR NA LOJA",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'BalooBhai',
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      ]
-                    ),
+                        ]),
                     width: displayWidth * 0.46,
                     decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        topLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                      )
-                    ),
+                        color: Colors.red,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          topLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        )),
                     // margin: EdgeInsets.only(
                     //   left: displayWidth * 0.01,
                     //   right: displayWidth * 0.01,
@@ -919,9 +929,10 @@ class _MyOrderState extends State<MyOrder> {
             OrderList(),
             //adicionar
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 print(restaurantId);
-                Get.off(RestaurantPage(id: this.restaurantId));
+                // TODO
+                // Get.off(RestaurantPage(id: this.restaurantId));
               },
               child: Container(
                 child: Center(
@@ -961,15 +972,14 @@ class _MyOrderState extends State<MyOrder> {
             //ultimo
             Container(
               child: Center(
-                child: Text(
-                  "ÚLTIMO DESEJO",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: 'BalooBhai',
-                    color: Colors.white,
-                  ),
-                )
-              ),
+                  child: Text(
+                "ÚLTIMO DESEJO",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: 'BalooBhai',
+                  color: Colors.white,
+                ),
+              )),
               margin: EdgeInsets.only(
                 left: displayWidth * 0.2,
                 right: displayWidth * 0.2,
@@ -989,14 +999,13 @@ class _MyOrderState extends State<MyOrder> {
             Container(
               child: Center(
                   child: Text(
-                    "CUPOM DE DESCONTO",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'BalooBhai',
-                      color: Colors.white,
-                    ),
-                  )
-              ),
+                "CUPOM DE DESCONTO",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: 'BalooBhai',
+                  color: Colors.white,
+                ),
+              )),
               margin: EdgeInsets.only(
                 left: displayWidth * 0.2,
                 right: displayWidth * 0.2,
@@ -1020,7 +1029,8 @@ class _MyOrderState extends State<MyOrder> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.only(left: 10, right: 5, top: 2, bottom: 2),
+                    padding:
+                        EdgeInsets.only(left: 10, right: 5, top: 2, bottom: 2),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -1030,8 +1040,7 @@ class _MyOrderState extends State<MyOrder> {
                               fontSize: 22,
                               color: Colors.black,
                               fontFamily: 'BalooBhai',
-                              fontWeight: FontWeight.w300
-                          ),
+                              fontWeight: FontWeight.w300),
                         ),
                       ],
                     ),
@@ -1067,8 +1076,7 @@ class _MyOrderState extends State<MyOrder> {
                           fontSize: 14,
                           color: Colors.white,
                           fontFamily: 'BalooBhai',
-                          fontWeight: FontWeight.w300
-                      ),
+                          fontWeight: FontWeight.w300),
                     ),
                     decoration: BoxDecoration(
                       color: Colors.red,
@@ -1092,8 +1100,7 @@ class _MyOrderState extends State<MyOrder> {
                           fontSize: 14,
                           color: Colors.white,
                           fontFamily: 'BalooBhai',
-                          fontWeight: FontWeight.w300
-                      ),
+                          fontWeight: FontWeight.w300),
                     ),
                     decoration: BoxDecoration(
                       color: Colors.red,
@@ -1120,8 +1127,7 @@ class _MyOrderState extends State<MyOrder> {
                               fontSize: 14,
                               color: Colors.white,
                               fontFamily: 'BalooBhai',
-                              fontWeight: FontWeight.w300
-                          ),
+                              fontWeight: FontWeight.w300),
                         ),
                         decoration: BoxDecoration(
                           color: Colors.red,
@@ -1145,8 +1151,7 @@ class _MyOrderState extends State<MyOrder> {
                               fontSize: 17,
                               color: Colors.white,
                               fontFamily: 'BalooBhai',
-                              fontWeight: FontWeight.w300
-                          ),
+                              fontWeight: FontWeight.w300),
                         ),
                         decoration: BoxDecoration(
                           color: Colors.green,
@@ -1176,20 +1181,19 @@ class _MyOrderState extends State<MyOrder> {
               width: displayHeight,
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(context, ScaleRoute(page: Final()));
               },
               child: Container(
                 child: Center(
                     child: Text(
-                      "TUDO CERTO",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontFamily: 'BalooBhai',
-                        color: Colors.white,
-                      ),
-                    )
-                ),
+                  "TUDO CERTO",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: 'BalooBhai',
+                    color: Colors.white,
+                  ),
+                )),
                 margin: EdgeInsets.only(
                   left: displayWidth * 0.03,
                   right: displayWidth * 0.03,

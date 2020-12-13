@@ -1,28 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login/entity/restaurant.dart';
 import 'package:flutter_login/globals.dart';
 import 'package:flutter_login/screens/FoodDetailsPage.dart';
-import 'package:flutter_login/screens/RestaurantPage.dart';
-import 'package:flutter_login/animation/ScaleRoute.dart';
-import 'package:flutter_login/widgets/Details.dart';
 import 'package:get/get.dart';
 
 class RestaurantAll extends StatefulWidget {
-  final String id;
-  RestaurantAll({@required this.id});
+  final Restaurant restaurant;
+  RestaurantAll({@required this.restaurant});
+
   @override
-  _RestaurantAllState createState() => _RestaurantAllState(id: this.id);
+  _RestaurantAllState createState() =>
+      _RestaurantAllState(restaurant: this.restaurant);
 }
 
 class _RestaurantAllState extends State<RestaurantAll> {
-  final String id;
-  _RestaurantAllState({@required this.id});
+  final Restaurant restaurant;
+  _RestaurantAllState({@required this.restaurant});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          CategoryList(id: this.id),
+          CategoryList(restaurant: this.restaurant),
         ],
       ),
     );
@@ -32,22 +33,20 @@ class _RestaurantAllState extends State<RestaurantAll> {
 class CategoryTile extends StatefulWidget {
   final String restaurantId;
   final String category;
-  CategoryTile(
-      {Key key,
-        @required this.category,
-        @required this.restaurantId,
-        })
-      : super(key: key);
+  CategoryTile({
+    @required this.category,
+    @required this.restaurantId,
+  });
 
   @override
-  _CategoryTileState createState() => _CategoryTileState(category: this.category, key: this.key, restaurantId: this.restaurantId);
+  _CategoryTileState createState() => _CategoryTileState(
+      category: this.category, restaurantId: this.restaurantId);
 }
 
 class _CategoryTileState extends State<CategoryTile> {
   String category;
   final String restaurantId;
   _CategoryTileState({
-    Key key,
     @required this.category,
     @required this.restaurantId,
   });
@@ -73,28 +72,30 @@ class _CategoryTileState extends State<CategoryTile> {
                   });
                 },
                 child: Container(
-                  padding: EdgeInsets.only(left: 10, right: 5, top: 2, bottom: 2),
+                  padding:
+                      EdgeInsets.only(left: 10, right: 5, top: 2, bottom: 2),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        category.substring(0, 9).toUpperCase(),
+                        this.category.toUpperCase(),
                         style: TextStyle(
                             fontSize: 27,
                             color: Colors.black,
                             fontFamily: 'BalooBhai',
-                            fontWeight: FontWeight.w300
-                        ),
+                            fontWeight: FontWeight.w300),
                       ),
-                      this.select ? Icon(
-                        Icons.keyboard_arrow_right,
-                        color: Colors.black,
-                        size: 35,
-                      ) : Icon(
-                        Icons.keyboard_arrow_down,
-                        color: Colors.black,
-                        size: 35,
-                      ),
+                      this.select
+                          ? Icon(
+                              Icons.keyboard_arrow_right,
+                              color: Colors.black,
+                              size: 35,
+                            )
+                          : Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Colors.black,
+                              size: 35,
+                            ),
                     ],
                   ),
                   width: displayWidth * 0.94,
@@ -109,22 +110,31 @@ class _CategoryTileState extends State<CategoryTile> {
             ],
           ),
         ),
-        !this.select ? ProductList(categoryId: category, restaurantId: restaurantId,) : Container(),
+        !this.select
+            ? ProductList(
+                categoryId: this.category,
+                restaurantId: this.restaurantId,
+              )
+            : Container(),
       ],
     );
   }
 }
 
 class CategoryList extends StatelessWidget {
-  final String id;
-  CategoryList({@required this.id});
+  final Restaurant restaurant;
+  CategoryList({@required this.restaurant});
 
   @override
   Widget build(BuildContext context) {
     return new StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('restaurantes').doc(this.id).collection('categorias').snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('restaurantes')
+          .doc(this.restaurant.id)
+          .collection('categorias')
+          .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if(!snapshot.hasData) return new Text("Carregando dados...");
+        if (!snapshot.hasData) return new Text("Carregando dados...");
         return new ListView(
           padding: EdgeInsets.zero,
           shrinkWrap: true,
@@ -132,13 +142,12 @@ class CategoryList extends StatelessWidget {
           children: snapshot.data.docs.map((category) {
             return new CategoryTile(
               category: category.id,
-              restaurantId: id,
+              restaurantId: this.restaurant.id,
             );
           }).toList(),
         );
       },
     );
-
   }
 }
 
@@ -162,22 +171,29 @@ class ProductTile extends StatelessWidget {
     @required this.categoryId,
     @required this.restaurantId,
     @required this.discount,
-
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(FoodDetailsPage(productId: this.productId, imageUrl: imageUrl, categoryId: categoryId, restaurantId: this.restaurantId, price: this.price, discount: this.discount, name: this.name,));
+        Get.to(FoodDetailsPage(
+          productId: this.productId,
+          imageUrl: imageUrl,
+          categoryId: categoryId,
+          restaurantId: this.restaurantId,
+          price: this.price,
+          discount: this.discount,
+          name: this.name,
+        ));
       },
       child: Column(
         children: <Widget>[
           Container(
             padding: EdgeInsets.only(left: 5, right: 5, top: 2.5, bottom: 2.5),
             decoration: BoxDecoration(
-              //color: Colors.black,
-            ),
+                //color: Colors.black,
+                ),
             child: Card(
               semanticContainer: true,
               clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -209,16 +225,17 @@ class ProductTile extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Container(
-                                child: Text(name.toUpperCase(),
+                                child: Text(
+                                  name.toUpperCase(),
                                   style: TextStyle(
                                     fontSize: 21,
                                     fontFamily: 'BalooBhai',
                                   ),
                                 ),
-
                               ),
                               Container(
-                                child: Text("R\$ " + price.toStringAsFixed(2),
+                                child: Text(
+                                  "R\$ " + price.toStringAsFixed(2),
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'BalooBhai',
@@ -244,9 +261,10 @@ class ProductTile extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                            //height: displayHeight * 0.008,
-                          ),
-                          Text(description.toUpperCase(),
+                              //height: displayHeight * 0.008,
+                              ),
+                          Text(
+                            description.toUpperCase(),
                             style: TextStyle(
                               fontSize: 14,
                               fontFamily: 'BalooBhai',
@@ -268,7 +286,7 @@ class ProductTile extends StatelessWidget {
   Text getDeliveryFee(double deliveryFee) {
     String text = "FRETE GRÁTIS";
     double textSize = 14.6;
-    if(deliveryFee.round() > 0) {
+    if (deliveryFee.round() > 0) {
       text = "R\$ " + deliveryFee.toStringAsFixed(2);
       textSize = 14.6;
     }
@@ -288,14 +306,23 @@ class ProductList extends StatelessWidget {
   final String categoryId;
   final String restaurantId;
   final String imageUrl;
-  ProductList({@required this.categoryId, @required this.restaurantId, @required this.imageUrl});
+  ProductList(
+      {@required this.categoryId,
+      @required this.restaurantId,
+      @required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
     return new StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('restaurantes').doc(this.restaurantId).collection('categorias').doc(this.categoryId).collection('produtos').snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('restaurantes')
+          .doc(this.restaurantId)
+          .collection('categorias')
+          .doc(this.categoryId)
+          .collection('produtos')
+          .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if(!snapshot.hasData) return new Text("");
+        if (!snapshot.hasData) return new Text("");
         return new ListView(
           padding: EdgeInsets.zero,
           shrinkWrap: true,
@@ -304,7 +331,9 @@ class ProductList extends StatelessWidget {
             return new ProductTile(
               name: product["nome"],
               description: product["descricao"],
-              price: (product["preco"] + .0) * (100.0 - (product["desconto"])) / 100.0,
+              price: (product["preco"] + .0) *
+                  (100.0 - (product["desconto"])) /
+                  100.0,
               productId: product.id,
               categoryId: categoryId,
               imageUrl: imageUrl,
@@ -315,7 +344,6 @@ class ProductList extends StatelessWidget {
         );
       },
     );
-
   }
   // Widget build(BuildContext context) {
   //   return ListView(

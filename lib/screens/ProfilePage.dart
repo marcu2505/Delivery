@@ -1,15 +1,17 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/animation/ScaleRoute.dart';
-import 'package:flutter_login/screens/CouponsPage.dart';
-import 'package:flutter_login/widgets/Indicate.dart';
 import 'package:flutter_login/globals.dart';
+import 'package:flutter_login/screens/CouponsPage.dart';
 import 'package:flutter_login/widgets/Contact.dart';
-import 'package:flutter_login/widgets/Suggest.dart';
+import 'package:flutter_login/widgets/Indicate.dart';
 import 'package:flutter_login/widgets/MyAdress.dart';
+import 'package:flutter_login/widgets/Suggest.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
+import 'package:path_provider/path_provider.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -20,7 +22,14 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
     await GoogleSignIn().signOut();
-    print(FirebaseAuth.instance.currentUser.toString());
+
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    String path = appDocDir.path;
+    var file = File('$path/cart.json');
+    if (await file.exists()) {
+      await file.delete();
+    }
+
     Get.offNamed('/login');
   }
 
@@ -49,7 +58,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     borderRadius: BorderRadius.circular(50),
                     child: Center(
                       child: Image.network(
-                        FirebaseAuth.instance.currentUser.photoURL != null ? FirebaseAuth.instance.currentUser.photoURL : "https://icon-library.com/images/default-profile-icon/default-profile-icon-16.jpg",
+                        FirebaseAuth.instance.currentUser.photoURL != null
+                            ? FirebaseAuth.instance.currentUser.photoURL
+                            : "https://icon-library.com/images/default-profile-icon/default-profile-icon-16.jpg",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -57,13 +68,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 Container(
                   child: Text(
-                    FirebaseAuth.instance.currentUser.displayName != null ? FirebaseAuth.instance.currentUser.displayName.toUpperCase() : "",
+                    FirebaseAuth.instance.currentUser.displayName != null
+                        ? FirebaseAuth.instance.currentUser.displayName
+                            .toUpperCase()
+                        : "",
                     style: TextStyle(
                         fontSize: 25,
                         color: Colors.black,
                         fontFamily: 'BalooBhai',
-                        fontWeight: FontWeight.w300
-                    ),
+                        fontWeight: FontWeight.w300),
                   ),
                 ),
               ],
@@ -96,7 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           //Indique e acumule
           GestureDetector(
-            onTap: (){
+            onTap: () {
               // Trocar
               Navigator.push(context, ScaleRoute(page: Indicate()));
             },
@@ -111,8 +124,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           fontSize: 23,
                           color: Colors.white,
                           fontFamily: 'BalooBhai',
-                          fontWeight: FontWeight.w300
-                      ),
+                          fontWeight: FontWeight.w300),
                     ),
                   ),
                 ],
@@ -145,7 +157,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           //Meus endereços
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.push(context, ScaleRoute(page: MyAdress()));
             },
             child: Container(
@@ -174,8 +186,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           fontSize: 23,
                           color: Colors.black,
                           fontFamily: 'BalooBhai',
-                          fontWeight: FontWeight.w300
-                      ),
+                          fontWeight: FontWeight.w300),
                     ),
                   ),
                 ],
@@ -233,8 +244,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         fontSize: 25,
                         color: Colors.black,
                         fontFamily: 'BalooBhai',
-                        fontWeight: FontWeight.w300
-                    ),
+                        fontWeight: FontWeight.w300),
                   ),
                 ),
               ],
@@ -295,8 +305,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           fontSize: 23,
                           color: Colors.black,
                           fontFamily: 'BalooBhai',
-                          fontWeight: FontWeight.w300
-                      ),
+                          fontWeight: FontWeight.w300),
                     ),
                   ),
                 ],
@@ -329,7 +338,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           //Cupons de desconto
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Get.to(CouponsPage(clickable: false));
             },
             child: Container(
@@ -358,8 +367,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           fontSize: 23,
                           color: Colors.black,
                           fontFamily: 'BalooBhai',
-                          fontWeight: FontWeight.w300
-                      ),
+                          fontWeight: FontWeight.w300),
                     ),
                   ),
                 ],
@@ -417,8 +425,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         fontSize: 23,
                         color: Colors.black,
                         fontFamily: 'BalooBhai',
-                        fontWeight: FontWeight.w300
-                    ),
+                        fontWeight: FontWeight.w300),
                   ),
                 ),
               ],
@@ -475,8 +482,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         fontSize: 19,
                         color: Colors.black,
                         fontFamily: 'BalooBhai',
-                        fontWeight: FontWeight.w300
-                    ),
+                        fontWeight: FontWeight.w300),
                   ),
                 ),
               ],
@@ -508,7 +514,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           //Fale conosco
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.push(context, ScaleRoute(page: Contact()));
             },
             child: Container(
@@ -537,8 +543,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           fontSize: 23,
                           color: Colors.black,
                           fontFamily: 'BalooBhai',
-                          fontWeight: FontWeight.w300
-                      ),
+                          fontWeight: FontWeight.w300),
                     ),
                   ),
                 ],
@@ -571,66 +576,65 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           //Sugerir estabelecimento
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.push(context, ScaleRoute(page: Suggest()));
             },
             child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      child: Icon(
-                        Icons.store,
-                        size: 28,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(50),
-                        ),
-                      ),
-                      margin: EdgeInsets.only(
-                        bottom: displayHeight * 0.01,
-                        right: displayWidth * 0.02,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    child: Icon(
+                      Icons.store,
+                      size: 28,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(50),
                       ),
                     ),
-                    Container(
-                      child: Text(
-                        "SUGERIR ESTABELECIMENTO",
-                        style: TextStyle(
-                            fontSize: 19,
-                            color: Colors.black,
-                            fontFamily: 'BalooBhai',
-                            fontWeight: FontWeight.w300
-                        ),
-                      ),
+                    margin: EdgeInsets.only(
+                      bottom: displayHeight * 0.01,
+                      right: displayWidth * 0.02,
                     ),
-                  ],
-                ),
-                margin: EdgeInsets.only(
-                  top: displayHeight * 0.05,
-                  left: displayWidth * 0.05,
-                  right: displayWidth * 0.05,
-                ),
-                padding: EdgeInsets.only(
-                  top: displayHeight * 0.005,
-                  left: displayWidth * 0.01,
-                  right: displayWidth * 0.01,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      spreadRadius: 1,
-                      blurRadius: 5,
-                      offset: Offset(0, 7), // changes position of shadow
+                  Container(
+                    child: Text(
+                      "SUGERIR ESTABELECIMENTO",
+                      style: TextStyle(
+                          fontSize: 19,
+                          color: Colors.black,
+                          fontFamily: 'BalooBhai',
+                          fontWeight: FontWeight.w300),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+              margin: EdgeInsets.only(
+                top: displayHeight * 0.05,
+                left: displayWidth * 0.05,
+                right: displayWidth * 0.05,
+              ),
+              padding: EdgeInsets.only(
+                top: displayHeight * 0.005,
+                left: displayWidth * 0.01,
+                right: displayWidth * 0.01,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: Offset(0, 7), // changes position of shadow
+                  ),
+                ],
+              ),
+            ),
           ),
           //Sair
           GestureDetector(
@@ -646,8 +650,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           fontSize: 23,
                           color: Colors.white,
                           fontFamily: 'BalooBhai',
-                          fontWeight: FontWeight.w300
-                      ),
+                          fontWeight: FontWeight.w300),
                     ),
                   ),
                   Container(
@@ -701,4 +704,3 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
-

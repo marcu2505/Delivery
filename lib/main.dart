@@ -1,18 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login/screens/CellphoneRegistrationPage.dart';
-import 'package:flutter_login/screens/CellphoneVerificationPage.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_login/globals.dart';
 import 'package:flutter_login/screens/EmailLoginSignUpPage.dart';
-import 'package:flutter_login/screens/ExtraDataSignUpPage.dart';
+import 'package:flutter_login/screens/LoginPage.dart';
 import 'package:flutter_login/screens/MainPage.dart';
 import 'package:flutter_login/screens/PasswordRecoveryPage.dart';
+import 'package:flutter_login/screens/SignUpPages.dart';
 import 'package:flutter_login/screens/SplashPage.dart';
-import 'package:flutter_login/screens/EmailVerificationPage.dart';
 import 'package:get/get.dart';
-import 'package:flutter_login/globals.dart';
-import 'package:flutter_login/screens/LoginPage.dart';
-import 'package:flutter/services.dart';
 
 Future main() async {
   await DotEnv().load('.env');
@@ -20,25 +17,13 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-
-  // Future<void> InicializacaoFirebase() async {
-  //   WidgetsFlutterBinding.ensureInitialized();
-  //   await Firebase.initializeApp();
-  // }
-
   @override
   Widget build(BuildContext context) {
     environment = DotEnv().env['ENVIRONMENT'];
 
-    // InicializacaoFirebase();
     final Future<FirebaseApp> firebaseInitialize = Firebase.initializeApp();
-    final pageController = PageController(initialPage: 1);
-    SystemChrome.setPreferredOrientations(
-        [
-          DeviceOrientation.portraitUp,
-          DeviceOrientation.portraitDown,
-        ]
-    );
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
     return FutureBuilder(
       //Inicializa o FlutterFire
       future: firebaseInitialize,
@@ -52,7 +37,6 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.blue,
             ),
             home: PageView(
-              controller: pageController,
               children: <Widget>[
                 Scaffold(
                   body: Text(
@@ -130,7 +114,6 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
           home: PageView(
-            controller: pageController,
             children: <Widget>[
               Scaffold(
                 body: Text(
@@ -144,6 +127,5 @@ class MyApp extends StatelessWidget {
         );
       },
     );
-
   }
 }

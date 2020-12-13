@@ -1,7 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login/animation/ScaleRoute.dart';
+import 'package:flutter_login/entity/restaurant.dart';
 import 'package:flutter_login/globals.dart';
+import 'package:flutter_login/repository/restaurant.dart';
 import 'package:flutter_login/screens/RestaurantPage.dart';
 import 'package:get/get.dart';
 
@@ -40,11 +40,10 @@ class RestaurantsTitle extends StatelessWidget {
             child: Text(
               "ESTABELECIMENTOS",
               style: TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontFamily: 'BalooBhai',
-                fontWeight: FontWeight.w300
-              ),
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontFamily: 'BalooBhai',
+                  fontWeight: FontWeight.w300),
             ),
             decoration: BoxDecoration(
               //color: Colors.red,
@@ -60,42 +59,29 @@ class RestaurantsTitle extends StatelessWidget {
 }
 
 class RestaurantTile extends StatelessWidget {
-  final String id;
-  final String name;
-  final String imageUrl;
+  final Restaurant restaurant;
   final String rating;
   final String numberOfRating;
   final String price;
-  final String address;
-  final String category;
-  final double deliveryFee;
 
-
-  RestaurantTile(
-      {Key key,
-        @required this.name,
-        @required this.imageUrl,
-        @required this.rating,
-        @required this.numberOfRating,
-        @required this.price,
-        @required this.id,
-        @required this.address,
-        @required this.category,
-        @required this.deliveryFee})
-      : super(key: key);
+  RestaurantTile({
+    @required this.restaurant,
+    @required this.rating,
+    @required this.numberOfRating,
+    @required this.price,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(RestaurantPage(id: this.id));
+        Get.to(RestaurantPage(restaurant: this.restaurant));
       },
       child: Column(
         children: <Widget>[
           Container(
             padding: EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
-            decoration: BoxDecoration(boxShadow: [
-            ]),
+            decoration: BoxDecoration(boxShadow: []),
             child: Card(
               semanticContainer: true,
               clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -115,7 +101,8 @@ class RestaurantTile extends StatelessWidget {
                   children: <Widget>[
                     ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      child: Image.network(imageUrl,
+                      child: Image.network(
+                        this.restaurant.imageURL,
                         height: displayHeight * 0.13,
                         width: displayHeight * 0.13,
                         fit: BoxFit.cover,
@@ -129,7 +116,8 @@ class RestaurantTile extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          Text(name.toUpperCase(),
+                          Text(
+                            this.restaurant.name.toUpperCase(),
                             style: TextStyle(
                               fontSize: 21,
                               fontFamily: 'BalooBhai',
@@ -139,7 +127,8 @@ class RestaurantTile extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               Container(
-                                child: Text(category.toUpperCase(),
+                                child: Text(
+                                  this.restaurant.mainCategory.toUpperCase(),
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontSize: 12,
@@ -169,7 +158,8 @@ class RestaurantTile extends StatelessWidget {
                                     width: 14,
                                     height: 14,
                                   ),
-                                  Text(rating,
+                                  Text(
+                                    rating,
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontFamily: 'BalooBhai',
@@ -185,7 +175,8 @@ class RestaurantTile extends StatelessWidget {
                           Row(
                             children: <Widget>[
                               ClipRRect(
-                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
                                 child: Image.asset(
                                   'assets/img/logo.png',
                                   width: displayWidth * 0.06,
@@ -193,7 +184,8 @@ class RestaurantTile extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              Text(address.toUpperCase(),
+                              Text(
+                                this.restaurant.address.toUpperCase(),
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: 'BalooBhai',
@@ -206,7 +198,8 @@ class RestaurantTile extends StatelessWidget {
                             textDirection: TextDirection.rtl,
                             children: [
                               Container(
-                                child: getDeliveryFee(deliveryFee),
+                                child:
+                                    getDeliveryFee(this.restaurant.deliveryFee),
                                 padding: EdgeInsets.only(
                                   top: 2,
                                   bottom: 2,
@@ -238,7 +231,7 @@ class RestaurantTile extends StatelessWidget {
   Text getDeliveryFee(double deliveryFee) {
     String text = "FRETE GRÁTIS";
     double textSize = 14.6;
-    if(deliveryFee.round() > 0) {
+    if (deliveryFee.round() > 0) {
       text = "R\$ " + deliveryFee.toStringAsFixed(2);
       textSize = 14.6;
     }
@@ -257,27 +250,31 @@ class RestaurantTile extends StatelessWidget {
 class RestaurantsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('restaurantes').snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if(!snapshot.hasData) return new Text("Carregando estabelecimentos...");
-        return new ListView(
+    return new StreamBuilder<List<Restaurant>>(
+      stream: getAllRestaurants(),
+      builder:
+          (BuildContext context, AsyncSnapshot<List<Restaurant>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return new Text("Carregando...");
+        }
+
+        if (!snapshot.hasData) {
+          return new Text("Carregando estabelecimentos...");
+        }
+
+        return new ListView.builder(
           padding: EdgeInsets.zero,
           shrinkWrap: true,
           physics: ClampingScrollPhysics(),
-          children: snapshot.data.docs.map((restaurant) {
+          itemCount: snapshot.data.length,
+          itemBuilder: (context, index) {
             return new RestaurantTile(
-              name: restaurant["nome"],
-              address: restaurant["endereco"],
-              imageUrl: restaurant["imagem"],
-              category: restaurant["categoria_principal"],
+              restaurant: snapshot.data[index],
               rating: '4.9',
               numberOfRating: '200',
               price: '\$\$\$',
-              id: restaurant.id,
-              deliveryFee: restaurant["taxa_entrega"],
             );
-          }).toList(),
+          },
         );
       },
     );

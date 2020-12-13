@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/globals.dart';
 import 'package:flutter_login/ui/Layout.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 
 class SplashPage extends StatelessWidget {
   SplashPage() {
@@ -17,8 +20,11 @@ class SplashPage extends StatelessWidget {
 
   openApp() async {
     var user = FirebaseAuth.instance.currentUser;
-    if(user != null) {
-      var result = await FirebaseFirestore.instance.collection('usuarios').doc(user.uid).get();
+    if (user != null) {
+      var result = await FirebaseFirestore.instance
+          .collection('usuarios')
+          .doc(user.uid)
+          .get();
       if (result != null && result.data() != null) {
         int signUpStep = result.data()["etapa_cadastro"];
         switch (signUpStep) {
@@ -40,7 +46,14 @@ class SplashPage extends StatelessWidget {
       });
     }
 
-    Get.offAndToNamed('/login');
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    String path = appDocDir.path;
+    var file = File('$path/cart.json');
+    if (await file.exists()) {
+      await file.delete();
+    }
+
+    await Get.offAndToNamed('/login');
   }
 
   @override

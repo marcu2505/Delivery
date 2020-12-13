@@ -1,7 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_login/entity/category.dart';
+import 'package:flutter_login/repository/category.dart';
 import 'package:flutter_login/screens/CategoryFilterPage.dart';
 import 'package:get/get.dart';
 
@@ -38,13 +38,12 @@ class CategoriesTitle extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2),
             child: Text(
-              "Categorias".toUpperCase(),
+              "CATEGORIAS",
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,
                   fontFamily: 'BalooBhai',
-                  fontWeight: FontWeight.w300
-              ),
+                  fontWeight: FontWeight.w300),
             ),
             decoration: BoxDecoration(
               //color: Colors.red,
@@ -60,21 +59,14 @@ class CategoriesTitle extends StatelessWidget {
 }
 
 class CategoryTile extends StatelessWidget {
-  final String name;
-  final String icon;
-  final String slug;
+  final Category category;
 
-  CategoryTile({
-    Key key,
-    @required this.name,
-    @required this.icon,
-    @required this.slug,
-  }) : super(key: key);
+  CategoryTile({@required this.category});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.to(CategoryFilterPage(category: this.slug, categoryName: this.name)),
+      onTap: () => Get.to(CategoryFilterPage(category: this.category)),
       child: Column(
         children: <Widget>[
           Container(
@@ -83,25 +75,25 @@ class CategoryTile extends StatelessWidget {
             ),
             padding: EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 0),
             child: Card(
-                color: Colors.yellow,
-                elevation: 0,
-                child: Center(
-                  child: Container(
-                    width: 70,
-                    height: 70,
-                    child: Center(
-                      child: Image.network(
-                        icon,
-                      ),
+              color: Colors.yellow,
+              elevation: 0,
+              child: Center(
+                child: Container(
+                  width: 70,
+                  height: 70,
+                  child: Center(
+                    child: Image.network(
+                      this.category.imageURL,
                     ),
                   ),
                 ),
+              ),
             ),
           ),
           Container(
             child: Center(
               child: Text(
-                name.toUpperCase(),
+                this.category.name.toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color(0xFF6e6e71),
@@ -124,26 +116,31 @@ class CategoryTile extends StatelessWidget {
 class CategoriesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('categorias').snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if(!snapshot.hasData) return new Text("Carregando...");
-        return new Container(
-          height: 120,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
-            physics: ClampingScrollPhysics(),
-            children: snapshot.data.docs.map((category) {
-              return new CategoryTile(
-                name: category["nome"],
-                slug: category["slug"],
-                icon: category["imagem"],
-              );
-            }).toList(),
-          ),
-        );
+    return new StreamBuilder<List<Category>>(
+      stream: getAllCategorys(),
+      builder: (BuildContext context, AsyncSnapshot<List<Category>> snapshot) {
+        if (snapshot.hasError) {
+          // TODO: checar possibilidade de logar erro
+          Get.back();
+          return new Container();
+        }
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return Text("Carregando...");
+          default:
+            return new Container(
+              height: 120,
+              child: ListView(
+                padding: EdgeInsets.zero,
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                children: snapshot.data.map((category) {
+                  return new CategoryTile(category: category);
+                }).toList(),
+              ),
+            );
+        }
       },
     );
   }
