@@ -78,7 +78,7 @@ class _CategoryTileState extends State<CategoryTile> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        this.category.toUpperCase(),
+                        this.category.substring(0,9),
                         style: TextStyle(
                             fontSize: 27,
                             color: Colors.black,

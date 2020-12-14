@@ -5,6 +5,155 @@ import 'package:flutter_login/globals.dart';
 import 'package:flutter_login/widgets/MyOrder.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class OptionTile extends StatefulWidget{
+  final String name;
+  final List<dynamic> options;
+
+  OptionTile({
+    Key key,
+    @required this.name,
+    @required this.options,
+  }) : super(key: key);
+
+  @override
+  _OptionTileState createState() => _OptionTileState(
+      name: this.name, options: this.options);
+}
+
+class _OptionTileState extends State<OptionTile>{
+
+  final String name;
+  final List<dynamic> options;
+
+  _OptionTileState({
+    @required this.name,
+    @required this.options,
+  });
+
+  bool select = true;
+  
+  @override
+  
+  Widget build(BuildContext context){
+    return Container(
+      margin: EdgeInsets.only(
+        top: 0,
+      ),
+      padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                select = !select;
+              });
+            },
+            child: Container(
+              padding: EdgeInsets.only(left: 10, right: 5, top: 2, bottom: 2),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    name.toUpperCase(),
+                    style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.black,
+                        fontFamily: 'BalooBhai',
+                        fontWeight: FontWeight.w300),
+                  ),
+                  this.select
+                      ? Icon(
+                    Icons.keyboard_arrow_right,
+                    color: Colors.black,
+                    size: 35,
+                  )
+                      : Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Colors.black,
+                    size: 35,
+                  ),
+                ],
+              ),
+              width: displayWidth * 0.94,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+            ),
+          ),
+          !this.select
+            ? OptionItemsList(
+              options: this.options,
+            ): Container(),
+        ],
+      ),
+    );
+  }
+}
+
+class OptionItemsList extends StatelessWidget {
+  final List<dynamic> options;
+
+  OptionItemsList({
+    @required this.options,
+  });
+
+  @override
+  // ignore: missing_return
+  Widget build(BuildContext context) {
+    options.forEach((item) {
+      return Container(
+        color: Colors.red,
+        child: Text(
+          item
+        ),
+      );
+    });
+  }
+}
+
+class OptionList extends StatelessWidget {
+  final String productId;
+  final String restaurantId;
+  final String categoryId;
+  
+  OptionList({
+    @required this.restaurantId,
+    @required this.categoryId,
+    @required this.productId,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return new StreamBuilder(
+      stream: FirebaseFirestore.instance
+          .collection('restaurantes').doc(this.restaurantId)
+          .collection('categorias').doc(this.categoryId)
+          .collection('produtos').doc(this.productId)
+          .collection('opcoes')
+          .snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (!snapshot.hasData) return new Text("Carregando dados...");
+        return new ListView(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          physics: ClampingScrollPhysics(),
+          children: snapshot.data.docs.map((options) {
+            return new OptionTile(
+              name: options.data()["nome"],
+              options: options.data()["opcoes"],
+            );
+          }).toList(),
+        );
+      },
+    );
+  }
+}
 
 class Details extends StatefulWidget {
 
@@ -75,14 +224,16 @@ class _DetailsState extends State<Details> {
 
   TextEditingController observationController = new TextEditingController();
 
+  bool select = true;
+
   @override
   Widget build(BuildContext context) {
-    print(this.quantity);
     observationController.text = this.observation;
     return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            OptionList(restaurantId: this.restaurantId, categoryId: this.categoryId, productId: this.productId),
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -228,7 +379,6 @@ class _DetailsState extends State<Details> {
                     ),
                     GestureDetector(
                       onTap: (){
-                        print(this.quantity);
                         if (this.quantity < 99) {
                           setState(() {
                             this.quantity++;
@@ -302,7 +452,6 @@ class _DetailsState extends State<Details> {
 
                 if(fileMap.containsKey("produtos")) {
                   Map<String, dynamic> productMap = fileMap["produtos"];
-                  print(onCart);
                   if(productMap.containsKey("$productId") && (onCart != true)){
                     showDialog(
                       context: context,
