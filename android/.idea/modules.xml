@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" group="android" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="android/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-748935494/firebase_auth.iml" filepath="$PROJECT_DIR$/.idea/modules/-748935494/firebase_auth.iml" group="android/firebase_auth" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1209914805/firebase_core.iml" filepath="$PROJECT_DIR$/.idea/modules/-1209914805/firebase_core.iml" group="android/firebase_core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/532386676/google_sign_in.iml" filepath="$PROJECT_DIR$/.idea/modules/532386676/google_sign_in.iml" group="android/google_sign_in" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/562364580/vibration.iml" filepath="$PROJECT_DIR$/.idea/modules/562364580/vibration.iml" group="android/vibration" />
+    </modules>
+  </component>
+</project>
